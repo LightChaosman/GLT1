@@ -242,6 +242,7 @@ public class RegexTest {
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("/no comment", false);
     	tc.runTestAuto("//some standard comment", true);
+    	tc.runTestAuto("//", true);
     	tc.runTestAuto("///some comment", true);
     	tc.runTestAuto("//some standard comment" + NEWLINE_UNIX + "no comment", false);	//Design decision: Only \n support
     	tc.runTestAuto("/" + NEWLINE_UNIX + "/no comment", false);
@@ -258,6 +259,7 @@ public class RegexTest {
     	tc.runTestAuto("/*some standard comment", false); 	//design decision
     	tc.runTestAuto("/*some standard comment*", false);
     	tc.runTestAuto("/*some standard comment*/", true);
+    	tc.runTestAuto("/**/", true);
     	tc.runTestAuto("no/*some standard comment*/", false);
     	tc.runTestAuto("/*some standard comment*/no", false);
     	
@@ -282,7 +284,9 @@ public class RegexTest {
     
     public static void testMATLABSINGLELINE(RegexTest tc){
     	System.out.println("testMATLABSINGLELINE");
+    	
     	tc.runTestAuto("no comment", false);
+    	tc.runTestAuto("%", true);
     	tc.runTestAuto("%some standard comment", true);
     	tc.runTestAuto("%%some standard comment", true);
     	tc.runTestAuto("%%%some comment", true);
@@ -290,16 +294,19 @@ public class RegexTest {
     	tc.runTestAuto("%" + NEWLINE_UNIX + "no comment", false);
     	tc.runTestAuto("%standard comment" + NEWLINE_UNIX, false); // newline not included
     	tc.runTestAuto("%~!@#$\\^&*()_+`1234567890-=[];',.{}:\"<>"+SLASH+SLASH, true); // special chars
+    	
     	System.out.println();
     }
     
     public static void testMATLABMULTILINE(RegexTest tc){
     	System.out.println("testMATLABMULTILINE");
+    	
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("%no multi line comment", false);
     	tc.runTestAuto("%{some standard comment", false);	//design decision
     	tc.runTestAuto("%{some standard comment%", false);
     	tc.runTestAuto("%{some standard comment%}", true);
+    	tc.runTestAuto("%{%}", true);
     	tc.runTestAuto("no%{some standard comment%}", false);
     	tc.runTestAuto("%{some standard comment%}no", false);
     	
