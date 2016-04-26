@@ -192,7 +192,6 @@ public class RegexTest {
     public static void testSTRING(RegexTest tc){
     	System.out.println("testSTRING");
     	
-    	
     	// Single char
     	tc.runTestAuto("", false);
     	tc.runTestAuto(QUOT, false);
@@ -204,23 +203,23 @@ public class RegexTest {
     	tc.runTestAuto(QUOT + "a" + QUOT, true);		
     	// special chars in a string
     	tc.runTestAuto(QUOT + "09.exaz..'!@#$%^&*()`~", true);
-    	// unicode in string
-    	tc.runTestAuto(QUOT + SLASH + "u0099" + QUOT, false);
+    	tc.runTestAuto(QUOT + QUOT_UNI + QUOT, true);
+    	tc.runTestAuto(QUOT + SLASH + "u0099" + QUOT, true);
     	// Symmetrical
     	tc.runTestAuto(QUOT + "string", false);
     	tc.runTestAuto("string" + QUOT, false);
+    	
+    	//Quatation chars
+    	tc.runTestAuto(SLASH + "a" + SLASH, false);
+    	tc.runTestAuto(ESQ_QUOT + "a" + ESQ_QUOT, false);
+    	tc.runTestAuto(ESQ_SLASH + "a" + ESQ_SLASH, false);
     	
     	// Escaping quotations chars
     	tc.runTestAuto(QUOT + QUOT + QUOT, false);
     	tc.runTestAuto(QUOT + SLASH + QUOT + QUOT, true);
     	tc.runTestAuto(QUOT + SLASH + SLASH + QUOT + QUOT, false);
-    	
-    	// Evil Unicode test case
     	tc.runTestAuto(QUOT_UNI + "aa" + QUOT_UNI, false);
-    	tc.runTestAuto(QUOT + QUOT_UNI + QUOT, true);
 
-    	// Escape quotations as quotations
-    	tc.runTestAuto(ESQ_QUOT + "no string" + ESQ_QUOT, false);
     	// Double escape escape chars
     	tc.runTestAuto(SLASH + SLASH + QUOT + "no string" + SLASH + SLASH + QUOT, false);
     	tc.runTestAuto(QUOT + "pre" + SLASH + SLASH + QUOT + "post" + QUOT, true);
