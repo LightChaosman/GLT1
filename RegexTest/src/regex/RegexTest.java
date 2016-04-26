@@ -187,7 +187,6 @@ public class RegexTest {
 	final static public String QUOT = "\"";
 	final static public String ESQ_QUOT = SLASH + QUOT;
 	final static public String NEWLINE_UNIX = "\n";
-	final static public String NEWLINE_WINDOWS = "\r\n";
 
     public static void testSTRING(RegexTest tc){
     	System.out.println("testSTRING");
@@ -245,7 +244,7 @@ public class RegexTest {
     	tc.runTestAuto("/no comment", false);
     	tc.runTestAuto("//some standard comment", true);
     	tc.runTestAuto("///some comment", true);
-    	tc.runTestAuto("//some standard comment" + NEWLINE_UNIX + "no comment", false);
+    	tc.runTestAuto("//some standard comment" + NEWLINE_UNIX + "no comment", false);	//Design decision: Only \n support
     	tc.runTestAuto("/" + NEWLINE_UNIX + "/no comment", false);
     	tc.runTestAuto("//standard comment" + NEWLINE_UNIX, false); // newline not included
     	tc.runTestAuto("/////~!@#$%^&*()_+`1234567890-=[];',.{}:\"<>"+SLASH+SLASH, true); // special chars
@@ -258,13 +257,14 @@ public class RegexTest {
     	tc.runTestAuto("/no comment", false);
     	tc.runTestAuto("//no multi line comment", false);
     	tc.runTestAuto("/*some standard comment", false); 	//design decision
+    	tc.runTestAuto("/*some standard comment*", false);
     	tc.runTestAuto("/*some standard comment*/", true);
     	tc.runTestAuto("no/*some standard comment*/comment", false);
     	
     	// Special comments newline
     	tc.runTestAuto("/*some" + NEWLINE_UNIX + "comment*/", true);
     	// Special comments special chars
-    	tc.runTestAuto("/////~!@#$%^&*()_+`1234567890-=[];',.{}:\"<>"+SLASH+SLASH, true);
+    	tc.runTestAuto("/*////~!@#$%^&*()_+`1234567890-=[];',.{}:\"<>"+SLASH+SLASH + "*/", true);
     	
     	// Asymetrical
     	tc.runTestAuto("/*/*comment*/", true);
