@@ -73,9 +73,6 @@ public class RegexTest {
     }
     
     public static void main(String[] args) {
-    	String CHAR = "[a-z]|[A-Z]|\\\"|\\\\";
-    	String STRING = "("+CHAR+")*";
-
         RegexTest exampleRegexTest = new RegexTest(STRING);
         exampleRegexTest.runTest("05", 0);
         exampleRegexTest.runTest("abcFe\"", 0);
@@ -84,7 +81,7 @@ public class RegexTest {
         testNAT(new RegexTest(UNSIGNEDINTEGER));
         testFLOAT(new RegexTest(REAL));
         testSTRING(new RegexTest(STRING));
-        testJAVASINGELLINE(new RegexTest(JAVASINGELLINE));
+        testJAVASINGELLINE(new RegexTest(JAVASINGLELINE));
         testJAVAMULTILINE(new RegexTest(JAVAMULTILINE));
     }
     
