@@ -8,6 +8,17 @@ import dk.brics.automaton.RegExp;
 import dk.brics.automaton.RunAutomaton;
 
 public class RegexTest {
+	
+	
+	
+	public final static String UNSIGNEDINTEGER = "[0]|([1-9][0-9]*)";
+	public final static String SIGNEDINTEGER = "-?("+UNSIGNEDINTEGER+")";
+	private final static String TEMP_FLOAT1 = "("+UNSIGNEDINTEGER + ")[eE](" + SIGNEDINTEGER+")";
+	private final static String TEMP_FLOAT2 = "("+UNSIGNEDINTEGER+").([0-9]+)([Ee]"+SIGNEDINTEGER+")?" ;
+	public final static String REAL = "("+TEMP_FLOAT1+")|("+TEMP_FLOAT2+")|("+UNSIGNEDINTEGER+")";
+	
+	
+	
     
     private final RunAutomaton r;
 
@@ -40,8 +51,9 @@ public class RegexTest {
     }
     
     public static void main(String[] args) {
-        RegexTest exampleRegexTest = new RegexTest("aap");
-        exampleRegexTest.runTest("aap_df34_d asdf sdfd", 0);
-        exampleRegexTest.runTest("a_a_pasdf sdfd", 0);
+
+        RegexTest exampleRegexTest = new RegexTest(REAL);
+        exampleRegexTest.runTest("05", 0);
+        exampleRegexTest.runTest("17.245e1", 0);
     }
 }
