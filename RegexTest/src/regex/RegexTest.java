@@ -12,7 +12,7 @@ public class RegexTest {
 	
 
 	
-	double d = 1;
+
 	/* Regexes for question 1*/
 	public final static String ID = "[a-z][a-z0-9]*";
 	public final static String UNSIGNEDINTEGER = "[0]|([1-9][0-9]*)";
@@ -29,8 +29,15 @@ public class RegexTest {
 	/* Regexes for question 3*/
 	private final static String SINGLELINECOMMENTCHAR ="[^\\\n]";
 	private final static String JAVASINGLELINE = "//(("+SINGLELINECOMMENTCHAR+")*)";
-	private final static String MULTIINSIDE = "(([^/])*[^/]([^\\*])*)*";
-	private final static String JAVAMULTILINE = "/\\*"+MULTIINSIDE+"\\*/";
+	private final static String JAVAMULTIINSIDE = "(([^/])*[^/]([^\\*])*)*";
+	private final static String JAVAMULTILINE = "/\\*"+JAVAMULTIINSIDE+"\\*/";
+	
+
+	private final static String MATLABSINGLELINE = "%(("+SINGLELINECOMMENTCHAR+")*)";
+	private final static String MATLABMULTIINSIDE = "(([^}])*[^}]([^%])*)*";
+	private final static String MATLABMULTILINE = "%{"+MATLABMULTIINSIDE+"%}/";
+	
+    /* Regexes for question 4*/
 	
 	
 	
