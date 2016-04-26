@@ -23,8 +23,8 @@ public class RegexTest {
 	
 	
 	/* Regexes for question 2*/
-	private final static String CHAR = "[a-z]|[A-Z]|\\\"|\\\\";//should backslashes be included?
-	public final static String STRING = "("+CHAR+")*";
+	private final static String CHAR = "[^\"]|(\\\\\\\")";
+	public final static String STRING = "(\\\")("+CHAR+")*(\\\")";
 	
 	/* Regexes for question 3*/
 	private final static String SINGLELINECOMMENTCHAR ="[^\\\n]";
@@ -36,6 +36,8 @@ public class RegexTest {
 	private final static String MATLABSINGLELINE = "%(("+SINGLELINECOMMENTCHAR+")*)";
 	private final static String MATLABMULTIINSIDE = "(([^}])*[^}]([^%])*)*";
 	private final static String MATLABMULTILINE = "%{"+MATLABMULTIINSIDE+"%}/";
+	
+    /* Regexes for question 4*/
 	
     /* Regexes for question 4*/
 	
