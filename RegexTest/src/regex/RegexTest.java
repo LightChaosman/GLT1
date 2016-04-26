@@ -23,8 +23,8 @@ public class RegexTest {
 	
 	
 	/* Regexes for question 2*/
-	private final static String CHAR = "[^\"]|(\\\\\\\")";
-	public final static String STRING = "(\\\")("+CHAR+")*(\\\")";
+	private final static String CHAR = "[^\"\\]";
+	public final static String STRING = "\"([^\"]|\\\\\")*\"";
 	
 	/* Regexes for question 3*/
 	private final static String SINGLELINECOMMENTCHAR ="[^\\\n]";
@@ -202,7 +202,7 @@ public class RegexTest {
     	tc.runTestAuto(QUOT + "" + QUOT, true);
     	tc.runTestAuto(QUOT + "a" + QUOT, true);		
     	// special chars in a string
-    	tc.runTestAuto(QUOT + "09.exaz..'!@#$%^&*()`~", true);
+    	tc.runTestAuto(QUOT + "09.exaz..'!@#$%^&*()`~" + QUOT, true);
     	tc.runTestAuto(QUOT + QUOT_UNI + QUOT, true);
     	tc.runTestAuto(QUOT + SLASH + "u0099" + QUOT, true);
     	// Symmetrical
@@ -242,16 +242,16 @@ public class RegexTest {
     	System.out.println();
     }
     
-    public static void testJAVASINGELLINE(RegexTest tc){
+    public static void testJAVASINGELLINE(RegexTest tc){//Je had hier backslashes gebruikt ipv slashes
     	System.out.println("testFLOAT");
     	tc.runTestAuto("no comment", false);
-    	tc.runTestAuto(SLASH + "no comment", false);
-    	tc.runTestAuto(SLASH + SLASH + "some standard comment", true);
-    	tc.runTestAuto(SLASH + SLASH + SLASH + "some comment", true);
-    	tc.runTestAuto(SLASH + SLASH + "some standard comment" + NEWLINE + "no comment", false);
-    	tc.runTestAuto(SLASH + NEWLINE + SLASH + "no comment", false);
-    	tc.runTestAuto(SLASH + SLASH + "standard comment" + NEWLINE, false); // newline not included
-    	tc.runTestAuto(SLASH + SLASH + "~!@#$%^&*()_+`1234567890-=[];',.{}:\"<>//\\\\", true); // special chars
+    	tc.runTestAuto("/no comment", false);
+    	tc.runTestAuto("//some standard comment", true);
+    	tc.runTestAuto("///some comment", true);
+    	tc.runTestAuto("//some standard comment" + NEWLINE + "no comment", false);
+    	tc.runTestAuto("/\n/no comment", false);
+    	tc.runTestAuto("//standard comment" + NEWLINE, false); // newline not included
+    	tc.runTestAuto("//~!@#$%^&*()_+`1234567890-=[];',.{}:\"<>//\\\\", true); // special chars
     	System.out.println();
     }
     
