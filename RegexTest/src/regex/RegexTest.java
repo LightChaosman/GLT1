@@ -166,17 +166,42 @@ public class RegexTest {
 
     public static void testSTRING(RegexTest tc){
     	System.out.println("testSTRING");
-    	tc.runTestAuto("", false);
-    	tc.runTestAuto("\"", false);
-    	tc.runTestAuto("\"\"", true);
-    	tc.runTestAuto("\"a\"", true);		
-    	tc.runTestAuto("\"09.exaz..'!@#$%^&*()`~\"", true);	// special chars in a string	
-    	tc.runTestAuto("\"\"\"", false);					// no quotations in a string
+    	final String SLASH = "\\";
+    	final String QUOT = "\"";
+    	final String QUOT_UNI = SLASH + "u0022";
+    	final String ESQ_QUOT = SLASH + QUOT;
     	
-    	tc.runTestAuto("\"asdsa\"", true);
-    	// special chars
-    	tc.runTestAuto("\"" + "\\u0022" + "\"", false);		// three quotes with unicode
-    	tc.runTestAuto("a", true);
+    	// Single char
+    	tc.runTestAuto("", false);
+    	tc.runTestAuto(QUOT, false);
+    	tc.runTestAuto("a", false);
+    	// Special chars
+    	tc.runTestAuto("09.exaz..'!@#$%^&*()`~", false);
+    	// Simple string
+    	tc.runTestAuto(QUOT + "" + QUOT, true);
+    	tc.runTestAuto(QUOT + "a" + QUOT, true);		
+    	// special chars in a string
+    	tc.runTestAuto(QUOT + "09.exaz..'!@#$%^&*()`~" + QUOT, true);
+    	// no quotations in a string allowed
+    	tc.runTestAuto(QUOT + QUOT + QUOT, false);
+    	// Escape quotations char 1
+    	tc.runTestAuto(QUOT + ESQ_QUOT + QUOT, true);
+    	// Escape quotations char twice
+    	tc.runTestAuto(QUOT + ESQ_QUOT + "strinception" + ESQ_QUOT + QUOT, true);
+    	tc.runTestAuto(QUOT + "pre" + ESQ_QUOT + "strinception" + ESQ_QUOT + "post" + QUOT, true);
+    	tc.runTestAuto(QUOT + QUOT + "strinception" + QUOT + QUOT, false);
+    	// Escape quotations char 3
+    	tc.runTestAuto(QUOT + ESQ_QUOT + ESQ_QUOT + ESQ_QUOT + QUOT, true);
+    	// Evil Unicode test case
+    	tc.runTestAuto(QUOT_UNI + "aa" + QUOT_UNI, false);
+    	tc.runTestAuto(QUOT + QUOT_UNI + QUOT, true);
+
+    	// Escape quotations as quotations
+    	tc.runTestAuto(ESQ_QUOT + "no string" + ESQ_QUOT, false);
+    	// Double escape escape chars
+    	tc.runTestAuto(SLASH + SLASH + QUOT + "no string" + SLASH + SLASH + QUOT, false);
+    	tc.runTestAuto(QUOT + "pre" + SLASH + SLASH + QUOT + "post" + QUOT, true);
+    	
     	System.out.println();
     }
     
