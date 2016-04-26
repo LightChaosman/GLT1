@@ -247,13 +247,16 @@ public class RegexTest {
     	if(match){
     		if( actual != exp ) {
         		System.err.println("Test fail on `" + s + "`, expected match, only got `"+actual+"` of `"+exp+"`");
+        	} else {
+        		System.out.println("Passed: `" + s + "` (match = "+match+")");
         	}
     	} else {
     		if( actual == exp ) {
     			System.err.println("Test fail on `" + s + "`, expected no match, got `"+actual+"` of `"+exp+"`");
+        	} else {
+        		System.out.println("Passed: `" + s + "` (match = "+match+")");
         	}
     	}
-    	System.out.println("Passed: `" + s + "` (match = "+match+")");
     }
 }
 
