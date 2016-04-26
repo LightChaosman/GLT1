@@ -82,6 +82,8 @@ public class RegexTest {
         testSTRING(new RegexTest(STRING));
         testJAVASINGELLINE(new RegexTest(JAVASINGLELINE));
         testJAVAMULTILINE(new RegexTest(JAVAMULTILINE));
+        testMATLABSINGLELINE(new RegexTest(MATLABSINGLELINE));
+        testMATLABMULTILINE(new RegexTest(MATLABMULTILINE));
     }
     
     public static void testID(RegexTest tc){
@@ -235,7 +237,7 @@ public class RegexTest {
     	System.out.println();
     }
     
-    public static void testJAVASINGELLINE(RegexTest tc){//Je had hier backslashes gebruikt ipv slashes
+    public static void testJAVASINGELLINE(RegexTest tc){
     	System.out.println("testJAVASINGELLINE");
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("/no comment", false);
@@ -256,7 +258,8 @@ public class RegexTest {
     	tc.runTestAuto("/*some standard comment", false); 	//design decision
     	tc.runTestAuto("/*some standard comment*", false);
     	tc.runTestAuto("/*some standard comment*/", true);
-    	tc.runTestAuto("no/*some standard comment*/comment", false);
+    	tc.runTestAuto("no/*some standard comment*/", false);
+    	tc.runTestAuto("/*some standard comment*/no", false);
     	
     	// Special comments newline
     	tc.runTestAuto("/*some" + NEWLINE_UNIX + "comment*/", true);
@@ -271,6 +274,52 @@ public class RegexTest {
     	tc.runTestAuto("//*comment*/", false);
     	tc.runTestAuto("/**comment**/", true);
     	tc.runTestAuto("/*comment*//", false);
+    	tc.runTestAuto("*/comment*/", false);
+    	tc.runTestAuto("/*comment/*", false);
+    	
+    	System.out.println();
+    }
+    
+    public static void testMATLABSINGLELINE(RegexTest tc){
+    	System.out.println("testMATLABSINGLELINE");
+    	tc.runTestAuto("no comment", false);
+    	tc.runTestAuto("%some standard comment", true);
+    	tc.runTestAuto("%%some standard comment", true);
+    	tc.runTestAuto("%%%some comment", true);
+    	tc.runTestAuto("%some standard comment" + NEWLINE_UNIX + "no comment", false);	//Design decision: Only \n support
+    	tc.runTestAuto("%" + NEWLINE_UNIX + "no comment", false);
+    	tc.runTestAuto("%standard comment" + NEWLINE_UNIX, false); // newline not included
+    	tc.runTestAuto("%~!@#$\\^&*()_+`1234567890-=[];',.{}:\"<>"+SLASH+SLASH, true); // special chars
+    	System.out.println();
+    }
+    
+    public static void testMATLABMULTILINE(RegexTest tc){
+    	System.out.println("testMATLABMULTILINE");
+    	tc.runTestAuto("no comment", false);
+    	tc.runTestAuto("%no multi line comment", false);
+    	tc.runTestAuto("%{some standard comment", false);	//design decision
+    	tc.runTestAuto("%{some standard comment%", false);
+    	tc.runTestAuto("%{some standard comment%}", true);
+    	tc.runTestAuto("no%{some standard comment%}", false);
+    	tc.runTestAuto("%{some standard comment%}no", false);
+    	
+    	// Special comments newline
+    	tc.runTestAuto("%{some" + NEWLINE_UNIX + "comment%}", true);
+    	// Special comments special chars
+    	tc.runTestAuto("%{////~!@#$%^&*()_+`1234567890-=[];',.{}:\"<>"+SLASH+SLASH + "%}", true);
+    	
+    	// Asymetrical
+    	tc.runTestAuto("%{%{comment%}", true);
+    	tc.runTestAuto("%{comment%}%}", false);
+    	
+    	// Open and closing chars
+    	tc.runTestAuto("%}comment%}", false);
+    	tc.runTestAuto("%{comment%{", false);
+    	tc.runTestAuto("%%{comment%}", false);
+    	tc.runTestAuto("%{{comment%}", true);
+    	tc.runTestAuto("%{comment%}}", false);
+    	tc.runTestAuto("{%comment%}", false);
+    	tc.runTestAuto("%{comment}%", false);
     	
     	System.out.println();
     }
