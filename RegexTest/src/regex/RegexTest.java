@@ -44,4 +44,17 @@ public class RegexTest {
         exampleRegexTest.runTest("aap_df34_d asdf sdfd", 0);
         exampleRegexTest.runTest("a_a_pasdf sdfd", 0);
     }
+    
+    public static void testInt(RegexTest tc){
+    	tc.runTestAuto("", 0);
+    	tc.runTestAuto("a", 1);
+    	tc.runTestAuto("aa", 1);
+    	tc.runTestAuto("0", 0);
+    	tc.runTestAuto("a0", 1);
+    	tc.runTestAuto("a0a0a0", 1);
+    }
+    
+    public void runTestAuto(String s, int expected){
+    	assert expected == r.run(s, 0);
+    }
 }
