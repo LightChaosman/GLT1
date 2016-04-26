@@ -66,6 +66,9 @@ public class RegexTest {
         testID(new RegexTest(ID));
         testNAT(new RegexTest(UNSIGNEDINTEGER));
         testFLOAT(new RegexTest(REAL));
+        testSTRING(new RegexTest(STRING));
+        testJAVASINGELLINE(new RegexTest(JAVASINGELLINE));
+        testJAVAMULTILINE(new RegexTest(JAVAMULTILINE));
     }
     
     public static void testID(RegexTest tc){
@@ -163,13 +166,15 @@ public class RegexTest {
     	System.out.println();
     }
     
+    final static public String SLASH = "\\";
+	final static public String QUOT = "\"";
+	final static public String QUOT_UNI = SLASH + "u0022";
+	final static public String ESQ_QUOT = SLASH + QUOT;
+	final static public String NEWLINE = System.lineSeparator();
 
     public static void testSTRING(RegexTest tc){
     	System.out.println("testSTRING");
-    	final String SLASH = "\\";
-    	final String QUOT = "\"";
-    	final String QUOT_UNI = SLASH + "u0022";
-    	final String ESQ_QUOT = SLASH + QUOT;
+    	
     	
     	// Single char
     	tc.runTestAuto("", false);
@@ -203,6 +208,23 @@ public class RegexTest {
     	tc.runTestAuto(QUOT + "pre" + SLASH + SLASH + QUOT + "post" + QUOT, true);
     	
     	System.out.println();
+    }
+    
+    public static void testJAVASINGELLINE(RegexTest tc){
+    	System.out.println("testFLOAT");
+    	tc.runTestAuto("no comment", false);
+    	tc.runTestAuto(SLASH + "no comment", false);
+    	tc.runTestAuto(SLASH + SLASH + "some standard comment", true);
+    	tc.runTestAuto(SLASH + SLASH + SLASH + "some comment", true);
+    	tc.runTestAuto(SLASH + SLASH + "some standard comment" + NEWLINE + "no comment", false);
+    	tc.runTestAuto(SLASH + NEWLINE + SLASH + "no comment", false);
+    	tc.runTestAuto(SLASH + SLASH + "standard comment" + NEWLINE, false); // newline not included
+    	tc.runTestAuto(SLASH + SLASH + "~!@#$%^&*()_+`1234567890-=[];',.{}:\"<>//\\\\", true); // special chars
+    	System.out.println();
+    }
+    
+    public static void testJAVAMULTILINE(RegexTest tc){
+    	
     }
     
     public void runTestAuto(String s, boolean match){
