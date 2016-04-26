@@ -181,6 +181,7 @@ public class RegexTest {
     }
     
     final static public String SLASH = "\\";
+    final static public String ESQ_SLASH = SLASH + SLASH;
 	final static public String QUOT = "\"";
 	final static public String QUOT_UNI = SLASH + "u0022";
 	final static public String ESQ_QUOT = SLASH + QUOT;
@@ -200,17 +201,18 @@ public class RegexTest {
     	tc.runTestAuto(QUOT + "" + QUOT, true);
     	tc.runTestAuto(QUOT + "a" + QUOT, true);		
     	// special chars in a string
-    	tc.runTestAuto(QUOT + "09.exaz..'!@#$%^&*()`~" + QUOT, true);
-    	// no quotations in a string allowed
+    	tc.runTestAuto(QUOT + "09.exaz..'!@#$%^&*()`~", true);
+    	// unicode in string
+    	tc.runTestAuto(QUOT + SLASH + "u0099" + QUOT, false);
+    	// Symmetrical
+    	tc.runTestAuto(QUOT + "string", false);
+    	tc.runTestAuto("string" + QUOT, false);
+    	
+    	// Escaping quotations chars
     	tc.runTestAuto(QUOT + QUOT + QUOT, false);
-    	// Escape quotations char 1
-    	tc.runTestAuto(QUOT + ESQ_QUOT + QUOT, true);
-    	// Escape quotations char twice
-    	tc.runTestAuto(QUOT + ESQ_QUOT + "strinception" + ESQ_QUOT + QUOT, true);
-    	tc.runTestAuto(QUOT + "pre" + ESQ_QUOT + "strinception" + ESQ_QUOT + "post" + QUOT, true);
-    	tc.runTestAuto(QUOT + QUOT + "strinception" + QUOT + QUOT, false);
-    	// Escape quotations char 3
-    	tc.runTestAuto(QUOT + ESQ_QUOT + ESQ_QUOT + ESQ_QUOT + QUOT, true);
+    	tc.runTestAuto(QUOT + SLASH + QUOT + QUOT, true);
+    	tc.runTestAuto(QUOT + SLASH + SLASH + QUOT + QUOT, false);
+    	
     	// Evil Unicode test case
     	tc.runTestAuto(QUOT_UNI + "aa" + QUOT_UNI, false);
     	tc.runTestAuto(QUOT + QUOT_UNI + QUOT, true);
@@ -220,6 +222,21 @@ public class RegexTest {
     	// Double escape escape chars
     	tc.runTestAuto(SLASH + SLASH + QUOT + "no string" + SLASH + SLASH + QUOT, false);
     	tc.runTestAuto(QUOT + "pre" + SLASH + SLASH + QUOT + "post" + QUOT, true);
+    	
+    	// Escaped string "
+    	tc.runTestAuto(QUOT + ESQ_QUOT + QUOT, true);
+    	// Escaped string \
+    	tc.runTestAuto(QUOT + ESQ_SLASH + QUOT, true);
+    	// Escaped string \\
+    	tc.runTestAuto(QUOT + ESQ_SLASH + ESQ_SLASH + QUOT, true);
+    	// Escaped string "stringception"
+    	tc.runTestAuto(QUOT + ESQ_QUOT + "stringception" + ESQ_QUOT + QUOT, true);
+    	// Escaped string \"
+    	tc.runTestAuto(QUOT + ESQ_SLASH + ESQ_QUOT + QUOT, true);
+    	// Escaped string \\"
+    	tc.runTestAuto(QUOT + ESQ_SLASH + ESQ_SLASH + ESQ_QUOT + QUOT, true);
+    	// Escaped string \""
+    	tc.runTestAuto(QUOT + ESQ_SLASH + ESQ_QUOT + ESQ_QUOT + QUOT, true);
     	
     	System.out.println();
     }
