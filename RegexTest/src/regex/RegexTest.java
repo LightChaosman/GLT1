@@ -30,14 +30,13 @@ public class RegexTest {
 	/* Regexes for question 3*/
 	private final static String SINGLELINECOMMENTCHAR ="[^\\\n]";
 	private final static String JAVASINGLELINE = "//(("+SINGLELINECOMMENTCHAR+")*)";
-	private final static String JAVAMULTIINSIDE = "(([^/])*[^/]([^\\*])*)*";
-	private final static String JAVAMULTILINE = "/\\*"+JAVAMULTIINSIDE+"\\*/";
+	private final static String JAVAMULTIINSIDE = "([^\\*]*(\\*[^\\*/]+)?)*\\*?";
+	private final static String JAVAMULTILINE = "/\\*("+JAVAMULTIINSIDE+")\\*/";
 	
 
 	private final static String MATLABSINGLELINE = "%(("+SINGLELINECOMMENTCHAR+")*)";
 	private final static String MATLABMULTIINSIDE = "(([^}])*[^}]([^%])*)*";
 	private final static String MATLABMULTILINE = "%{"+MATLABMULTIINSIDE+"%}/";
-	
 	
 	
     
