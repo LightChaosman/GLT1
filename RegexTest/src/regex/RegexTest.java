@@ -62,5 +62,20 @@ public class RegexTest {
         RegexTest exampleRegexTest = new RegexTest(STRING);
         exampleRegexTest.runTest("05", 0);
         exampleRegexTest.runTest("abcFe\"", 0);
+        
+        testInt(new RegexTest(UNSIGNEDINTEGER));
+    }
+    
+    public static void testInt(RegexTest tc){
+    	tc.runTestAuto("", 0);
+    	tc.runTestAuto("a", 1);
+    	tc.runTestAuto("aa", 1);
+    	tc.runTestAuto("0", 0);
+    	tc.runTestAuto("a0", 1);
+    	tc.runTestAuto("a0a0a0", 1);
+    }
+    
+    public void runTestAuto(String s, int expected){
+    	assert expected == r.run(s, 0);
     }
 }
