@@ -159,16 +159,32 @@ public class RegexTest {
     	System.out.println();
     }
     
+
+    public static void testSTRING(RegexTest tc){
+    	System.out.println("testSTRING");
+    	return;
+    	tc.runTestAuto("", false);
+    	tc.runTestAuto("\"", false);
+    	tc.runTestAuto("\"\"", true);
+    	tc.runTestAuto("\"\"\"", true);
+    	tc.runTestAuto("\"a\"", true);
+    	tc.runTestAuto("\"asdsa\"", true);
+    	tc.runTestAuto("\"09.exaz..'!@#$%^&*()`~\"", true);	// special chars
+    	tc.runTestAuto("\"" + "\\u0022" + "\"", false);		// three quotes with unicode
+    	tc.runTestAuto("a", true);
+    	System.out.println();
+    }
+    
     public void runTestAuto(String s, boolean match){
     	int exp = s.length();
     	int actual = r.run(s, 0);
     	if(match){
     		if( actual != exp ) {
-        		System.err.println("Test fail on `" + s + "`, expected match, only got "+actual+"/"+exp);
+        		System.err.println("Test fail on `" + s + "`, expected match, only got `"+actual+"` of `"+exp+"`");
         	}
     	} else {
     		if( actual == exp ) {
-    			System.err.println("Test fail on `" + s + "`, expected no match, got "+actual+"/"+exp);
+    			System.err.println("Test fail on `" + s + "`, expected no match, got `"+actual+"` of `"+exp+"`");
         	}
     	}
     	System.out.println("Passed: `" + s + "` (match = "+match+")");
