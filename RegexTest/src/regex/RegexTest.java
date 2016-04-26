@@ -89,6 +89,7 @@ public class RegexTest {
     	tc.runTestAuto("1", true);
     	tc.runTestAuto("173892", true);
     	tc.runTestAuto("9a9", false);
+    	tc.runTestAuto("1,000", false);
     	System.out.println();
     }
     
@@ -111,20 +112,22 @@ public class RegexTest {
     	tc.runTestAuto("0e0", true);
     	tc.runTestAuto("0a0", false);
     	tc.runTestAuto("0,0", false);
+    	tc.runTestAuto("1,000.0", false);
+    	tc.runTestAuto("1.000.0", false);
 
     	//Empty decimals
-    	tc.runTestAuto("0.", false);
+    	tc.runTestAuto("0.", false);		//design decision
     	tc.runTestAuto("1.", false);
     	tc.runTestAuto(".", false);
     	tc.runTestAuto("e.", false);
     	tc.runTestAuto("a.", false);
     	
     	//Negations in e power
-    	tc.runTestAuto("0.e-1", true);
-    	tc.runTestAuto("0.e--1", false);
-    	tc.runTestAuto("0.e---1", false);
-    	tc.runTestAuto("0.e-0", true);		//dd
-    	tc.runTestAuto("0.e0", true);
+    	tc.runTestAuto("1.0e-1", true);
+    	tc.runTestAuto("1.0e--1", false);
+    	tc.runTestAuto("1.0e---1", false);
+    	tc.runTestAuto("1.0e-0", true);		//design decision
+    	tc.runTestAuto("1.0e0", true);
     	
     	//Simple e power positives
     	tc.runTestAuto("3.14e-7", true);
@@ -142,19 +145,20 @@ public class RegexTest {
     	tc.runTestAuto("0.0E1", true);
     	tc.runTestAuto("0.0A1", false);
     	tc.runTestAuto("0.0exp1", false);
+    	tc.runTestAuto("0.0-1", false);
     	
     	//E power without decimals
     	tc.runTestAuto("e", false);
-    	tc.runTestAuto("e1", true);
+    	tc.runTestAuto("e1", false);
     	tc.runTestAuto("e01", false);
-    	tc.runTestAuto("e10", true);
+    	tc.runTestAuto("e10", false);
     	
     	//More complex E power numbers
-    	tc.runTestAuto("0.e0.e1", false);	// Float in e power
-    	tc.runTestAuto("0.e01", false);		// Invalid int in e power
-    	tc.runTestAuto("0.e1", true);
-    	tc.runTestAuto("0.e0.0", false);
-    	tc.runTestAuto("0.ee", false);
+    	tc.runTestAuto("1.0e0.0", false);		// Float in e power
+    	tc.runTestAuto("1.0e01", false);		// Invalid int in e power
+    	tc.runTestAuto("1.0e0.0e1", false);		// E in e power
+    	tc.runTestAuto("1.0e.0e1", false);
+    	tc.runTestAuto("1.0ee1", false);
     	
     	System.out.println();
     }
@@ -162,14 +166,15 @@ public class RegexTest {
 
     public static void testSTRING(RegexTest tc){
     	System.out.println("testSTRING");
-    	return;
     	tc.runTestAuto("", false);
     	tc.runTestAuto("\"", false);
     	tc.runTestAuto("\"\"", true);
-    	tc.runTestAuto("\"\"\"", true);
-    	tc.runTestAuto("\"a\"", true);
+    	tc.runTestAuto("\"a\"", true);		
+    	tc.runTestAuto("\"09.exaz..'!@#$%^&*()`~\"", true);	// special chars in a string	
+    	tc.runTestAuto("\"\"\"", false);					// no quotations in a string
+    	
     	tc.runTestAuto("\"asdsa\"", true);
-    	tc.runTestAuto("\"09.exaz..'!@#$%^&*()`~\"", true);	// special chars
+    	// special chars
     	tc.runTestAuto("\"" + "\\u0022" + "\"", false);		// three quotes with unicode
     	tc.runTestAuto("a", true);
     	System.out.println();
