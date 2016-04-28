@@ -31,6 +31,7 @@ public class PicoRec {
 		// General
 		doTest("statement mix1",	"begin declare | c := 1 + b; end", true);
 		doTest("statement mix2",	"begin declare | c := x4 + 4; end", true);
+		doTest("statement mix3",	"begin declare | c := x4 + 04; end", true);
 		doTest("statement recur",	"begin declare | a := b + c; z := 1 + 3; end", true);
 		doTest("decls recur",		"begin declare a, b, | g := 6; end", true);
 		doTest("number id mix1",	"begin declare | 1 := a; end", false);
