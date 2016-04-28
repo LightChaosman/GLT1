@@ -22,16 +22,16 @@ public class PicoRec {
 		// Simple
 		doTest("empty",				"", false);
 		doTest("random string",		"dkwaojqpo2314321", false);
-		doTest("empty program",		"begin declare | end", true);
-		doTest("only statements",	"begin declare | a = 1; end", true);
-		doTest("only decls",		"begin declare a, | end", true);
 		doTest("simple program",	"begin declare a, | c := a + b; end", true);
+		doTest("empty program",		"begin declare | end", true);
+		doTest("only statements",	"begin declare | a := 1; end", true);
+		doTest("only decls",		"begin declare a, | end", true);
 		doTest("minimal program",	"begindeclare|end", true);
 		
 		// General
 		doTest("statement mix1",	"begin declare | c := 1 + b; end", true);
 		doTest("statement mix2",	"begin declare | c := x4 + 4; end", true);
-		doTest("statement recur",	"begin declare | a := b + c; z := 1 - 3; end", true);
+		doTest("statement recur",	"begin declare | a := b + c; z := 1 + 3; end", true);
 		doTest("decls recur",		"begin declare a, b, | g := 6; end", true);
 		doTest("number id mix1",	"begin declare | 1 := a; end", false);
 		doTest("number id mix2",	"begin declare | a := 1a; end", false);
@@ -45,9 +45,10 @@ public class PicoRec {
 		doTest("statement *-recusrion 2",		"begin declare | a := a * a * a ** a; end", false);
 		doTest("statement +/*-recusrion 1", 	"begin declare | a := a + a * a + a; end", true);
 		doTest("statement */+-recusrion 2", 	"begin declare | a := a * a + a * a; end", true);
-		doTest("statement */+-recusrion 3", 	"begin declare | a := a *+ a; end", true);
+		doTest("statement */+-recusrion 3", 	"begin declare | a := a *+ a; end", false);
 		
 		doTest("statement --recusrion 1", 		"begin declare | a := -a; end", true);
+		doTest("statement --recusrion 1 bra",	"begin declare | a := -(a)+-(a); end", true);
 		doTest("statement --recusrion 2", 		"begin declare | a := --a; end", true);
 		doTest("statement --recusrion 3", 		"begin declare | a := ---a; end", true);
 		
@@ -57,46 +58,52 @@ public class PicoRec {
 		doTest("statement -/+-recusrion", 		"begin declare | a := +a-a; end", false);
 		
 		doTest("statement brackets empty",		"begin declare | a := (); end", false);
-		doTest("statement brackets simple1",	"begin declare | a := (a1); end", true);
+		doTest("statement brackets simple 1",	"begin declare | a := (a1); end", true);
+		doTest("statement brackets simple 2",	"begin declare | a := (1); end", true);
 		doTest("statement brackets neg",		"begin declare | a := -(a); end", true);
-		doTest("statement brackets nested",		"begin declare | a := (a+(a)+a); end", true);
-		doTest("statement brackets nested",		"begin declare | a := ((a)+(b)); end", true);
-		doTest("statement brackets simple2",	"begin declare | a := (1); end", true);
-		doTest("statement brackets exp",		"begin declare | a := (1-1); end", true);
+		doTest("statement brackets expr",		"begin declare | a := (1+-1); end", true);
+		doTest("statement brackets nested 1",	"begin declare | a := (a+(a)+a); end", true);
+		doTest("statement brackets nested 2",	"begin declare | a := ((a)+(b)); end", true);
+		doTest("statement brackets double nested 1","begin declare | a := (((a)+(b))+b); end", true);
+		doTest("statement brackets double nested 2","begin declare | a := ((a)+(b)+(b)); end", true);
 		doTest("statement brackets +- 1",		"begin declare | a := (1)+(-1); end", true);
 		doTest("statement brackets +- 2",		"begin declare | a := (1)+-(1); end", true);
 		doTest("statement brackets +- 3",		"begin declare | a := (1)(+-1); end", false);
 		doTest("statement brackets +- 4",		"begin declare | a := (1(+-1)); end", false);
-		doTest("statement brackets +- 5",		"begin declare | a := (1*(+-1)); end", true);
-		doTest("statement brackets +- mix",		"begin declare | a := 1-(-1)-1; end", true);
+		doTest("statement brackets +- mix",		"begin declare | a := 1+-(-1)+-1; end", true);
 		
 		// Layout
-		doTest("newlines",						"begin\ndeclare\na,\n|\ncn:=\nx\n+\n4x\n;\nend", true);
+		doTest("newlines",						"begin\ndeclare\na,\n|\ncn:=\nx\n+\nx\n;\nend", true);
 		doTest("newlines in keywords",			"begi\nn decl\nare a, b, | c := a + b; en\nd", false);
 		doTest("newlines in id",				"begin declare a\nb, b, | c := a + b; end", false);
 		doTest("newlines and spaces mix",		"begin declare |  \n \n \n   c := 5;  end", true);
 		doTest("newlines and spaces mix",		"begin declare |  \n \n \n   c := 5;  end", true);
+		doTest("untrimmed input",				" begin declare | end ", false);
+		doTest("untrimmed end",					"begin declare | end ", false);
+		doTest("untrimmed start",				" begin declare | end", false);
 		
 		// Keywords
 		doTest("keyword missing begin",			"begi declare | end", false);
 		doTest("keyword missing declare",		"begin declar | end", false);
-		doTest("keyword missing end",			"begin declare | en", false);
+		doTest("keyword missing end 1",			"begin declare | en", false);
+		doTest("keyword missing end 2",			"begin declare | a := 1; en", false);
 		doTest("keyword missing ,",				"begin declare a | end", false);
 		doTest("keyword missing assign",		"begin declare | a =: 1; end", false);
 		doTest("keyword missing ;",				"begin declare | a := 1 end", false);
 		
 		doTest("id as keyword end",				"begin declare end, | a := end; end", true);
+		doTest("id as keyword endend",			"begin declare end, | a := endend; end", true);
 		doTest("id as keyword declare",			"begin declare declare, | declare := end; end", true);
 		doTest("id as keyword mix",				"begindeclarebegindeclare,|end:=end;end", true);
 		
 		// Empty values
-		doTest("special ids empty val",			"begin declare | a := ; end", true);
-		doTest("special ids empty ass",			"begin declare |  := a; end", true);
-		doTest("special ids empty dec",			"begin declare , | end", true);
+		doTest("special ids empty val",			"begin declare | a := ; end", false);
+		doTest("special ids empty ass",			"begin declare |  := a; end", false);
+		doTest("special ids empty dec",			"begin declare , | end", false);
 	}
 	
 	/**
-	 * Execute a testcase
+	 * Execute a testcase and print the result to System.out on success and to System.err on failure
 	 * @param tc_name the name of the test case
 	 * @param input the input string
 	 * @param expected iff the syntax of the input is valid
@@ -212,12 +219,28 @@ public class PicoRec {
 	}
 
 	/**
+	 * Matches s and end of string, and increments currentPosition on success
+	 * @param s
+	 * @return true iff s matches and end of string
+	 */
+	private boolean tryEndWidth(String s) {
+		int length = s.length();
+		if (this.str.startsWith(s, currentPosition)) {
+			if(currentPosition + length == this.str.length()){
+				//end of string reached
+				currentPosition += length;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Matches c and increments currentPosition, throws Exception on failure
 	 * @param c
 	 */
 	private void match(char c) {
 		if (this.str.charAt(currentPosition) != c) {
-			System.err.println("found "+str.charAt(currentPosition)+" instead of "+c);
 			throw new ParseException();
 		}
 		currentPosition++;
@@ -225,22 +248,11 @@ public class PicoRec {
 	}
 
 	/**
-	 * Matches the end of the string, throws Exception on failure
-	 */
-	private void matchEOS() {
-		if (this.currentPosition != this.str.length() - 1) {
-			throw new ParseException();
-		}
-	}
-
-	/**
 	 * Parse the current string
 	 */
 	public void parse() {
 		this.currentPosition = 0;
-		match(LAYOUT);
 		parseProgram();
-		matchEOS();
 	}
 
 	/**
@@ -251,7 +263,6 @@ public class PicoRec {
 		parseDecls();
 		match('|');
 		parseBody();
-		match("end");
 	}
 
 	/**
@@ -276,10 +287,14 @@ public class PicoRec {
 	 * Parses a BODY symbol
 	 */
 	void parseBody() {
+		if(tryEndWidth("end")){
+			return;
+		}
 		if (tryParseStatement()) {
 			match(";");
 			parseBody();
-			
+		} else {
+			throw new ParseException();
 		}
 	}
 
@@ -311,7 +326,11 @@ public class PicoRec {
 			matchSingle(LAYOUT);
 			
 			parseExp();
+			
 			match(')');
+			
+			parseExpP();
+			
 			break;
 		default:
 			if (tryMatch(ID) || tryMatch(NAT)) {
@@ -366,14 +385,10 @@ public class PicoRec {
 	 * @return 
 	 */
 	private static String genParseExceptionMessage(String s, int p){
-		String[] lines = s.split("\n");
-		int i = 0;
-		while(i < lines.length && p > lines[i++].length()){
-			p -= lines[i - 1].length() - 1;
+		if(s.contains("\n")){
+			return s;
 		}
-		String r = System.lineSeparator();
-		r += s;
-		r += System.lineSeparator();
+		String r = System.lineSeparator() + s + System.lineSeparator();
 		r += new String(new char[p]).replace("\0", " ");
 		r += "^";
 		return r;
