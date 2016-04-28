@@ -139,7 +139,7 @@ public class PicoRec {
 	 * The lexical syntax NAT automaton
 	 */
 	static RunAutomaton NAT = new RunAutomaton(new RegExp(
-			RegexTest.UNSIGNEDINTEGER).toAutomaton());
+			"[0-9]+").toAutomaton());
 	/**
 	 * The lexical syntax LAYOUT automaton
 	 */
