@@ -78,7 +78,6 @@ public class PicoRec {
 		doTest("newlines in keywords",			"begi\nn decl\nare a, b, | c := a + b; en\nd", false);
 		doTest("newlines in id",				"begin declare a\nb, b, | c := a + b; end", false);
 		doTest("newlines and spaces mix",		"begin declare |  \n \n \n   c := 5;  end", true);
-		doTest("newlines and spaces mix",		"begin declare |  \n \n \n   c := 5;  end", true);
 		doTest("untrimmed input",				" begin declare | end ", false);
 		doTest("untrimmed end",					"begin declare | end ", false);
 		doTest("untrimmed start",				" begin declare | end", false);
