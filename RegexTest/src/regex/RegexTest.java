@@ -8,10 +8,6 @@ import dk.brics.automaton.RegExp;
 import dk.brics.automaton.RunAutomaton;
 
 public class RegexTest {
-	
-	
-
-	
 
 	/* Regexes for question 1*/
 	public final static String ID = "[a-z][a-z0-9]*";
@@ -20,7 +16,6 @@ public class RegexTest {
 	private final static String TEMP_FLOAT1 = "("+UNSIGNEDINTEGER + ")[eE](" + SIGNEDINTEGER+")";
 	private final static String TEMP_FLOAT2 = "("+UNSIGNEDINTEGER+")?\\.([0-9]+)([Ee]"+SIGNEDINTEGER+")?" ;
 	public final static String REAL = "("+TEMP_FLOAT1+")|("+TEMP_FLOAT2+")|("+UNSIGNEDINTEGER+")";
-	
 	
 	/* Regexes for question 2*/
 	private final static String CHAR = "[^\"\\\\]|(\\\\\\\\)|(\\\\\\\")";
@@ -33,13 +28,10 @@ public class RegexTest {
 	private final static String JAVAMULTIINSIDE = "([^\\*]*(\\*[^/]+)?)*\\*?";
 	private final static String JAVAMULTILINE = "/\\*("+JAVAMULTIINSIDE+")\\*/";
 	
-
 	private final static String MATLABSINGLELINE = "%(("+SINGLELINECOMMENTCHAR+")*)";
 	private final static String MATLABMULTIINSIDE = "([^%]*(%[^\\}]+)?)*%?";
 	private final static String MATLABMULTILINE = "%\\{("+MATLABMULTIINSIDE+")%\\}";
 	
-	
-    
     private final RunAutomaton r;
 
     public RegexTest(String regex) {
@@ -61,7 +53,7 @@ public class RegexTest {
         
         return end - start;
     }
-        
+
     void runTest(String input, int index) {
     	System.out.println("input string = " + input);
     	System.out.println("index = " + index);
@@ -84,8 +76,9 @@ public class RegexTest {
         testMATLABSINGLELINE(new RegexTest(MATLABSINGLELINE));
         testMATLABMULTILINE(new RegexTest(MATLABMULTILINE));
     }
-    
+
     public static void testID(RegexTest tc){
+    	// Testing functions for ID
     	System.out.println("testID");
     	tc.runTestAuto("", false);
     	tc.runTestAuto("a", true);
@@ -97,6 +90,7 @@ public class RegexTest {
     }
     
     public static void testNAT(RegexTest tc){
+    	// Testing functions for NAT
     	System.out.println("testNAT");
     	tc.runTestAuto("", false);
     	tc.runTestAuto("a", false);
@@ -111,6 +105,7 @@ public class RegexTest {
     }
     
     public static void testFLOAT(RegexTest tc){
+    	// Testing functions for FLOAT
     	System.out.println("testFLOAT");
     	System.out.print("-> ");
     	testNAT(tc);
@@ -187,6 +182,7 @@ public class RegexTest {
 	final static public String NEWLINE_UNIX = "\n";
 
     public static void testSTRING(RegexTest tc){
+    	// Testing functions for STRING
     	System.out.println("testSTRING");
     	
     	// Single char
@@ -237,6 +233,7 @@ public class RegexTest {
     }
     
     public static void testJAVASINGELLINE(RegexTest tc){
+    	// Testing functions for JAVASINGELLINE
     	System.out.println("testJAVASINGELLINE");
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("/no comment", false);
@@ -251,6 +248,7 @@ public class RegexTest {
     }
     
     public static void testJAVAMULTILINE(RegexTest tc){
+    	// Testing functions for JAVAMULTILINE
     	System.out.println("testJAVAMULTILINE");
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("/no comment", false);
@@ -282,6 +280,7 @@ public class RegexTest {
     }
     
     public static void testMATLABSINGLELINE(RegexTest tc){
+    	// Testing functions for MATLABSINGLELINE
     	System.out.println("testMATLABSINGLELINE");
     	
     	tc.runTestAuto("no comment", false);
@@ -298,6 +297,7 @@ public class RegexTest {
     }
     
     public static void testMATLABMULTILINE(RegexTest tc){
+    	// Testing functions for MATLABMULTILINE
     	System.out.println("testMATLABMULTILINE");
     	
     	tc.runTestAuto("no comment", false);
@@ -330,6 +330,11 @@ public class RegexTest {
     	System.out.println();
     }
     
+    /**
+     * Custom testing function that tests if the full string is matched or not
+     * @param s input string
+     * @param match true iff the full string matches this.r
+     */
     public void runTestAuto(String s, boolean match){
     	int exp = s.length();
     	int actual = r.run(s, 0);
