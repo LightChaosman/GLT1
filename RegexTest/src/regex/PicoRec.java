@@ -111,6 +111,7 @@ public class PicoRec {
 	static void doTest(String tc_name, String input, boolean expected){
 		try{
 			new PicoRec(input).parse();
+			new PicoRec.PicoRecDeter(input).parse();
 		} catch (ParseException e){
 			if(expected){
 				System.err.println(tc_name + " fails");
@@ -397,5 +398,52 @@ public class PicoRec {
 	@Override
 	public String toString() {
 		return genParseExceptionMessage(this.str, this.currentPosition);
+	}
+	
+	static class PicoRecDeter extends PicoRec{
+		PicoRecDeter(String s){
+			super(s);
+		}
+		
+		/**
+		 * The lexical syntax IDNOEND automaton
+		 */
+		static RunAutomaton IDNOEND = new RunAutomaton(new RegExp(
+				"([a-df-z][a-z0-9]*)|(e[a-mo-z0-9][a-z0-9]*)|(en[a-ce-z0-9][a-z0-9]*)|(end[a-z0-9]+)"
+			).toAutomaton());
+
+
+		/**
+		 * Parses a BODY symbol
+		 */
+		void parseBody() {
+			if(super.tryMatch(IDNOEND)){
+				parseRest();
+			} else {
+				super.match("end");
+				parseTerm();
+			}
+		}
+		
+		/**
+		 * Parses a REST symbol
+		 */
+		void parseRest() {
+			super.match(":=");
+			super.parseExp();
+			super.match(';');
+			parseBody();
+		}
+		
+		/**
+		 * Parses a TERM symbol
+		 */
+		void parseTerm() {
+			if(super.currentPosition == super.str.length()){
+				// end of string
+				return;
+			}
+			parseRest();
+		}
 	}
 }
