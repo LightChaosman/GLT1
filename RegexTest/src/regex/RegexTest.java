@@ -63,10 +63,6 @@ public class RegexTest {
     }
     
     public static void main(String[] args) {
-        RegexTest exampleRegexTest = new RegexTest(STRING);
-        exampleRegexTest.runTest("05", 0);
-        exampleRegexTest.runTest("abcFe\"", 0);
-        
         testID(new RegexTest(ID));
         testNAT(new RegexTest(UNSIGNEDINTEGER));
         testFLOAT(new RegexTest(REAL));
@@ -79,7 +75,7 @@ public class RegexTest {
 
     public static void testID(RegexTest tc){
     	// Testing functions for ID
-    	System.out.println("testID");
+    	System.out.println("---testID---");
     	tc.runTestAuto("", false);
     	tc.runTestAuto("a", true);
     	tc.runTestAuto("aa", true);
@@ -91,7 +87,7 @@ public class RegexTest {
     
     public static void testNAT(RegexTest tc){
     	// Testing functions for NAT
-    	System.out.println("testNAT");
+    	System.out.println("---testNAT---");
     	tc.runTestAuto("", false);
     	tc.runTestAuto("a", false);
     	tc.runTestAuto("0", true);
@@ -106,11 +102,11 @@ public class RegexTest {
     
     public static void testFLOAT(RegexTest tc){
     	// Testing functions for FLOAT
-    	System.out.println("testFLOAT");
-    	System.out.print("-> ");
+    	System.out.println("---testFLOAT---");
+    	System.out.print("--->");
     	testNAT(tc);
     	tc.runTestAuto("0001", false);
-    	System.out.println("-> testFLOAT");
+    	System.out.println("--->---testFLOAT---");
     	
     	//Simple positives
     	tc.runTestAuto("3.1415", true);
@@ -183,7 +179,7 @@ public class RegexTest {
 
     public static void testSTRING(RegexTest tc){
     	// Testing functions for STRING
-    	System.out.println("testSTRING");
+    	System.out.println("---testSTRING---");
     	
     	// Single char
     	tc.runTestAuto("", false);
@@ -234,7 +230,7 @@ public class RegexTest {
     
     public static void testJAVASINGELLINE(RegexTest tc){
     	// Testing functions for JAVASINGELLINE
-    	System.out.println("testJAVASINGELLINE");
+    	System.out.println("---testJAVASINGELLINE---");
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("/no comment", false);
     	tc.runTestAuto("//some standard comment", true);
@@ -249,7 +245,7 @@ public class RegexTest {
     
     public static void testJAVAMULTILINE(RegexTest tc){
     	// Testing functions for JAVAMULTILINE
-    	System.out.println("testJAVAMULTILINE");
+    	System.out.println("---testJAVAMULTILINE---");
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("/no comment", false);
     	tc.runTestAuto("//no multi line comment", false);
@@ -281,7 +277,7 @@ public class RegexTest {
     
     public static void testMATLABSINGLELINE(RegexTest tc){
     	// Testing functions for MATLABSINGLELINE
-    	System.out.println("testMATLABSINGLELINE");
+    	System.out.println("---testMATLABSINGLELINE---");
     	
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("%", true);
@@ -298,7 +294,7 @@ public class RegexTest {
     
     public static void testMATLABMULTILINE(RegexTest tc){
     	// Testing functions for MATLABMULTILINE
-    	System.out.println("testMATLABMULTILINE");
+    	System.out.println("---testMATLABMULTILINE---");
     	
     	tc.runTestAuto("no comment", false);
     	tc.runTestAuto("%no multi line comment", false);
@@ -342,13 +338,17 @@ public class RegexTest {
     		if( actual != exp ) {
         		System.err.println("Test fail on `" + s + "`, expected match, only got `"+actual+"` of `"+exp+"`");
         	} else {
-        		System.out.println("Passed: `" + s + "` (match = "+match+")");
+        		System.out.println("Passed:     `" + s + "`");
+        		System.out.println(" expected: = "+match);
+        		System.out.println();
         	}
     	} else {
     		if( actual == exp ) {
     			System.err.println("Test fail on `" + s + "`, expected no match, got `"+actual+"` of `"+exp+"`");
         	} else {
-        		System.out.println("Passed: `" + s + "` (match = "+match+")");
+        		System.out.println("Passed:     `" + s + "`");
+        		System.out.println(" expected: = "+match);
+        		System.out.println();
         	}
     	}
     }
