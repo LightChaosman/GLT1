@@ -117,7 +117,11 @@ public class PicoRec {
 				System.err.println(tc_name + " fails");
 				e.printStackTrace(System.err);
 			} else {
-				System.out.println(tc_name + " success: input was invalid");
+	    		System.out.println("Passed test case: " + tc_name);
+	    		System.out.println("  expected: "+expected);
+	    		System.out.println("  input string:");
+	    		System.out.println(input);
+	    		System.out.println();
 			}
 			return;
 		}
@@ -125,7 +129,11 @@ public class PicoRec {
 			System.err.println(tc_name + " fails. Expected a invalid syntax for:");
 			System.err.println(input);
 		} else {
-			System.out.println(tc_name + " success: input was valid");
+    		System.out.println("Passed test case: " + tc_name);
+    		System.out.println("  expected: "+expected);
+    		System.out.println("  input string:");
+    		System.out.println(input);
+    		System.out.println();
 		}
 	}
 
