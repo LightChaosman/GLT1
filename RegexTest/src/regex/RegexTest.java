@@ -313,6 +313,7 @@ public class RegexTest {
     	// Asymetrical
     	tc.runTestAuto("%{%{comment%}", true);
     	tc.runTestAuto("%{comment%}%}", false);
+    	// Out of scope: tc.runTestAuto("%{%{comment%}%}", );
     	
     	// Open and closing chars
     	tc.runTestAuto("%}comment%}", false);
