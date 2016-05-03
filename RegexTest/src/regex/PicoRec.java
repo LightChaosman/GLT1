@@ -16,7 +16,7 @@ public class PicoRec {
 	
 	/**
 	 * Execute test cases
-	 * @param args
+	 * @param args not used
 	 */
 	public static void main(String[] args) {
 		// Simple
@@ -31,7 +31,6 @@ public class PicoRec {
 		// General
 		doTest("statement mix1",	"begin declare | c := 1 + b; end", true);
 		doTest("statement mix2",	"begin declare | c := x4 + 4; end", true);
-		doTest("statement mix3",	"begin declare | c := x4 + 04; end", true);
 		doTest("statement recur",	"begin declare | a := b + c; z := 1 + 3; end", true);
 		doTest("decls recur",		"begin declare a, b, | g := 6; end", true);
 		doTest("number id mix1",	"begin declare | 1 := a; end", false);
@@ -91,15 +90,34 @@ public class PicoRec {
 		doTest("keyword missing assign",		"begin declare | a =: 1; end", false);
 		doTest("keyword missing ;",				"begin declare | a := 1 end", false);
 		
-		doTest("id as keyword end",				"begin declare end, | a := end; end", true);
-		doTest("id as keyword endend",			"begin declare end, | a := endend; end", true);
-		doTest("id as keyword declare",			"begin declare declare, | declare := end; end", true);
-		doTest("id as keyword mix",				"begindeclarebegindeclare,|end:=end;end", true);
+		doTest("id as keyword end",				"begin declare end, | a := end; end", false);
+		doTest("id as keyword endend",			"begin declare end, | a := endend; end", false);
+		doTest("id as keyword declare",			"begin declare declare, | declare := end; end", false);
+		doTest("id as keyword mix",				"begindeclarebegindeclare,|end:=end;end", false);
 		
 		// Empty values
 		doTest("special ids empty val",			"begin declare | a := ; end", false);
 		doTest("special ids empty ass",			"begin declare |  := a; end", false);
 		doTest("special ids empty dec",			"begin declare , | end", false);
+		
+		// EOS to early
+		doTest("EOS to early 1",	"begin declare a, | c := a + b; ", false);
+		doTest("EOS to early 2",	"begin declare a, | c := a + b;", false);
+		doTest("EOS to early 3",	"begin declare a, | c := a + b", false);
+		doTest("EOS to early 4",	"begin declare a, | c := a + ", false);
+		doTest("EOS to early 5",	"begin declare a, | c := a +", false);
+		doTest("EOS to early 6",	"begin declare a, | c := ", false);
+		doTest("EOS to early 7",	"begin declare a, | c :", false);
+		doTest("EOS to early 8",	"begin declare a, | c ", false);
+		doTest("EOS to early 9",	"begin declare a, | ", false);
+		doTest("EOS to early 10",	"begin declare a, |", false);
+		doTest("EOS to early 11",	"begin declare a, ", false);
+		doTest("EOS to early 12",	"begin declare a,", false);
+		doTest("EOS to early 13",	"begin declare a", false);
+		doTest("EOS to early 14",	"begin declare ", false);
+		doTest("EOS to early 15",	"begin declare", false);
+		doTest("EOS to early 16",	"begin ", false);
+		doTest("EOS to early 17",	" ", false);
 	}
 	
 	/**
@@ -111,7 +129,6 @@ public class PicoRec {
 	static void doTest(String tc_name, String input, boolean expected){
 		try{
 			new PicoRec(input).parse();
-			new PicoRec.PicoRecDeter(input).parse();
 		} catch (ParseException e){
 			if(expected){
 				System.err.println(tc_name + " fails");
@@ -140,13 +157,11 @@ public class PicoRec {
 	/**
 	 * The lexical syntax ID automaton
 	 */
-	static RunAutomaton ID = new RunAutomaton(
-			new RegExp(RegexTest.ID).toAutomaton());
+	static RunAutomaton ID = new RunAutomaton(new RegExp(RegexTest.ID).toAutomaton());
 	/**
 	 * The lexical syntax NAT automaton
 	 */
-	static RunAutomaton NAT = new RunAutomaton(new RegExp(
-			"[0-9]+").toAutomaton());
+	static RunAutomaton NAT = new RunAutomaton(new RegExp(RegexTest.UNSIGNEDINTEGER).toAutomaton());
 	/**
 	 * The lexical syntax LAYOUT automaton
 	 */
@@ -249,11 +264,35 @@ public class PicoRec {
 	 * @param c
 	 */
 	private void match(char c) {
-		if (this.str.charAt(currentPosition) != c) {
+		if (this.currentPosition >= this.str.length() || this.str.charAt(currentPosition) != c) {
 			throw new ParseException();
 		}
 		currentPosition++;
 		matchSingle(LAYOUT);
+	}
+	
+	/**
+	 * @return true iff the next tokens are a keyword
+	 */
+	private boolean isKeyword(){
+		String KEYWORD1 = "begin";
+		String KEYWORD2 = "end";
+		String KEYWORD3 = "declare";
+		return 
+				this.str.startsWith(KEYWORD1, currentPosition) ||
+				this.str.startsWith(KEYWORD2, currentPosition) ||
+				this.str.startsWith(KEYWORD3, currentPosition);
+	}
+	
+	/**
+	 * Try to match ID but not the keywords, and increments currentPosition on success
+	 * @return true iff ID matches
+	 */
+	private boolean tryMatchID() {
+		if(isKeyword()){
+			return false;
+		}
+		return tryMatch(ID);
 	}
 
 	/**
@@ -286,7 +325,7 @@ public class PicoRec {
 	 * Parses a DECL symbol
 	 */
 	void parseDecl() {
-		if (tryMatch(ID)) {
+		if (tryMatchID()) {
 			match(',');
 			parseDecl();
 		}
@@ -323,31 +362,33 @@ public class PicoRec {
 	 * Parses a EXP symbol
 	 */
 	void parseExp() {
-		switch (this.str.charAt(currentPosition)) {
-		case '-':
-			currentPosition++;
-			matchSingle(LAYOUT);
-			
-			parseExp();
-			break;
-		case '(':
-			currentPosition++;
-			matchSingle(LAYOUT);
-			
-			parseExp();
-			
-			match(')');
-			
-			parseExpP();
-			
-			break;
-		default:
-			if (tryMatch(ID) || tryMatch(NAT)) {
+		if(currentPosition < this.str.length()){
+			switch (this.str.charAt(currentPosition)) {
+			case '-':
+				currentPosition++;
+				matchSingle(LAYOUT);
+				
+				parseExp();
+				break;
+			case '(':
+				currentPosition++;
+				matchSingle(LAYOUT);
+				
+				parseExp();
+				
+				match(')');
+				
 				parseExpP();
-			} else {
-				throw new ParseException();
+				
+				break;
+			default:
+				if (tryMatchID() || tryMatch(NAT)) {
+					parseExpP();
+				} else {
+					throw new ParseException();
+				}
+				break;
 			}
-			break;
 		}
 	}
 
@@ -355,26 +396,28 @@ public class PicoRec {
 	 * Parses a EXP' symbol
 	 */
 	void parseExpP() {
-		switch (this.str.charAt(currentPosition)) {
-		case '*':
-			currentPosition++;
-			matchSingle(LAYOUT);
-			
-			parseExp();
-			parseExpP();
-			
-			break;
-		case '+':
-			currentPosition++;
-			matchSingle(LAYOUT);
-			
-			parseExp();
-			parseExpP();
-			
-			break;
-		default:
-			// parseEpsilon()
-			break;
+		if(currentPosition < this.str.length()){
+			switch (this.str.charAt(currentPosition)) {
+			case '*':
+				currentPosition++;
+				matchSingle(LAYOUT);
+				
+				parseExp();
+				parseExpP();
+				
+				break;
+			case '+':
+				currentPosition++;
+				matchSingle(LAYOUT);
+				
+				parseExp();
+				parseExpP();
+				
+				break;
+			default:
+				// parseEpsilon()
+				break;
+			}
 		}
 	}
 
@@ -406,52 +449,5 @@ public class PicoRec {
 	@Override
 	public String toString() {
 		return genParseExceptionMessage(this.str, this.currentPosition);
-	}
-	
-	static class PicoRecDeter extends PicoRec{
-		PicoRecDeter(String s){
-			super(s);
-		}
-		
-		/**
-		 * The lexical syntax IDNOEND automaton
-		 */
-		static RunAutomaton IDNOEND = new RunAutomaton(new RegExp(
-				"([a-df-z][a-z0-9]*)|(e[a-mo-z0-9][a-z0-9]*)|(en[a-ce-z0-9][a-z0-9]*)|(end[a-z0-9]+)"
-			).toAutomaton());
-
-
-		/**
-		 * Parses a BODY symbol
-		 */
-		void parseBody() {
-			if(super.tryMatch(IDNOEND)){
-				parseRest();
-			} else {
-				super.match("end");
-				parseTerm();
-			}
-		}
-		
-		/**
-		 * Parses a REST symbol
-		 */
-		void parseRest() {
-			super.match(":=");
-			super.parseExp();
-			super.match(';');
-			parseBody();
-		}
-		
-		/**
-		 * Parses a TERM symbol
-		 */
-		void parseTerm() {
-			if(super.currentPosition == super.str.length()){
-				// end of string
-				return;
-			}
-			parseRest();
-		}
 	}
 }
