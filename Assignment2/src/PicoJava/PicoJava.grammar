@@ -9,6 +9,16 @@
 %left OP_AND; // Not 100% sure
 %left OP_OR;
 
+%embed {: 
+
+	public final static class Events extends Parser.Events{
+	public void syntaxError(Symbol token)
+		{throw new RuntimeException(token.value.toString());}
+	}
+
+ :} ;
+ %init {: report = new Events(); :} ;
+
 %goal block;
 
 block =
