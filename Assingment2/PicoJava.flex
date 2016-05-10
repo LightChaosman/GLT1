@@ -1,24 +1,59 @@
-/*** PicoJavaScanner ***/
+package AST;
+
+import beaver.Symbol;
 import beaver.Scanner;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import AST.PicoJavaParser.Terminals;
 
 %%
-/*** Rules section ***/
-%public
-%class PicoJavaScanner
 
+%public
+%final
+%class PicoJavaScanner
+%extends Scanner
+%unicode
+%function nextToken
+%type Symbol
+%yylexthrow Scanner.Exception
 %line
 %column
 
-DIGIT = [0-9]
-NUMBER = {DIGIT}+
+%{
+  private Symbol sym(short id) {
+    return new Symbol(id, yyline + 1, yycolumn + 1, yylength(), yytext());
+  }
+%}
 
-%%
-/*** Supplementary Code section ***/
+// Helper Definitions
 
-public static void main(String[] args) {
-    yylex();
-    return;
-}
+LineTerminator = \r|\n|\r\n
+InputCharacter = [^\r\n]
 
+WhiteSpace = {LineTerminator} | [ \t\f]
+Comment = "//" {InputCharacter}* {LineTerminator}?
+
+Identifier = [:letter:]([:letter:] | [:digit:])*
+
+%% // Rules
+
+"class"       { return sym(Terminals.CLASS); }
+"extends"     { return sym(Terminals.EXTENDS); }
+"while"       { return sym(Terminals.WHILE); }
+
+"true"        { return sym(Terminals.BOOLEAN_LITERAL); }
+"false"       { return sym(Terminals.BOOLEAN_LITERAL); }
+
+"("           { return sym(Terminals.LPAREN); }
+")"           { return sym(Terminals.RPAREN); }
+"{"           { return sym(Terminals.LBRACE); }
+"}"           { return sym(Terminals.RBRACE); }
+";"           { return sym(Terminals.SEMICOLON); }
+"."           { return sym(Terminals.DOT); }
+
+"="           { return sym(Terminals.ASSIGN); }
+
+{Comment}     { /* discard token */ }
+{WhiteSpace}  { /* discard token */ }
+{Identifier}  { return sym(Terminals.IDENTIFIER); }
+
+.|\n          { throw new RuntimeException("Illegal character \""+yytext()+ "\" at line "+yyline+", column "+yycolumn); }
+<<EOF>>       { return sym(Terminals.EOF); }
