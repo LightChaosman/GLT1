@@ -1,6 +1,5 @@
 package PicoJava;
 
-import PicoJavaParser.Terminals;
 import beaver.*;
 import java.util.ArrayList;
 
