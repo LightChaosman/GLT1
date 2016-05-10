@@ -1,4 +1,4 @@
-package PicoJava;
+package picoJava;
 
 import beaver.*;
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ public class PicoJavaParser extends Parser {
 		static public final short IDENTIFIER = 1;
 		static public final short LPAREN = 2;
 		static public final short BOOLEAN = 3;
-		static public final short OP_AND = 4;
-		static public final short OP_OR = 5;
-		static public final short LBRACE = 6;
-		static public final short RBRACE = 7;
-		static public final short WHILE = 8;
+		static public final short LBRACE = 4;
+		static public final short RBRACE = 5;
+		static public final short OP_AND = 6;
+		static public final short WHILE = 7;
+		static public final short OP_OR = 8;
 		static public final short DOT = 9;
 		static public final short RPAREN = 10;
 		static public final short CLASS = 11;
@@ -28,14 +28,14 @@ public class PicoJavaParser extends Parser {
 	}
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9njabjF6b4KXTVC21HG0QiW5LGAhLfzQDJO66DuuQ4FlSO7aoRzB$xStblhfTxgxdVE72Q" +
-		"JXY7VtkkiSzdda2tfe#QKgAA1dgYeANNKr0ELSVkPMxA$UkhTAkwccPwv6Uy#LEpTLQtO9t" +
-		"NvBUgH5lYbthbQgGgnvkTJNT1ZF#gexVC6QYauFLXNt#uqhHbkEAi6rUfsHkvgNijQuwmYe" +
-		"pdkC4#zckhiRPEZd5lYtiwjujQaCEFSY9SwD#Rq9TvMvlK5Qiq4hqZbLALnri#dkiH$uqQk" +
-		"fikLJBdiY5WJyP8YLIAgjL0HDQPHCVVOEY6OsIsf3LNOSnvV4ruwFORlBMp0gp0#WlT1ByE" +
-		"Re7im27eJXl0SHl0EZdDdxi1klaxmFy0#7C3hu7L3heHxduxNe#$#FoEiVG67GGydhM7lLM" +
-		"xzzdXVpXlbzC6aCyBSk4uvvsqf##pUnrkxiUlWNFdusyS$Ffx2T$XcFucVxOTtlzeNkxIBx" +
-		"AHVFhNe6TT12JqcYEcsA6EHNcWpr$2zwFf04BChel#cwC22xv6K9AFckpHHvn#XAsxr");
+		"U9nrabjF544GHh#zNrmOTbZsCWiei88WqPWDGQ8l9ZwOG9GdJFmr$bnHhYegi6jvPhOO9WI" +
+		"xSwhggwwfxfaUIPyKgg2w1dgiiehAcwcgcaBxacOhMc6IjR6DjSeiQLOFc4$jfpQIgWKg7k" +
+		"cXvjHLeCXLn$t4TjLGP2CjftgAoeBMDQyszA0FI$24cWLDgwaPUgxQ3xNGNVIYrjYXI1HoY" +
+		"XQhROcL7jb#9fjZnjaIiy8ieUCptpvR8vDd$odUSPhtcwY6#uajuwiyMqzrX2wY0qvsbnmz" +
+		"szWEFIjKDT3bHESvu#PdZ1dVKFGGfv3cuXmZX64Sty3OWZwyTlqUFdWSmJkFLs3Pumttps0" +
+		"Vzk0Wq$C5FC$ku$cFi0FRiEkvjtxUywptU7ItXpypW9SUx$odPfY9jznlPt9lCl6zFNpjbV" +
+		"iWazjKEknlOg$joYuzyoUntnFxEx7dS0n7Teezj9Ca#ys#sY#xI3kT9Qx3RUIutm9$5pV7d" +
+		"RRGDtIvxnvhJUAO#8OYQZh48Mkp$4Nn7pAXa1AW0$pyFs5qRcm=");
 
 	static final Action RETURN3 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
