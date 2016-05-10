@@ -1,6 +1,5 @@
 %package "PicoJava";
 %class "PicoJavaParser";
-%import "PicoJavaParser.Terminals";
 %terminals CLASS, EXTENDS, WHILE;
 %terminals BOOLEAN, IDENTIFIER;
 %terminals LPAREN, RPAREN, LBRACE, RBRACE;

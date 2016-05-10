@@ -1,29 +1,12 @@
-package PivoJava;
+package PicoJava;
 
 import beaver.Symbol;
 import beaver.Scanner;
+import PicoJava.PicoJavaParser.Terminals;
 %%
 
 
-%{
-	public final static class Terminals{
-		public final static short CLASS = 1;
-		public final static short EXTENDS = 2;
-		public final static short WHILE = 3;
-		public final static short BOOLEAN = 4;
-		public final static short LPAREN = 5;
-		public final static short RPAREN = 6;
-		public final static short LBRACE = 7;
-		public final static short RBRACE = 8;
-		public final static short SEMICOLON = 9;
-		public final static short DOT = 10;
-		public final static short OP_OR = 11;
-		public final static short OP_AND = 12;
-		public final static short ASSIGN = 13;
-		public final static short IDENTIFIER = 14;
-		public final static short EOF = 15;
-	}
-	
+%{	
 	private Symbol sym(short id) {
 		return new Symbol(id, yyline + 1, yycolumn + 1, yylength(), yytext());
 	}
