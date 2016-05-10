@@ -17,6 +17,7 @@ import picoJava.PicoJavaParser.Terminals;
 %class PicoJavaScanner
 %extends Scanner
 %unicode
+%function nextToken
 %type Symbol
 %line
 %column
