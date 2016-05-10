@@ -1,8 +1,8 @@
-package PicoJava;
+package picoJava;
 
 import beaver.Symbol;
 import beaver.Scanner;
-import PicoJava.PicoJavaParser.Terminals;
+import picoJava.PicoJavaParser.Terminals;
 %%
 
 

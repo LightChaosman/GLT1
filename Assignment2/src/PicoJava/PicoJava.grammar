@@ -1,4 +1,4 @@
-%package "PicoJava";
+%package "picoJava";
 %class "PicoJavaParser";
 %terminals CLASS, EXTENDS, WHILE;
 %terminals BOOLEAN, IDENTIFIER;
