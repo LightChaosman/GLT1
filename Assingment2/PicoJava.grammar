@@ -6,6 +6,9 @@
 %terminals SEMICOLON, DOT, ASSIGN;
 %terminals OP_OR, OP_AND;
 
+%left OP_AND; // Not 100% sure
+%left OP_OR;
+
 %goal block;
 
 block =
