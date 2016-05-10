@@ -1,34 +1,18 @@
-/*** Definition section ***/
-
-%{
-// Definition section flex output
-%}
+/*** PicoJavaScanner ***/
+import beaver.Scanner;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 %%
 /*** Rules section ***/
-
-/* This tells flex to read only one input file */
-%option noyywrap
-
 %public
-%class Scanner
-
-%unicode
+%class PicoJavaScanner
 
 %line
 %column
 
-%cup
-%cupdebug
-
-%{
-// Rules section flex output
-%}
-
-[0-9]+ {/* yytext is a string containing the matched text. */
-    printf("Saw an integer: %s\n", yytext);
-}
-.|\n { /* Ignore all other characters. */ } 
+DIGIT = [0-9]
+NUMBER = {DIGIT}+
 
 %%
 /*** Supplementary Code section ***/
