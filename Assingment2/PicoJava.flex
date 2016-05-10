@@ -1,19 +1,19 @@
-package AST;
+package PivoJava;
 
 import beaver.Symbol;
 import beaver.Scanner;
-import AST.PicoJavaParser.Terminals;
-
+import PivoJava.PicoJavaParser.Terminals;
 %%
 
 %public
 %final
 %class PicoJavaScanner
 %extends Scanner
+
 %unicode
-%function nextToken
+
 %type Symbol
-%yylexthrow Scanner.Exception
+
 %line
 %column
 
@@ -25,13 +25,9 @@ import AST.PicoJavaParser.Terminals;
 
 // Helper Definitions
 
-LineTerminator = \r|\n|\r\n
-InputCharacter = [^\r\n]
-
-WhiteSpace = {LineTerminator} | [ \t\f]
-Comment = "//" {InputCharacter}* {LineTerminator}?
-
-Identifier = [:letter:]([:letter:] | [:digit:])*
+Layout      = [ \t\n\r]*
+Identifier  = [a-zA-Z][a-zA-Z0-9]*
+Comment     = "//"^[\n\r]*[\n\r]?
 
 %% // Rules
 
@@ -39,8 +35,8 @@ Identifier = [:letter:]([:letter:] | [:digit:])*
 "extends"     { return sym(Terminals.EXTENDS); }
 "while"       { return sym(Terminals.WHILE); }
 
-"true"        { return sym(Terminals.BOOLEAN_LITERAL); }
-"false"       { return sym(Terminals.BOOLEAN_LITERAL); }
+"true"        { return sym(Terminals.BOOLEAN); }
+"false"       { return sym(Terminals.BOOLEAN); }
 
 "("           { return sym(Terminals.LPAREN); }
 ")"           { return sym(Terminals.RPAREN); }
@@ -48,12 +44,15 @@ Identifier = [:letter:]([:letter:] | [:digit:])*
 "}"           { return sym(Terminals.RBRACE); }
 ";"           { return sym(Terminals.SEMICOLON); }
 "."           { return sym(Terminals.DOT); }
+"||"          { return sym(Terminals.OP_OR); }
+"&&"          { return sym(Terminals.OP_AND); }
 
 "="           { return sym(Terminals.ASSIGN); }
 
-{Comment}     { /* discard token */ }
-{WhiteSpace}  { /* discard token */ }
+{Layout}      { /* ignore */ }
+{Comment}     { /* ignore */ }
 {Identifier}  { return sym(Terminals.IDENTIFIER); }
 
-.|\n          { throw new RuntimeException("Illegal character \""+yytext()+ "\" at line "+yyline+", column "+yycolumn); }
+.|\n|\r       { throw new RuntimeException("Error: `"+yytext()+ "` (l:"+yyline+",c:"+yycolumn+")"); }
 <<EOF>>       { return sym(Terminals.EOF); }
+
