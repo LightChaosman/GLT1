@@ -1,5 +1,6 @@
 package overhead;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -50,27 +51,37 @@ public class PicoJavaTester {
 	}
 
 	private static void runTest(File test,boolean valid) throws IOException {
-		Reader reader = new FileReader(test);
+		FileReader reader = new FileReader(test);
 		PicoJavaScanner scanner = new PicoJavaScanner(reader);
 		PicoJavaParser parser = new PicoJavaParser();
 		String name = test.getName().substring(0,test.getName().lastIndexOf('.'));
+		BufferedReader br = new BufferedReader(new FileReader(test));
+		String s = br.readLine();
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n\t");
+		while(s!=null)
+		{
+			sb.append(s);
+			s=br.readLine();
+		}
 		try {
 			Object o = parser.parse(scanner);
 			
 			if(valid)
 			{
-				System.out.println("Passed (valid) test "+ name);
+				System.out.println("Passed (valid) test "+ name + " " + sb);
 			}else{
-				System.out.println("Failed (invalid) test "+ name);
+				System.err.println("Failed (invalid) test "+ name  + " " + sb);
 			}
 		} catch (RuntimeException |Exception e) {
 			if(!valid)
 			{
-				System.out.println("Passed (invalid) test "+ name);
+				System.out.println("Passed (invalid) test "+ name + " " + sb);
 			}else{
-				System.out.println("Failed (valid) test "+ name + " " + e);
+				System.err.println("Failed (valid) test "+ name   + " " + sb);
 			}
 		}
+		System.out.println();
 	}
 
 }
