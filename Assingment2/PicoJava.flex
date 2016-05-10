@@ -27,7 +27,7 @@ import PivoJava.PicoJavaParser.Terminals;
 
 Layout      = [ \t\n\r]*
 Identifier  = [a-zA-Z][a-zA-Z0-9]*
-Comment     = "//"^[\n\r]*[\n\r]?
+Comment     = "//"[^\n\r]*[\n\r]?
 
 %% // Rules
 
