@@ -1,14 +1,14 @@
-%package "PicoJava"
-%class "PicoJavaParser"
-%import "PicoJavaParser.Terminals"
-%terminals CLASS, EXTENDS, WHILE
-%terminals BOOLEAN, IDENTIFIER
-%terminals LPAREN, RPAREN, LBRACE, RBRACE
-%terminals SEMICOLON, DOT, ASSIGN
-%terminals OP_OR, OP_AND
-%terminals EOF
+%package "PicoJava";
+%class "PicoJavaParser";
+%import "PicoJavaParser.Terminals";
+%terminals CLASS, EXTENDS, WHILE;
+%terminals BOOLEAN, IDENTIFIER;
+%terminals LPAREN, RPAREN, LBRACE, RBRACE;
+%terminals SEMICOLON, DOT, ASSIGN;
+%terminals OP_OR, OP_AND;
+%terminals EOF;
 
-%goal block
+%goal block;
 
 block =
   LBRACE block_statements RBRACE
