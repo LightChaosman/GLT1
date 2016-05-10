@@ -6,7 +6,6 @@
 %terminals LPAREN, RPAREN, LBRACE, RBRACE;
 %terminals SEMICOLON, DOT, ASSIGN;
 %terminals OP_OR, OP_AND;
-%terminals EOF;
 
 %goal block;
 
@@ -17,6 +16,7 @@ block =
 block_statements =
   
   | block_statement block_statements
+  ;
 
 block_statement =
     class_decl
@@ -43,7 +43,7 @@ extends_opt =
   ;
 
 use =
-  ID
+  IDENTIFIER
   ;
 
 assign_stmt =
@@ -63,6 +63,7 @@ exp =
   ;
 
 name =
-    ID
+    IDENTIFIER
   | name DOT use
+  ;
 
