@@ -21,6 +21,7 @@ import beaver.Scanner;
 		public final static short OP_AND = 12;
 		public final static short ASSIGN = 13;
 		public final static short IDENTIFIER = 14;
+		public final static short EOF = 15;
 	}
 	
 	private Symbol sym(short id) {
@@ -68,6 +69,6 @@ Comment     = "//"[^\n\r]*[\n\r]?
 {Comment}     { /* ignore */ }
 {Identifier}  { return sym(Terminals.IDENTIFIER); }
 
-.|\n|\r       { throw new RuntimeException("Error: `"+yytext()+ "` (l:"+yyline+",c:"+yycolumn+")"); }
+[^]       { throw new RuntimeException("Error: `"+yytext()+ "` (l:"+yyline+",c:"+yycolumn+")"); }
 <<EOF>>       { return sym(Terminals.EOF); }
 
