@@ -19,6 +19,15 @@ public class PicoJavaTester {
 	private final static HashMap<String,String> invalids = new HashMap<>();
 	
 	static{
+		valids.put("Assignment", 		"{Boolean a; a = true;}");
+		valids.put("FromAssignment",	"{	class A {		boolan a;		a = true;		class AA {			boolean aa;		}	}	class B extends A {		boolean b;		b = a;		A refA;		B refB;		refA = refB;		refB.b = refA.a;		class BB extends AA {			boolean bb;			bb = aa;			while (b)			b = a;		}	}}");
+		valids.put("Boolean", 			"{boolean a;}");
+		valids.put("Extension",			"{class A{} class B extends B{}}");
+		valids.put("One class",			"{class A{}}");
+		valids.put("Single Block",		"{}");
+		valids.put("Two classes",		"{{class A{} class B{}}");
+		valids.put("Undeclared assign", "{a=b;}");
+		valids.put("While", 			"{while(a) a=b;}");
 		valids.put("And",				"{a=a&&b;}");
 		valids.put("Or",				"{a=a||b;}");
 		valids.put("Brackets",			"{a=a||(b&&c);}");
@@ -33,8 +42,15 @@ public class PicoJavaTester {
 		valids.put("while false",		"{while(false)a = true;}");
 		valids.put("while true",		"{while(true)a = true;}");
 		valids.put("assignment dot",	"{a=b.c;}");
-
 		
+
+
+		invalids.put("Declare plus ass","{boolean a = true;}");
+		invalids.put("Empty While", 	"{while(a)}");
+		invalids.put("empty", 			"");
+		invalids.put("infinite while", 	"{while(a);}");
+		invalids.put("no ext. brack", 	"a=b;");
+		invalids.put("no semicolon", 	"{a=b}");
 		invalids.put("dot name", 		"{boolean b.a;}");
 		invalids.put("extends dot",		"{class A extends B.C{}}");
 		invalids.put("No second arg",	"{a = b &&}");
@@ -47,22 +63,6 @@ public class PicoJavaTester {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		String r = System.getProperty("user.dir");
 		runCommandLine(r);
-		r = r + "\\tests\\PicoJava\\";
-		String rv = r + "valid\\";
-		File f = new File(rv);
-		File[] fs = f.listFiles();
-		for(File test:fs)
-		{
-			addTest(test,true);
-		}
-		
-		String ri = r + "invalid\\";
-		f = new File(ri);
-		fs = f.listFiles();
-		for(File test:fs)
-		{
-			addTest(test,false);
-		}
 		for(String k:valids.keySet())
 		{
 			executeTest(k,valids.get(k),true);
@@ -116,20 +116,5 @@ public class PicoJavaTester {
 		System.out.println();
 	}
 
-	private static void addTest(File test,boolean valid) throws IOException {
-		
-		String name = test.getName().substring(0,test.getName().lastIndexOf('.'));
-		BufferedReader br = new BufferedReader(new FileReader(test));
-		String s = br.readLine();
-		StringBuilder sb = new StringBuilder();
-		while(s!=null)
-		{
-			sb.append(s);
-			s=br.readLine();
-		}
-		HashMap<String,String> map = valid?valids:invalids;
-		map.put(name,sb.toString());
-		br.close();
-	}
-
+	
 }
