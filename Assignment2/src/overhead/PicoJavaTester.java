@@ -52,8 +52,8 @@ public class PicoJavaTester {
 		valids.put("keyword in ID 4",   "{class classa{}}");
 		
 		valids.put("valid no layout",   "{classname{}}");
-		invalids.put("invalid no layout",   "{declareid;}");
-
+		invalids.put("inV no layout",   "{declareid;}");
+		
 		invalids.put("Declare plus ass","{boolean a = true;}");
 		invalids.put("Empty While", 	"{while(a)}");
 		invalids.put("empty", 			"");

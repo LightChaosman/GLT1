@@ -1,0 +1,23 @@
+%package "Oberon";
+%class "OberonParser";
+%terminals OP_TIMES, OP_DIV, OP_MOD, OP_AND, OP_PLUS, OP_MINUS, OP_OR;
+%terminals EQUALS, HASHTAG, SMALL, SMALLEQ, GREATER, GREATEREQ, DOT, COMMA, COLON, RPAREN, RSQBRACK;
+%terminals OF, THEN, DO, LPAREN, LBRACE, TILDE, ASSIGN, SEMICOLON;
+%terminals END, ELSE, ELSEIF,IF,WHILE;
+%terminals ARRAY, RECORD,CONST,TYPE,VAR,PROCEDURE,BEGIN,MODULE;
+
+
+
+%embed {: 
+
+	public final static class Events extends Parser.Events{
+		public void syntaxError(Symbol token){
+			throw new RuntimeException(token.value.toString());
+		}
+	}
+ :};
+ 
+%init {: report = new Events(); :} ;
+
+%goal block;
+
