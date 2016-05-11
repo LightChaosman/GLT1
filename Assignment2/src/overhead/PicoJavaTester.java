@@ -43,9 +43,16 @@ public class PicoJavaTester {
 		valids.put("while true",		"{while(true)a = true;}");
 		valids.put("assignment dot",	"{a=b.c;}");
 
-		valids.put("rev ord BLCK-STMT", "{a=true; a a; class a extends {}}");
-		invalids.put("missing layout",  "{aba;}");
-		invalids.put("no trim"          ,"\n {} \n");
+		valids.put("rev ord BLCK-STMT", "{a=true; a a; class a {}}");
+		invalids.put("no trim",         "\n {} \n");
+		
+		invalids.put("keyword as ID 1", "{true=true;}");
+		invalids.put("keyword as ID 2", "{class class{}}");
+		valids.put("keyword in ID 3",   "{class aclass{}}");
+		valids.put("keyword in ID 4",   "{class classa{}}");
+		
+		valids.put("valid no layout",   "{classname{}}");
+		invalids.put("invalid no layout",   "{declareid;}");
 
 		invalids.put("Declare plus ass","{boolean a = true;}");
 		invalids.put("Empty While", 	"{while(a)}");
