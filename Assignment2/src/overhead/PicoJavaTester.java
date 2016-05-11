@@ -6,12 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
+import java.util.HashMap;
 
 import beaver.Parser.Exception;
 import picoJava.PicoJavaParser;
 import picoJava.PicoJavaScanner;
 
 public class PicoJavaTester {
+	
+	private final static HashMap<String,String> valids = new HashMap<>();
+	private final static HashMap<String,String> invalids = new HashMap<>();
+	
+	static{
+		
+	}
+	
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		String r = System.getProperty("user.dir");
@@ -22,7 +32,7 @@ public class PicoJavaTester {
 		File[] fs = f.listFiles();
 		for(File test:fs)
 		{
-			runTest(test,true);
+			addTest(test,true);
 		}
 		
 		String ri = r + "invalid\\";
@@ -30,7 +40,14 @@ public class PicoJavaTester {
 		fs = f.listFiles();
 		for(File test:fs)
 		{
-			runTest(test,false);
+			addTest(test,false);
+		}
+		for(String k:valids.keySet())
+		{
+			executeTest(k,valids.get(k),true);
+		}for(String k:invalids.keySet())
+		{
+			executeTest(k,invalids.get(k),false);
 		}
 
 	}
@@ -49,39 +66,49 @@ public class PicoJavaTester {
 		rt.exec(flex);
 		Thread.sleep(500);
 	}
-
-	private static void runTest(File test,boolean valid) throws IOException {
-		FileReader reader = new FileReader(test);
+	
+	private static void executeTest(String name, String program, boolean valid) throws IOException
+	{
+		System.out.println("name: " + name);
+		System.out.println("prog: " + program);
+		Reader reader = new StringReader(program);
 		PicoJavaScanner scanner = new PicoJavaScanner(reader);
 		PicoJavaParser parser = new PicoJavaParser();
-		String name = test.getName().substring(0,test.getName().lastIndexOf('.'));
-		BufferedReader br = new BufferedReader(new FileReader(test));
-		String s = br.readLine();
-		StringBuilder sb = new StringBuilder();
-		sb.append("\n\t");
-		while(s!=null)
-		{
-			sb.append(s);
-			s=br.readLine();
-		}
 		try {
 			Object o = parser.parse(scanner);
 			
 			if(valid)
 			{
-				System.out.println("Passed (valid) test "+ name + " " + sb);
+				System.out.println("Passed (valid) test "+ name);
 			}else{
-				System.err.println("Failed (invalid) test "+ name  + " " + sb);
+				System.err.println("Failed (invalid) test "+ name);
 			}
 		} catch (RuntimeException |Exception e) {
 			if(!valid)
 			{
-				System.out.println("Passed (invalid) test "+ name + " " + sb);
+				System.out.println("Passed (invalid) test "+ name);
 			}else{
-				System.err.println("Failed (valid) test "+ name   + " " + sb);
+				System.err.println("Failed (valid) test "+ name);
 			}
 		}
+		reader.close();
 		System.out.println();
+	}
+
+	private static void addTest(File test,boolean valid) throws IOException {
+		
+		String name = test.getName().substring(0,test.getName().lastIndexOf('.'));
+		BufferedReader br = new BufferedReader(new FileReader(test));
+		String s = br.readLine();
+		StringBuilder sb = new StringBuilder();
+		while(s!=null)
+		{
+			sb.append(s);
+			s=br.readLine();
+		}
+		HashMap<String,String> map = valid?valids:invalids;
+		map.put(name,sb.toString());
+		br.close();
 	}
 
 }
