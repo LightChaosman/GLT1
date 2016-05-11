@@ -19,7 +19,20 @@ public class PicoJavaTester {
 	private final static HashMap<String,String> invalids = new HashMap<>();
 	
 	static{
+		valids.put("And",				"{a=a&&b;}");
+		valids.put("Or",				"{a=a||b;}");
+		valids.put("Brackets",			"{a=a||(b&&c);}");
+		valids.put("While And",			"{while(a&&b)a=b;}");
+		valids.put("While Or",			"{while(a||b)a=b;}");
+		valids.put("While Or and",		"{while(a||(b && c))a=b;}");
+		valids.put("and and",			"{a = a && b && c;}");
+		valids.put("and or",			"{a = a && b || c;}");
+		valids.put("or and",			"{a = a || b && c;}");
+		valids.put("or or",				"{a = a || b || c;}");
+		valids.put("declare dot",		"{Rectanle.Square s;}");
 		
+		invalids.put("dot name", 		"{boolean b.a;}");
+		invalids.put("extends dot",		"{class A extends B.C{}}");
 	}
 	
 
