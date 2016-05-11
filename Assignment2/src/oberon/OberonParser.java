@@ -55,40 +55,40 @@ public class OberonParser extends Parser {
 	}
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9orbdUSLDKLntzlPfQooYA8h0KLKPH5DBAobANiiknI5dTX4HSK15IAsB4b5Ym4Em8AY29" +
-		"YmOAAeWWYJIIQs3Mn5#mbqSH8Z369CJdvtZjtXiTyHlpBcS$t$SuvzznxNxdtlID5yzL2hT" +
-		"LAkwgDTbDRxPpZZyxnn#Nun#VuKtByyxJBTdwrscilzTRme7lgKFr2XwchcgXK2PNQRDLee" +
-		"0Pfi8QeWbY52jLT$LJbwOcVwU7yz2YzWbQIdxQEL3Vjhc6g8pyTQOpbJmWwILE3TR7c16kX" +
-		"hjPIuiKw2#sEdgAZD9wPp$UQL84Er46wMRKwKsVeLkAdwYfTeQ6wGxUhdVRnsbxxCjhUwkI" +
-		"oxLtrKLyLs$MCTm7CysDbADRfS8CMaHrYjafDDSyUraxCqK7xCyVrcgy5FkicRytJ$RehM0" +
-		"y7TQrhitb7gCIhczjHeltKaR4ELcSuH0Tmbmxd6hkfpDxI7bnZ9XE8ZF3wYexHIJvwSeWiq" +
-		"zbslxTMQQmkqqpDqkNse5Rfbzp7vPfbc$6kzNsMSPOhz2ijiRKwrXrjCtvApMokbjbrQcvp" +
-		"zA1QgaXTr4Fbwgy1UaJrzeuQx0sDj3TrjCPebFr14#qb7QSJTA8cwpHDqsfDv5u#e1bsfzs" +
-		"j6Jf7vzezccvtwK9TeeiqNPVgrxh6xhNxDDjMw4hDjOTikJsWk$alXXjrdMxHRVQOxj6Tkb" +
-		"VtsM$i4Nk2beUqakCQFQfr71$J#kogA#MESRz#Ph#LVq9TU4OPBMOzxy5#6QU85HQnAlVd#" +
-		"NNqQx4Glv2dquBxk8kdDNwcX$DpHukoLc#UqWJkQs4saY#$NzQgoLgrVbz6hBBkp1onqvgg" +
-		"6JEFzEhY1UpgmQoUOzc7WuaFvubDufqnWlqvckVgD3tQUFQUoqxvOyGkYzWx4NytLWOtHyI" +
-		"Es9diRJ6NcsBVrR5ogfcZ1#kubyzAMn5lduoLqMsjpYfatJbrSplAULEuiIfPZOugVvTQ#6" +
-		"EAFTGwcva#voAlIVPjexT6PIDZUQUbh#W4LkqKl4BofxA6QzXJ2JN7g$KPHPnbTwuYGQzE$" +
-		"jWSFq5FqPPazYJlnGHxePnOU$gLuwVu3mhq9QCDx0RxGb#y1FyI8dipUblljVNtAqqzVYki" +
-		"UXZgMzqnnRmf$tVtVmXqu5oIM4arO4NXc2RXiuPvROLA6owH$tM2XLBK2rqCg#0v$DvmEFI" +
-		"5FiIkGVj1$z1lZjCVWryDV0fV1V$0MDlNGQjXGR07ml8yuvG4hOUg7vbhHj1lqnhL14t0GV" +
-		"dxH2ce3lqcx#XQOlEieC#Wq7#m$4EFQg49D8SZe10gQ5YDLa8H30jz6ZYiGO#4bj0JVorwL" +
-		"6ZV5Tnzs8mE2R5kK0T3Wtyqr0Vx6AY22L0CnyCaE0ucal0aEZdaJWaw1dQ7gN1AY9q6UyBf" +
-		"S0Q1vz5fS2QS1Vl1sR0Fi5wYS#0yE9VSTNdkRGcCnNWn#ET3AKmF$eLG1XV7#bp0OKkmEy1" +
-		"5C1CE0yBH5Q7jgg0pE7o4NWspOkDS6$HI3f#Xis5kfjtCjiIUPnt#v$cUDV5NGiuNGHFvyc" +
-		"9ZTOK1q3humsDjcVN9caZl6tuRd9zdd7NX$7TIsADvSfuA#dHEl6m7vzThcnsrtD6rnFeKR" +
-		"Uz7JKBSlGUQ1Tll1#xNEyJQO6wCzo7#SSYh2$wNiV4RGkmR#hOBiOsm2KR4ycR6xCpxPrFk" +
-		"#JBEzx5pRHVhqnXYxMEnzJ6x8kSwEuRu9swzXrXbY2t9dPVVcA1BWuvqxyvO#sYtr$FqMnR" +
-		"6BetDNPQJyqFCNXvoKh7yobZxoX2h3lu6XPyjLUndBy1JzbjxmPwqv#nvUzQUiQVjTzp1rs" +
-		"shRR7FxLFx3EizylvaV$N7FzgVxKlxmhwpV#9$P$#mR#tlzetzZLx$WVyH$QzjvVY3VMrVs" +
-		"L$iU#$z6$vbdzZ7zf5zQ1$O#$QglUPRtWvdipLpTEVbxT#7SmmnUp5hlMotswqstsx1dc$p" +
-		"ybxP7N1pTjp5#ecVhRGrzgYj3lcRx76lwu9ki8rUrs$NPuajj0N1NcWts6sso6uC$YAx2Pa" +
-		"czzNimnUtjoT99P3mLK5viAkWFpdzyIk9n#bCl3DwC6rTK4Tr3FUc6K0RAmiYwhm4bLgKb$" +
-		"6qTQLEuAi04PLTaag4dOjEe8sl24JKjAus4aHKjqsfJ0geXnBKkGNKl8A8#ZUY0jwUCb$li" +
-		"0jGLmkvhrm3O$LaJhvq455NHjIHIIgv51MAV9NImrTwQLorK8FMqiuN328giIILZY19HPgW" +
-		"BXD4L92kOXD4rAmfghG4zMJIlPLyfTk8DgAZq56#marHFHImAnE#yXc6FHNRVMa7OhiApts" +
-		"nAnXZ73hEr#tDgDGJElN$Z$MK60==");
+		"U9orbdUSLDKLntzlPcYhB4LarQ0YYh98egmiPIcxBBkKnLrOn0K50PKI4YlsWWL95ANfKaG" +
+		"H2nPK54KGQI6eYOabnNH3YhqhzkxnU#$S6Hxp6SbVcVbyt##SSy#zzvLxtpjIj4WjrLPjj8" +
+		"$QQL#rrzuv$jWSVqAEVqgEFot7lqYjT$Ehr54$K5#D37g0VgIZTBIwgwbAb529pLEr1ck8X" +
+		"cgOoecLgq0zDK2LdjxucHxEJu$I9sW5#MdhEFNGVXgXMlBJaOPO$gIWKpGzM9ThGR2Mwbgj" +
+		"95waSz2Uw6awNXEP#MAlIJNHuJf2Dwj6CtIMRYL#kkReQWtN7RfT7NIGruuwcD4EL1UNRVz" +
+		"KF$LNaLtFU9T0enyhGv7EX2MwYUmGitLgfaPxM7inHoSToXmtQ94M#wnbtchK$RehM0y7TQ" +
+		"qRitd7gjYhczjHh4FKcR6EL5VueGxZBXt3DVPGgVrT#tEDcKmWCihhypfHF$7HduR8Afrhz" +
+		"tjhdSRhPvgjkVgvFQXrke3xk5fpRJlUFDzd5MUvHXTgXMtKIUves$5JQcuBjCeMgeNDruDg" +
+		"fK9rKo#LQQ06wH7LsGkgjxzgjFrD9sYSnjWVDTb#fvDrgdwigJf3Pskz9dCl7z0ikzFkrYo" +
+		"Tf$Fj7isqktIfhj1bcgahTPMkitljFistDRf62#qXMsqFw6x#o#56NQzRT9izfdjqf#xLVV" +
+		"QuFMA$fEKXhUMuGOzg4yV7j3cxwaguOzol$xFVnZ#XRZoZZ1QndlTdlqnGn0gBM9M7ylmw#" +
+		"xLOW5$0qsd9VMpjQOkVwU7ytD6YhDMNfpI9#rgGZUJB7v2rghDMZT#N4Qki9pD7xBHcQixC" +
+		"exswU1DszL1Mpqdimw74H$B4fl3E6CN#7CjpTPeURI9xpsMd$35YbqNidOY$6ok3coDYH#n" +
+		"DzgwOoqsnxsfPELNCqOjrtCTdfQs8jq$6okYkLcSLiEwSkhaTPRmft5WLh4P7fRzBBVqnnH" +
+		"vgcyrCdtEXroJxji5ROxAHyRpJqbTqAgjs6bu1#TDPmzNigOHQuDNuZ4BEiYTNaQ1N5tziW" +
+		"P#WfsXBCdkIzsA2lL16h2Fzol1J$8S4#fFH3lQ5Ww4$Ne9$CP436Rszzzhx#vMc3hyDLXqC" +
+		"zwtkc6BUbF#x#pyCEd4kIQoawh6YS4oJy5aZlBP1fIrNoF#wm58fweCkXtNmD7vVE0RwGpz" +
+		"Yrw43O63ejy3fzy6l6bw1TuD$UApj$Q1Li3ZOWs5rdd6AWzP1vVVCDIlenscDgeCcu8ZyVQ" +
+		"8KL8L#K$TqBR5vrj1dIEW$LFwXHpNG55h0iL00vJIiHokW44Q4FlKSDg37GIleZRyHFJwqx" +
+		"mFkFcn7XuLO3wY5uS4$0Ug2VI9KmYGeWbDW2fmCaqbu0fqQSgS57GVxmNGuBSJEW0FWJ3YB" +
+		"m3FesJ03pe53u5mu25WlqNbm4PnFxgOyzxOOncCy5$oBeGHc1lzIA8NBOtqkuR0Zs9tWCfW" +
+		"DHmFXwEhGDYVeB0ulejV2tDWuyu9UoU5LT3uipBIRsOxOywp5VotVioR#VCXvCsWYNrvihE" +
+		"um2De6VsIiBRC#MHFfVSDlY$FpZBCfdFzU2diqJywJGP$AYPVkuVpwxBAZLdkwbbYVmjtzg" +
+		"6c8k$T0ys3x$S3zUe5OEyojyJx4NmfvjS5$ApP#VOXzIDyE8ROLji6eMDxic9rv$spBFL$6" +
+		"#J9shXrYVHf2h6CijZbcb#TSP#SGVzcjzn2h2B4LkVFo6nTqPT3HxjqPQn$hzdgUVgl2s2M" +
+		"nkKjpShwEsQj3JYgMNn5hNnjYLS7Vel2pbOhzx5buqdvbpzeJzhGzOx#rtzXJzclku5zif#" +
+		"smr#mLUnNhN#IzOU$vu#lsjhrbRzgdzXd#f$Q9VMmVsOVs0Rs#Wc#9VcCxENvjxzkxzevzw" +
+		"Rqlu7DxsLwo5#s$zX$xj$t9$knR$X7EPcVcwCxBsty8vnXYzbpM#htTRhTQezs2tMWtvBso" +
+		"EsovtHHwBxURzJz#jjOssAEsFfp7Dlk5rqr1jzXMhvjtwxF2bjYYO2#nnNQRBREbmLzcDo8" +
+		"pvBwQ$VZYzlKagGGIlYee2tOb32Hd87u5yJXTYNT5ZwIj6#geYk7UD8DeOsL1H9sNe5AByZ" +
+		"AHjkxK2NmL8AAoIrA9i7FHIRJn5O68cjRLHeA8whOPbKaJwg44TMuJQbv1HFqRKG7lJgclT" +
+		"zW5gAk5t5Ukdh5wCoTVEeYeAoFgo2ILN8eAHRvAwUKhlJIkMgX6QsZd2mOHbLYIIaUGf29D" +
+		"K9S98Yf8Lx498chM55LQWdeowTvAlj9jG1lGCUWON#6cVFLGntMC9jTLFoEmfsExh#rWR5V" +
+		"bkQzsEUDCG2VushqvrNf2fty7tIUNYm==");
 
 	static final Action RETURN2 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
@@ -237,20 +237,21 @@ public class OberonParser extends Parser {
 			Action.NONE,  	// [96] opt$declarations7 = 
 			Action.RETURN,	// [97] opt$declarations7 = declarations7
 			RETURN4,	// [98] declarations = opt$declarations3 opt$declarations5 opt$declarations7 declarations8; returns 'declarations8' although none is marked
-			RETURN5,	// [99] declarations2 = IDENTIFIER EQUALS expression SEMICOLON declarations2; returns 'declarations2' although none is marked
-			RETURN2,	// [100] declarations3 = CONST declarations2; returns 'declarations2' although none is marked
-			Action.NONE,  	// [101] declarations4 = 
-			RETURN5,	// [102] declarations4 = IDENTIFIER EQUALS type SEMICOLON declarations4; returns 'declarations4' although none is marked
-			RETURN2,	// [103] declarations5 = TYPE declarations4; returns 'declarations4' although none is marked
-			Action.NONE,  	// [104] declarations6 = 
-			RETURN5,	// [105] declarations6 = IdentList COLON type SEMICOLON declarations6; returns 'declarations6' although none is marked
-			RETURN2,	// [106] declarations7 = VAR declarations6; returns 'declarations6' although none is marked
-			Action.NONE,  	// [107] declarations8 = 
-			RETURN3,	// [108] declarations8 = ProcedureDeclaration SEMICOLON declarations8; returns 'declarations8' although none is marked
-			Action.NONE,  	// [109] opt$module2 = 
-			Action.RETURN,	// [110] opt$module2 = module2
-			RETURN8,	// [111] module = MODULE IDENTIFIER SEMICOLON declarations opt$module2 END IDENTIFIER DOT; returns 'DOT' although none is marked
-			RETURN2	// [112] module2 = BEGIN StatementSequence; returns 'StatementSequence' although none is marked
+			Action.NONE,  	// [99] declarations2 = 
+			RETURN5,	// [100] declarations2 = IDENTIFIER EQUALS expression SEMICOLON declarations2; returns 'declarations2' although none is marked
+			RETURN2,	// [101] declarations3 = CONST declarations2; returns 'declarations2' although none is marked
+			Action.NONE,  	// [102] declarations4 = 
+			RETURN5,	// [103] declarations4 = IDENTIFIER EQUALS type SEMICOLON declarations4; returns 'declarations4' although none is marked
+			RETURN2,	// [104] declarations5 = TYPE declarations4; returns 'declarations4' although none is marked
+			Action.NONE,  	// [105] declarations6 = 
+			RETURN5,	// [106] declarations6 = IdentList COLON type SEMICOLON declarations6; returns 'declarations6' although none is marked
+			RETURN2,	// [107] declarations7 = VAR declarations6; returns 'declarations6' although none is marked
+			Action.NONE,  	// [108] declarations8 = 
+			RETURN3,	// [109] declarations8 = ProcedureDeclaration SEMICOLON declarations8; returns 'declarations8' although none is marked
+			Action.NONE,  	// [110] opt$module2 = 
+			Action.RETURN,	// [111] opt$module2 = module2
+			RETURN8,	// [112] module = MODULE IDENTIFIER SEMICOLON declarations opt$module2 END IDENTIFIER DOT; returns 'DOT' although none is marked
+			RETURN2	// [113] module2 = BEGIN StatementSequence; returns 'StatementSequence' although none is marked
 		};
 
  		report = new Events();

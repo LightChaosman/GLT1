@@ -104,7 +104,8 @@ ProcedureBody2 = BEGIN StatementSequence;
 ProcedureDeclaration = ProcedureHeading SEMICOLON ProcedureBody;
 
 declarations = declarations3? declarations5? declarations7? declarations8;
-declarations2 = IDENTIFIER EQUALS expression SEMICOLON declarations2;
+declarations2 = 
+              | IDENTIFIER EQUALS expression SEMICOLON declarations2;
 declarations3 = CONST declarations2;
 declarations4 = 
               |IDENTIFIER EQUALS type SEMICOLON declarations4;
