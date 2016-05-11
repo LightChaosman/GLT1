@@ -27,7 +27,7 @@ import oberon.OberonParser.Terminals;
 
 Layout      = [ \t\n\r]+
 Identifier  = [a-zA-Z][a-zA-Z0-9]*
-Number      = [1-9][0-9]*
+Number      = 0|[1-9][0-9]*
 
 %% // Rules
 
@@ -81,7 +81,6 @@ Number      = [1-9][0-9]*
 
 
 {Layout}      { /* ignore */ }
-{Comment}     { /* ignore */ }
 {Identifier}  { return sym(Terminals.IDENTIFIER); }
 {Number}      { return sym(Terminals.NUMBER); }
 

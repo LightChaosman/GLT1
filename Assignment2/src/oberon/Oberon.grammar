@@ -62,7 +62,8 @@ ActualParameters3 = expression ActualParameters2;
 ProcedureCall = IDENTIFIER selector ActualParameters?; 
 
 IfStatement = IF expression THEN StatementSequence IfStatement2 IfStatement3? END;
-IfStatement2 = ELSEIF expression THEN StatementSequence IfStatement2;
+IfStatement2 = 
+             | ELSEIF expression THEN StatementSequence IfStatement2;
 IfStatement3 = ELSE StatementSequence;
  
 WhileStatement = WHILE expression DO StatementSequence END;
@@ -72,7 +73,7 @@ statement2 = assignment | ProcedureCall | IfStatement | WhileStatement;
 
 StatementSequence = statement StatementSequence2;
 StatementSequence2 = 
-                   | SEMICOLON statement;
+                   | SEMICOLON statement StatementSequence2;
 
 IdentList = IDENTIFIER IdentList2;
 IdentList2 = 

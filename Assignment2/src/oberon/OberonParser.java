@@ -55,40 +55,40 @@ public class OberonParser extends Parser {
 	}
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9orbdUSLDKLntzlPcYhB4LarQ0YYh98egmiPIcxBBkKnLrOn0K50PKI4YlsWWL95ANfKaG" +
-		"H2nPK54KGQI6eYOabnNH3YhqhzkxnU#$S6Hxp6SbVcVbyt##SSy#zzvLxtpjIj4WjrLPjj8" +
-		"$QQL#rrzuv$jWSVqAEVqgEFot7lqYjT$Ehr54$K5#D37g0VgIZTBIwgwbAb529pLEr1ck8X" +
-		"cgOoecLgq0zDK2LdjxucHxEJu$I9sW5#MdhEFNGVXgXMlBJaOPO$gIWKpGzM9ThGR2Mwbgj" +
-		"95waSz2Uw6awNXEP#MAlIJNHuJf2Dwj6CtIMRYL#kkReQWtN7RfT7NIGruuwcD4EL1UNRVz" +
-		"KF$LNaLtFU9T0enyhGv7EX2MwYUmGitLgfaPxM7inHoSToXmtQ94M#wnbtchK$RehM0y7TQ" +
-		"qRitd7gjYhczjHh4FKcR6EL5VueGxZBXt3DVPGgVrT#tEDcKmWCihhypfHF$7HduR8Afrhz" +
-		"tjhdSRhPvgjkVgvFQXrke3xk5fpRJlUFDzd5MUvHXTgXMtKIUves$5JQcuBjCeMgeNDruDg" +
-		"fK9rKo#LQQ06wH7LsGkgjxzgjFrD9sYSnjWVDTb#fvDrgdwigJf3Pskz9dCl7z0ikzFkrYo" +
-		"Tf$Fj7isqktIfhj1bcgahTPMkitljFistDRf62#qXMsqFw6x#o#56NQzRT9izfdjqf#xLVV" +
-		"QuFMA$fEKXhUMuGOzg4yV7j3cxwaguOzol$xFVnZ#XRZoZZ1QndlTdlqnGn0gBM9M7ylmw#" +
-		"xLOW5$0qsd9VMpjQOkVwU7ytD6YhDMNfpI9#rgGZUJB7v2rghDMZT#N4Qki9pD7xBHcQixC" +
-		"exswU1DszL1Mpqdimw74H$B4fl3E6CN#7CjpTPeURI9xpsMd$35YbqNidOY$6ok3coDYH#n" +
-		"DzgwOoqsnxsfPELNCqOjrtCTdfQs8jq$6okYkLcSLiEwSkhaTPRmft5WLh4P7fRzBBVqnnH" +
-		"vgcyrCdtEXroJxji5ROxAHyRpJqbTqAgjs6bu1#TDPmzNigOHQuDNuZ4BEiYTNaQ1N5tziW" +
-		"P#WfsXBCdkIzsA2lL16h2Fzol1J$8S4#fFH3lQ5Ww4$Ne9$CP436Rszzzhx#vMc3hyDLXqC" +
-		"zwtkc6BUbF#x#pyCEd4kIQoawh6YS4oJy5aZlBP1fIrNoF#wm58fweCkXtNmD7vVE0RwGpz" +
-		"Yrw43O63ejy3fzy6l6bw1TuD$UApj$Q1Li3ZOWs5rdd6AWzP1vVVCDIlenscDgeCcu8ZyVQ" +
-		"8KL8L#K$TqBR5vrj1dIEW$LFwXHpNG55h0iL00vJIiHokW44Q4FlKSDg37GIleZRyHFJwqx" +
-		"mFkFcn7XuLO3wY5uS4$0Ug2VI9KmYGeWbDW2fmCaqbu0fqQSgS57GVxmNGuBSJEW0FWJ3YB" +
-		"m3FesJ03pe53u5mu25WlqNbm4PnFxgOyzxOOncCy5$oBeGHc1lzIA8NBOtqkuR0Zs9tWCfW" +
-		"DHmFXwEhGDYVeB0ulejV2tDWuyu9UoU5LT3uipBIRsOxOywp5VotVioR#VCXvCsWYNrvihE" +
-		"um2De6VsIiBRC#MHFfVSDlY$FpZBCfdFzU2diqJywJGP$AYPVkuVpwxBAZLdkwbbYVmjtzg" +
-		"6c8k$T0ys3x$S3zUe5OEyojyJx4NmfvjS5$ApP#VOXzIDyE8ROLji6eMDxic9rv$spBFL$6" +
-		"#J9shXrYVHf2h6CijZbcb#TSP#SGVzcjzn2h2B4LkVFo6nTqPT3HxjqPQn$hzdgUVgl2s2M" +
-		"nkKjpShwEsQj3JYgMNn5hNnjYLS7Vel2pbOhzx5buqdvbpzeJzhGzOx#rtzXJzclku5zif#" +
-		"smr#mLUnNhN#IzOU$vu#lsjhrbRzgdzXd#f$Q9VMmVsOVs0Rs#Wc#9VcCxENvjxzkxzevzw" +
-		"Rqlu7DxsLwo5#s$zX$xj$t9$knR$X7EPcVcwCxBsty8vnXYzbpM#htTRhTQezs2tMWtvBso" +
-		"EsovtHHwBxURzJz#jjOssAEsFfp7Dlk5rqr1jzXMhvjtwxF2bjYYO2#nnNQRBREbmLzcDo8" +
-		"pvBwQ$VZYzlKagGGIlYee2tOb32Hd87u5yJXTYNT5ZwIj6#geYk7UD8DeOsL1H9sNe5AByZ" +
-		"AHjkxK2NmL8AAoIrA9i7FHIRJn5O68cjRLHeA8whOPbKaJwg44TMuJQbv1HFqRKG7lJgclT" +
-		"zW5gAk5t5Ukdh5wCoTVEeYeAoFgo2ILN8eAHRvAwUKhlJIkMgX6QsZd2mOHbLYIIaUGf29D" +
-		"K9S98Yf8Lx498chM55LQWdeowTvAlj9jG1lGCUWON#6cVFLGntMC9jTLFoEmfsExh#rWR5V" +
-		"bkQzsEUDCG2VushqvrNf2fty7tIUNYm==");
+		"U9orbtUOLSKPXt$ddaiGXCK5510KDmQ51HI4NTnLM5WMLdeJ5QcAW0GmAfP4KS1UgCk288e" +
+		"DHL1qfQYq22OciIQMH6EB8TqIqKHZIVBvpjpPzN2V2$ahTvvtlZBVp3bdpioSxqhH2ZLMCp" +
+		"LLSnsk8zH2ZRBiCLdsn2nxSfPzVfPzXGxRp#wd0hNHgHeHP6kTg2xggfDiWRef1R7wgrAdQ" +
+		"O06gZTsRnsbjYfJNy$HsA67jpEZb0RPX$YCThgAr4h3DPJuZEVCHFmvGKxLzuCsJqk2jb9h" +
+		"TIl#jMgfItIysYFdw0nDKdrTwQGjKJrzHtTeY6RhRXznfMxHJUgW#tIl6lgwGCVeL7jBFTM" +
+		"B$eV2aT31ZrDBIytIXTJLjjcFM#EzoxHSAtIRLkiYIhKke5IhK0$hTjzIxTk#w#i74fvDNj" +
+		"$kwnxUCqXfbVWxS0pMiVeUunn7tKaTuGJYsZ5FtP4bo69x8n4Fs6CrocklrFb7QOPcsZgDr" +
+		"wM#PODkqFLQQ9jjemvX5c$K3zL0MxLHYxHGDNXhVByVsMAU8KyJT9SzwR3TjbkFsY9jqNgj" +
+		"juLgGibNPvsiKrIk2WspDpNIVgFHzhhEqjaQPozhYhseStMUfcYwVg2BDKsFw77DiVjqkQw" +
+		"bN6RtwofxmDRgQifSpTSrkautsuEstXxH0YssH#qXUrZhj1JkX2gjqXhTOq$eGTsl3Nh8zj" +
+		"WcUugMnxIP#aazeHtKsxIJ6QjTUzsOjQB$ivtFstBlgNETRC5gQSLAcgc8dH1Ht3jjnpizd" +
+		"dKNmHZcgGbxpZ4HkxQ7ixD7Y#gqKrZtazWL3UiykU9xrMdzwhHYLbalweZTu7P5n6wjppg8" +
+		"DJh88Rpn0Omydjf5ZFPlhpNhw7HMagipOwL3$pPG0Arz$reYTc#PV#B8ssbVzs2jbB2x6h7" +
+		"FXz8oWX9n6ZGBBP5lA$TrqfFHCtLZxndBsTFKtu7ZN4wA2iPnTMzE5KTZnd7pr9Wu9zE9U4" +
+		"UQtPldjRZEbyUfSnRsP8tpTeeJPnfrH7J4B3Rqv#LqJfj1U8ln5lkuDlHfnXdO7c$iQK3fB" +
+		"q4UnVbIj9SooZ7qAeKqfsQ6vkotc78ujFMofuzlpfWTU3$k#aTGt2Z3VAIRrNnlkJjB#JAO" +
+		"alObykzt83JWt8dHOer4ZqAT8UL76UvbFbBQDK$#rnuguKEu55P0bHIrWwEWDvo4Rm6o3$G" +
+		"D$PQWLpZzGF1x1vR11y4#Bj7sKP0LS4lGtHokpZ5EXo27Gla1hlL9a9zbP7HQa34KvkuJrO" +
+		"FAq6$gmPubSPqDz1aG#W#450o6#j0GkCUe4PGHK8CiXyDWPEWpYceJSZGqWLBiBSWpGti#3" +
+		"4BPYUmVV2V341WMxB4mFEZZe1#S0otXF9WCKs4Q0KyXpm#nCu8S3wrW5imClWlXQBW8BiQn" +
+		"1ta1p8PBe01O7z6nq0akWolWSc9tvvZRpZ0HvQLWpu4UC3VOLqC9p4$qkOhgvQ1t1zJe1YY" +
+		"2Q#3cq7PhaDTHlOvqQtDHOfp5GLvBzHxIhTMgsdOpUoFnFfbNzSprhebx9SHy76JAkNF59i" +
+		"RhAhz$r3ICyKMYRNwGgs1Jq7V1rXpZR0$Fa4Urym3NUYR8PxFyHGUvlv9lzQZfmPubqITlV" +
+		"piw9FXxkJKVzChml6$YQu6wBTa7$zuGDoJOxoV67n5ydzAtRV0z7PYRY9kNqFi4kIVxVXdd" +
+		"gyIz7fdeSqRm5IHyEn9wMTPp5WR$NlIEmHVsf9PcNvVVs23N13dAhUFazTsQpz5lNHYxM#B" +
+		"QnLanNoRqZK5#dOZlasYl2Rv#mTwbyBDxbVZPy$0J#wazJ$sqFMlFsI$iv$OpUuOv$BNjix" +
+		"Vjp$P7#nCQ9xdzrVxkwx$O1$Q#$Sq#jtzXVswVsJ$j7$QfVKAlh#6$UFzZ#wZ$RH$RH$QXV" +
+		"UMjB#4B#uFjjT$RU$OxUzTUjTTyos$3$UohhRcZNthzL#4kzmNvGcshlMHtsnghiZkmgsnf" +
+		"pcUxnrRRgj1xjTsk$$6pn#nnssfRmdtysFoysROWTzXEBxVlr#TEMsxBWhxSgkqkMsahWht" +
+		"IRaFC9XyHfCXC734PGSfd1wL1BmU#hH2JpKJxKOY$4DcHjav8HqM2lhJtfMqCSWnsPyOw6v" +
+		"cBYRHr9MVWMm4HcLJil$sLo4cqyLs1Y0mtTciL8dBT#cGed97aFfE9wOxiWjs5jXFWn2oAV" +
+		"EuZYCbCKcGXWfXiBaqsAOZ8DIFsHan#boPVaSzPUk2hXUyPHFu$qXJqAUXJYU4x2p4vQahk" +
+		"spOD$r1ile4GaSMcoTbIv9cnEviW8iSJH6Hw0fS9fyca1FN8TbC#5ngEFXqzayFL8#DBoNs" +
+		"$onXd0d82$MQIqSx0F#iRbSAYDW==");
 
 	static final Action RETURN2 = new Action() {
 		public Symbol reduce(Symbol[] _symbols, int offset) {
@@ -186,72 +186,73 @@ public class OberonParser extends Parser {
 			Action.NONE,  	// [45] opt$IfStatement3 = 
 			Action.RETURN,	// [46] opt$IfStatement3 = IfStatement3
 			RETURN7,	// [47] IfStatement = IF expression THEN StatementSequence IfStatement2 opt$IfStatement3 END; returns 'END' although none is marked
-			RETURN5,	// [48] IfStatement2 = ELSEIF expression THEN StatementSequence IfStatement2; returns 'IfStatement2' although none is marked
-			RETURN2,	// [49] IfStatement3 = ELSE StatementSequence; returns 'StatementSequence' although none is marked
-			RETURN5,	// [50] WhileStatement = WHILE expression DO StatementSequence END; returns 'END' although none is marked
-			Action.NONE,  	// [51] opt$statement2 = 
-			Action.RETURN,	// [52] opt$statement2 = statement2
-			Action.RETURN,	// [53] statement = opt$statement2
-			Action.RETURN,	// [54] statement2 = assignment
-			Action.RETURN,	// [55] statement2 = ProcedureCall
-			Action.RETURN,	// [56] statement2 = IfStatement
-			Action.RETURN,	// [57] statement2 = WhileStatement
-			RETURN2,	// [58] StatementSequence = statement StatementSequence2; returns 'StatementSequence2' although none is marked
-			Action.NONE,  	// [59] StatementSequence2 = 
-			RETURN2,	// [60] StatementSequence2 = SEMICOLON statement; returns 'statement' although none is marked
-			RETURN2,	// [61] IdentList = IDENTIFIER IdentList2; returns 'IdentList2' although none is marked
-			Action.NONE,  	// [62] IdentList2 = 
-			RETURN3,	// [63] IdentList2 = COMMA IDENTIFIER IdentList2; returns 'IdentList2' although none is marked
-			RETURN4,	// [64] ArrayType = ARRAY expression OF type; returns 'type' although none is marked
-			Action.NONE,  	// [65] opt$FieldList2 = 
-			Action.RETURN,	// [66] opt$FieldList2 = FieldList2
-			Action.RETURN,	// [67] FieldList = opt$FieldList2
-			RETURN3,	// [68] FieldList2 = IdentList COLON type; returns 'type' although none is marked
-			RETURN4,	// [69] RecordType = RECORD FieldList RecordType2 END; returns 'END' although none is marked
-			Action.NONE,  	// [70] RecordType2 = 
-			RETURN3,	// [71] RecordType2 = SEMICOLON FieldList RecordType2; returns 'RecordType2' although none is marked
-			Action.RETURN,	// [72] type = IDENTIFIER
-			Action.RETURN,	// [73] type = ArrayType
-			Action.RETURN,	// [74] type = RecordType
-			Action.NONE,  	// [75] opt$VAR = 
-			Action.RETURN,	// [76] opt$VAR = VAR
-			RETURN4,	// [77] FPSection = opt$VAR IdentList COLON type; returns 'type' although none is marked
-			Action.NONE,  	// [78] opt$FormalParameters3 = 
-			Action.RETURN,	// [79] opt$FormalParameters3 = FormalParameters3
-			RETURN3,	// [80] FormalParameters = LPAREN opt$FormalParameters3 RPAREN; returns 'RPAREN' although none is marked
-			Action.NONE,  	// [81] FormalParameters2 = 
-			RETURN3,	// [82] FormalParameters2 = SEMICOLON FPSection FormalParameters2; returns 'FormalParameters2' although none is marked
-			RETURN2,	// [83] FormalParameters3 = FPSection FormalParameters2; returns 'FormalParameters2' although none is marked
-			Action.NONE,  	// [84] opt$FormalParameters = 
-			Action.RETURN,	// [85] opt$FormalParameters = FormalParameters
-			RETURN3,	// [86] ProcedureHeading = PROCEDURE IDENTIFIER opt$FormalParameters; returns 'opt$FormalParameters' although none is marked
-			Action.NONE,  	// [87] opt$ProcedureBody2 = 
-			Action.RETURN,	// [88] opt$ProcedureBody2 = ProcedureBody2
-			RETURN4,	// [89] ProcedureBody = declarations opt$ProcedureBody2 END IDENTIFIER; returns 'IDENTIFIER' although none is marked
-			RETURN2,	// [90] ProcedureBody2 = BEGIN StatementSequence; returns 'StatementSequence' although none is marked
-			RETURN3,	// [91] ProcedureDeclaration = ProcedureHeading SEMICOLON ProcedureBody; returns 'ProcedureBody' although none is marked
-			Action.NONE,  	// [92] opt$declarations3 = 
-			Action.RETURN,	// [93] opt$declarations3 = declarations3
-			Action.NONE,  	// [94] opt$declarations5 = 
-			Action.RETURN,	// [95] opt$declarations5 = declarations5
-			Action.NONE,  	// [96] opt$declarations7 = 
-			Action.RETURN,	// [97] opt$declarations7 = declarations7
-			RETURN4,	// [98] declarations = opt$declarations3 opt$declarations5 opt$declarations7 declarations8; returns 'declarations8' although none is marked
-			Action.NONE,  	// [99] declarations2 = 
-			RETURN5,	// [100] declarations2 = IDENTIFIER EQUALS expression SEMICOLON declarations2; returns 'declarations2' although none is marked
-			RETURN2,	// [101] declarations3 = CONST declarations2; returns 'declarations2' although none is marked
-			Action.NONE,  	// [102] declarations4 = 
-			RETURN5,	// [103] declarations4 = IDENTIFIER EQUALS type SEMICOLON declarations4; returns 'declarations4' although none is marked
-			RETURN2,	// [104] declarations5 = TYPE declarations4; returns 'declarations4' although none is marked
-			Action.NONE,  	// [105] declarations6 = 
-			RETURN5,	// [106] declarations6 = IdentList COLON type SEMICOLON declarations6; returns 'declarations6' although none is marked
-			RETURN2,	// [107] declarations7 = VAR declarations6; returns 'declarations6' although none is marked
-			Action.NONE,  	// [108] declarations8 = 
-			RETURN3,	// [109] declarations8 = ProcedureDeclaration SEMICOLON declarations8; returns 'declarations8' although none is marked
-			Action.NONE,  	// [110] opt$module2 = 
-			Action.RETURN,	// [111] opt$module2 = module2
-			RETURN8,	// [112] module = MODULE IDENTIFIER SEMICOLON declarations opt$module2 END IDENTIFIER DOT; returns 'DOT' although none is marked
-			RETURN2	// [113] module2 = BEGIN StatementSequence; returns 'StatementSequence' although none is marked
+			Action.NONE,  	// [48] IfStatement2 = 
+			RETURN5,	// [49] IfStatement2 = ELSEIF expression THEN StatementSequence IfStatement2; returns 'IfStatement2' although none is marked
+			RETURN2,	// [50] IfStatement3 = ELSE StatementSequence; returns 'StatementSequence' although none is marked
+			RETURN5,	// [51] WhileStatement = WHILE expression DO StatementSequence END; returns 'END' although none is marked
+			Action.NONE,  	// [52] opt$statement2 = 
+			Action.RETURN,	// [53] opt$statement2 = statement2
+			Action.RETURN,	// [54] statement = opt$statement2
+			Action.RETURN,	// [55] statement2 = assignment
+			Action.RETURN,	// [56] statement2 = ProcedureCall
+			Action.RETURN,	// [57] statement2 = IfStatement
+			Action.RETURN,	// [58] statement2 = WhileStatement
+			RETURN2,	// [59] StatementSequence = statement StatementSequence2; returns 'StatementSequence2' although none is marked
+			Action.NONE,  	// [60] StatementSequence2 = 
+			RETURN3,	// [61] StatementSequence2 = SEMICOLON statement StatementSequence2; returns 'StatementSequence2' although none is marked
+			RETURN2,	// [62] IdentList = IDENTIFIER IdentList2; returns 'IdentList2' although none is marked
+			Action.NONE,  	// [63] IdentList2 = 
+			RETURN3,	// [64] IdentList2 = COMMA IDENTIFIER IdentList2; returns 'IdentList2' although none is marked
+			RETURN4,	// [65] ArrayType = ARRAY expression OF type; returns 'type' although none is marked
+			Action.NONE,  	// [66] opt$FieldList2 = 
+			Action.RETURN,	// [67] opt$FieldList2 = FieldList2
+			Action.RETURN,	// [68] FieldList = opt$FieldList2
+			RETURN3,	// [69] FieldList2 = IdentList COLON type; returns 'type' although none is marked
+			RETURN4,	// [70] RecordType = RECORD FieldList RecordType2 END; returns 'END' although none is marked
+			Action.NONE,  	// [71] RecordType2 = 
+			RETURN3,	// [72] RecordType2 = SEMICOLON FieldList RecordType2; returns 'RecordType2' although none is marked
+			Action.RETURN,	// [73] type = IDENTIFIER
+			Action.RETURN,	// [74] type = ArrayType
+			Action.RETURN,	// [75] type = RecordType
+			Action.NONE,  	// [76] opt$VAR = 
+			Action.RETURN,	// [77] opt$VAR = VAR
+			RETURN4,	// [78] FPSection = opt$VAR IdentList COLON type; returns 'type' although none is marked
+			Action.NONE,  	// [79] opt$FormalParameters3 = 
+			Action.RETURN,	// [80] opt$FormalParameters3 = FormalParameters3
+			RETURN3,	// [81] FormalParameters = LPAREN opt$FormalParameters3 RPAREN; returns 'RPAREN' although none is marked
+			Action.NONE,  	// [82] FormalParameters2 = 
+			RETURN3,	// [83] FormalParameters2 = SEMICOLON FPSection FormalParameters2; returns 'FormalParameters2' although none is marked
+			RETURN2,	// [84] FormalParameters3 = FPSection FormalParameters2; returns 'FormalParameters2' although none is marked
+			Action.NONE,  	// [85] opt$FormalParameters = 
+			Action.RETURN,	// [86] opt$FormalParameters = FormalParameters
+			RETURN3,	// [87] ProcedureHeading = PROCEDURE IDENTIFIER opt$FormalParameters; returns 'opt$FormalParameters' although none is marked
+			Action.NONE,  	// [88] opt$ProcedureBody2 = 
+			Action.RETURN,	// [89] opt$ProcedureBody2 = ProcedureBody2
+			RETURN4,	// [90] ProcedureBody = declarations opt$ProcedureBody2 END IDENTIFIER; returns 'IDENTIFIER' although none is marked
+			RETURN2,	// [91] ProcedureBody2 = BEGIN StatementSequence; returns 'StatementSequence' although none is marked
+			RETURN3,	// [92] ProcedureDeclaration = ProcedureHeading SEMICOLON ProcedureBody; returns 'ProcedureBody' although none is marked
+			Action.NONE,  	// [93] opt$declarations3 = 
+			Action.RETURN,	// [94] opt$declarations3 = declarations3
+			Action.NONE,  	// [95] opt$declarations5 = 
+			Action.RETURN,	// [96] opt$declarations5 = declarations5
+			Action.NONE,  	// [97] opt$declarations7 = 
+			Action.RETURN,	// [98] opt$declarations7 = declarations7
+			RETURN4,	// [99] declarations = opt$declarations3 opt$declarations5 opt$declarations7 declarations8; returns 'declarations8' although none is marked
+			Action.NONE,  	// [100] declarations2 = 
+			RETURN5,	// [101] declarations2 = IDENTIFIER EQUALS expression SEMICOLON declarations2; returns 'declarations2' although none is marked
+			RETURN2,	// [102] declarations3 = CONST declarations2; returns 'declarations2' although none is marked
+			Action.NONE,  	// [103] declarations4 = 
+			RETURN5,	// [104] declarations4 = IDENTIFIER EQUALS type SEMICOLON declarations4; returns 'declarations4' although none is marked
+			RETURN2,	// [105] declarations5 = TYPE declarations4; returns 'declarations4' although none is marked
+			Action.NONE,  	// [106] declarations6 = 
+			RETURN5,	// [107] declarations6 = IdentList COLON type SEMICOLON declarations6; returns 'declarations6' although none is marked
+			RETURN2,	// [108] declarations7 = VAR declarations6; returns 'declarations6' although none is marked
+			Action.NONE,  	// [109] declarations8 = 
+			RETURN3,	// [110] declarations8 = ProcedureDeclaration SEMICOLON declarations8; returns 'declarations8' although none is marked
+			Action.NONE,  	// [111] opt$module2 = 
+			Action.RETURN,	// [112] opt$module2 = module2
+			RETURN8,	// [113] module = MODULE IDENTIFIER SEMICOLON declarations opt$module2 END IDENTIFIER DOT; returns 'DOT' although none is marked
+			RETURN2	// [114] module2 = BEGIN StatementSequence; returns 'StatementSequence' although none is marked
 		};
 
  		report = new Events();
