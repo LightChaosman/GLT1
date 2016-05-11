@@ -34,6 +34,9 @@ public class PicoJavaTester {
 		valids.put("while true",		"{while(true)a = true;}");
 		valids.put("assignment dot",	"{a=b.c;}");
 
+		valids.put("rev ord BLCK-STMT", "{a=true; a a; class a extends {}}");
+		invalids.put("missing layout",  "{aba;}");
+		invalids.put("no trim"          ,"\n {} \n");
 		
 		invalids.put("dot name", 		"{boolean b.a;}");
 		invalids.put("extends dot",		"{class A extends B.C{}}");
