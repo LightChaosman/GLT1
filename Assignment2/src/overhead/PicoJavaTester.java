@@ -30,9 +30,17 @@ public class PicoJavaTester {
 		valids.put("or and",			"{a = a || b && c;}");
 		valids.put("or or",				"{a = a || b || c;}");
 		valids.put("declare dot",		"{Rectanle.Square s;}");
+		valids.put("while false",		"{while(false)a = true;}");
+		valids.put("while true",		"{while(true)a = true;}");
+		valids.put("assignment dot",	"{a=b.c;}");
+
 		
 		invalids.put("dot name", 		"{boolean b.a;}");
 		invalids.put("extends dot",		"{class A extends B.C{}}");
+		invalids.put("No second arg",	"{a = b &&}");
+		invalids.put("No second arg2",	"{a = b ||}");
+		invalids.put("Empty while2",	"{while() a = b;}");
+		invalids.put("Empty while3",	"{while a = b;}");
 	}
 	
 
