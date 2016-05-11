@@ -1,8 +1,8 @@
-package Oberon;
+package oberon;
 
 import beaver.Symbol;
 import beaver.Scanner;
-import Oberon.OberonParser.Terminals;
+import oberon.OberonParser.Terminals;
 %%
 
 
@@ -74,7 +74,7 @@ Comment     = "//"[^\n\r]*[\n\r]?
 "TYPE"        { return sym(Terminals.TYPE); }
 "VAR"         { return sym(Terminals.VAR); }
 "PROCEDURE"   { return sym(Terminals.PROCEDURE); }
-"BEGIN"       { return sym(Terminals.BEIN); }
+"BEGIN"       { return sym(Terminals.BEGIN); }
 "MODULE"      { return sym(Terminals.MODULE); }
 
 
