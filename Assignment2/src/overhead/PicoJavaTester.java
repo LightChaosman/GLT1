@@ -25,7 +25,7 @@ public class PicoJavaTester {
 		valids.put("Extension",			"{class A{} class B extends B{}}");
 		valids.put("One class",			"{class A{}}");
 		valids.put("Single Block",		"{}");
-		valids.put("Two classes",		"{{class A{} class B{}}");
+		valids.put("Two classes",		"{class A{} class B{}}");
 		valids.put("Undeclared assign", "{a=b;}");
 		valids.put("While", 			"{while(a) a=b;}");
 		valids.put("And",				"{a=a&&b;}");

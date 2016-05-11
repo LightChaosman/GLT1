@@ -12,11 +12,12 @@
 %embed {: 
 
 	public final static class Events extends Parser.Events{
-	public void syntaxError(Symbol token)
-		{throw new RuntimeException(token.value.toString());}
+		public void syntaxError(Symbol token){
+			throw new RuntimeException(token.value.toString());
+		}
 	}
-
- :} ;
+ :};
+ 
  %init {: report = new Events(); :} ;
 
 %goal block;
