@@ -28,7 +28,6 @@ import oberon.OberonParser.Terminals;
 Layout      = [ \t\n\r]+
 Identifier  = [a-zA-Z][a-zA-Z0-9]*
 Number      = [1-9][0-9]*
-Comment     = "//"[^\n\r]*[\n\r]?
 
 %% // Rules
 
@@ -84,7 +83,7 @@ Comment     = "//"[^\n\r]*[\n\r]?
 {Layout}      { /* ignore */ }
 {Comment}     { /* ignore */ }
 {Identifier}  { return sym(Terminals.IDENTIFIER); }
-{Number}  { return sym(Terminals.NUMBER); }
+{Number}      { return sym(Terminals.NUMBER); }
 
 [^]       { throw new RuntimeException("Error: `"+yytext()+ "` (l:"+yyline+",c:"+yycolumn+")"); }
 <<EOF>>       { return sym(Terminals.EOF); }

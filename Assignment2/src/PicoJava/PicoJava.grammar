@@ -38,7 +38,7 @@ block_statement =
   ;
 
 class_decl =
-  CLASS IDENTIFIER extends_opt block
+  CLASS IDENTIFIER extends? block
   ;
 
 var_decl = 
@@ -50,9 +50,8 @@ stmt =
   | while_stmt
   ;
 
-extends_opt =
-                //Can optionally be the empty string
-  | EXTENDS use
+extends =
+EXTENDS use
   ;
 
 use =

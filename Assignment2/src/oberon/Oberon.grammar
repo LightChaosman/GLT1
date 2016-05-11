@@ -1,13 +1,12 @@
 %package "oberon";
 %class "OberonParser";
+
 %terminals OP_TIMES, OP_DIV, OP_MOD, OP_AND, OP_PLUS, OP_MINUS, OP_OR;
 %terminals EQUALS, HASHTAG, SMALLER, SMALLEREQ, GREATER, GREATEREQ, DOT, COMMA, COLON, RPAREN, RBRACE;
 %terminals OF, THEN, DO, LPAREN, LBRACE, TILDE, ASSIGN, SEMICOLON;
 %terminals END, ELSE, ELSEIF,IF,WHILE;
 %terminals ARRAY, RECORD,CONST,TYPE,VAR,PROCEDURE,BEGIN,MODULE;
 %terminals IDENTIFIER, NUMBER;
-
-
 
 %embed {: 
 
@@ -18,9 +17,11 @@
 	}
  :};
  
-%init {: report = new Events(); :} ;
+%init {: 		report = new Events(); :} ;
 
 %goal module;
+
+
 
 selector  = 
           | selector2 selector;
@@ -113,6 +114,8 @@ declarations6 =
 declarations7 =  VAR declarations6;
 declarations8 = 
               | ProcedureDeclaration SEMICOLON declarations8;
+			  
+			  
 
 module = MODULE IDENTIFIER SEMICOLON declarations module2? END IDENTIFIER DOT; 
 module2 = BEGIN StatementSequence;

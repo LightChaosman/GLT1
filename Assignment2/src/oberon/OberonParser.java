@@ -253,7 +253,7 @@ public class OberonParser extends Parser {
 			RETURN2	// [112] module2 = BEGIN StatementSequence; returns 'StatementSequence' although none is marked
 		};
 
- report = new Events();
+ 		report = new Events();
 	}
 
 	protected Symbol invokeReduceAction(int rule_num, int offset) {
