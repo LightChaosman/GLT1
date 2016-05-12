@@ -11,7 +11,10 @@ import oberon.OberonScanner;
 
 public class OberonTester {
 	
+	
+	@SuppressWarnings("serial")
 	private final static HashMap<String,String> valids = new HashMap<String,String>(){
+
 
 		@Override
 		public String put(String key, String value){
@@ -26,7 +29,9 @@ public class OberonTester {
 		
 	};
 	
+	@SuppressWarnings("serial")
 	private final static HashMap<String,String> invalids = new HashMap<String,String>(){
+
 
 		@Override
 		public String put(String key, String value){
@@ -57,7 +62,71 @@ public class OberonTester {
 		valids.put("declarations", "MODULE Sample; VAR a,b : b;a : b; END Sample.");
 		valids.put("declarations", "MODULE Sample;CONST TYPE VAR END Sample.");
 		valids.put("declarations", "MODULE Sample; PROCEDURE x; END x; END Sample.");
+		valids.put("factor", "MODULE Sample; CONST a = 1; END Sample.");
+		valids.put("factor", "MODULE Sample; CONST a = b; END Sample.");
+		valids.put("factor", "MODULE Sample; CONST a = b.c; END Sample.");
+		valids.put("factor", "MODULE Sample; CONST a = (b.c + d.e); END Sample.");
+		valids.put("factor", "MODULE Sample; CONST a = ~(b.c + d.e); END Sample.");
+		valids.put("selector", "MODULE Sample; CONST a = b[5]; END Sample.");
+		valids.put("selector", "MODULE Sample; CONST a = b[5].c[4][5].d.e.f[z]; END Sample.");
+		valids.put("term", "MODULE Sample; CONST a = a * b; END Sample.");
+		valids.put("term", "MODULE Sample; CONST a = a * b * c; END Sample.");
+		valids.put("term", "MODULE Sample; CONST a = a * b * c & d; END Sample.");
+		valids.put("term", "MODULE Sample; CONST a = a * b * c & d DIV 8; END Sample.");
+		valids.put("term", "MODULE Sample; CONST a = a * b * c & d DIV 8 MOD 2; END Sample.");
+		valids.put("SimpleExpression", "MODULE Sample; CONST a = +1; END Sample.");
+		valids.put("SimpleExpression", "MODULE Sample; CONST a = -1; END Sample.");
+		valids.put("SimpleExpression", "MODULE Sample; CONST a = 1+b; END Sample.");
+		valids.put("SimpleExpression", "MODULE Sample; CONST a = 1 OR b; END Sample.");
+		valids.put("SimpleExpression", "MODULE Sample; CONST a = 1 - b; END Sample.");
+		valids.put("Expression", "MODULE Sample; CONST a = 1 = b; END Sample.");
+		valids.put("Expression", "MODULE Sample; CONST a = 1 < b; END Sample.");
+		valids.put("Expression", "MODULE Sample; CONST a = 1 <= b; END Sample.");
+		valids.put("Expression", "MODULE Sample; CONST a = 1 > b; END Sample.");
+		valids.put("Expression", "MODULE Sample; CONST a = 1 >= b; END Sample.");
+		valids.put("Expression", "MODULE Sample; CONST a = 1+b >= ~b-d; END Sample.");
+		valids.put("type", "MODULE Sample; TYPE a = b; END Sample.");
+		valids.put("type", "MODULE Sample; TYPE a = ARRAY 10-b OF c; END Sample.");
+		valids.put("type", "MODULE Sample; TYPE a = RECORD END; END Sample.");
+		valids.put("record", "MODULE Sample; TYPE a = RECORD a:b END; END Sample.");
+		valids.put("record", "MODULE Sample; TYPE a = RECORD a,c:b END; END Sample.");
+		valids.put("record", "MODULE Sample; TYPE a = RECORD a,c:b;d,e,c:z END; END Sample.");
+		valids.put("record", "MODULE Sample; TYPE a = RECORD a,c:b;d,e,c:ARRAY x OF y END; END Sample.");
+		valids.put("IdentList", "MODULE Sample; VAR a,b,c: a; END Sample.");
+		valids.put("IdentList", "MODULE Sample; VAR a,b,c: RECORD a,b,c:ARRAY a OF b END; END Sample.");
+		valids.put("procedure", "MODULE Sample; PROCEDURE x;  END x; END Sample.");
+		valids.put("procedure", "MODULE Sample; PROCEDURE x();  END x; END Sample.");
+		valids.put("procedure", "MODULE Sample; PROCEDURE x(a:b);  END x; END Sample.");
+		valids.put("procedure", "MODULE Sample; PROCEDURE x(VAR a:b);  END x; END Sample.");
+		valids.put("procedure", "MODULE Sample; PROCEDURE x(VAR a:b;c,e:d);  END x; END Sample.");
+		valids.put("procedure", "MODULE Sample; PROCEDURE x(VAR a:b;VAR c,e:d);  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; PROCEDURE x;   END x;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; VAR a,b:c;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; TYPE a=c;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; CONST a=c;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; CONST a=c;TYPE a=b; VAR a,b:c;  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN a:=b  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN a:=b;a:=c  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN END x; END Sample.");
+		valids.put("statementseq", "MODULE Sample; PROCEDURE x; BEGIN ;  END x; END Sample.");
+		valids.put("statementseq", "MODULE Sample; PROCEDURE x; BEGIN ;;;;  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN WHILE x=0 DO x:=1; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSEIF x=2 THEN x:=3; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSEIF x=2 THEN x:=3;ELSEIF x=4 THEN x:=5; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSEIF x=2 THEN x:=3;ELSEIF x=4 THEN x:=5; ELSE x:=6; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSE x:=6; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z[1] END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z[1]() END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z[1](10,6) END x; END Sample.");
+		valids.put("statementseq", "MODULE Sample; PROCEDURE x; BEGIN y.z[1](10,6);y.z[1](10,6); END x; END Sample.");
+		
+		
+		
 		invalids.put("Empty", "");
+		
 	}
 	
 

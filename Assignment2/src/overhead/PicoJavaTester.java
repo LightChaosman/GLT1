@@ -11,8 +11,39 @@ import picoJava.PicoJavaScanner;
 
 public class PicoJavaTester {
 	
-	private final static HashMap<String,String> valids = new HashMap<>();
-	private final static HashMap<String,String> invalids = new HashMap<>();
+	@SuppressWarnings("serial")
+	private final static HashMap<String,String> valids = new HashMap<String,String>(){
+
+
+		@Override
+		public String put(String key, String value){
+			if(!this.containsKey(key))
+			{
+				return super.put(key, value);
+			}
+			int i = 1;
+			while(this.containsKey(key+""+i))i++;
+			return super.put(key+i, value);
+		}
+		
+	};
+	
+	@SuppressWarnings("serial")
+	private final static HashMap<String,String> invalids = new HashMap<String,String>(){
+
+
+		@Override
+		public String put(String key, String value){
+			if(!this.containsKey(key))
+			{
+				return super.put(key, value);
+			}
+			int i = 1;
+			while(this.containsKey(key+""+i))i++;
+			return super.put(key+i, value);
+		}
+		
+	};
 	
 	static{
 		valids.put("Assignment", 		"{Boolean a; a = true;}");
@@ -101,21 +132,22 @@ public class PicoJavaTester {
 		Reader reader = new StringReader(program);
 		PicoJavaScanner scanner = new PicoJavaScanner(reader);
 		PicoJavaParser parser = new PicoJavaParser();
+		Object o = null;
 		try {
-			Object o = parser.parse(scanner);
+			o = parser.parse(scanner);
 			
 			if(valid)
 			{
 				System.out.println("Passed (valid) test "+ name);
 			}else{
-				System.err.println("Failed (invalid) test "+ name);
+				System.err.println("Failed (invalid) test "+ name + " " +  o);
 			}
 		} catch (RuntimeException |Exception e) {
 			if(!valid)
 			{
 				System.out.println("Passed (invalid) test "+ name);
 			}else{
-				System.err.println("Failed (valid) test "+ name);
+				System.err.println("Failed (valid) test "+ name + " " + o + " " + e);
 			}
 		}
 		reader.close();
