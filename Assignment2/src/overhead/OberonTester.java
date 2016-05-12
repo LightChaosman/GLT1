@@ -183,6 +183,7 @@ public class OberonTester {
 		valids.put("missing brackets", "MODULE a; BEGIN a:=~a=a+a END a.");
 		invalids.put("missing brackets", "MODULE a; BEGIN a:=a=a+a=a END a.");
 		invalids.put("brackets mismatch", "MODULE a; BEGIN a:=a[a[(])] END a.");
+		invalids.put("brackets mismatch", "MODULE a; BEGIN a:=a[(a[)]] END a.");
 		valids.put("brackets match", "MODULE a; BEGIN a:=a[(a[(0)])] END a.");
 		valids.put("brackets match", "MODULE a; BEGIN a:=a[a[a[a]]] END a.");
 		
