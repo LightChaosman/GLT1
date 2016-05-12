@@ -3,3 +3,6 @@ read -p "...
 "
 java -jar /home/dennis/Programs/beaver-0.9.11/lib/beaver-cc.jar PicoJava.grammar
 echo Done
+read -p "...
+"
+

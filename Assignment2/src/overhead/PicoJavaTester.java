@@ -50,6 +50,7 @@ public class PicoJavaTester {
 		valids.put("valid no layout",   "{classname{}}");
 		invalids.put("inV no layout",   "{declareid;}");
 		
+		invalids.put("Two programs",	"{}{}");
 		invalids.put("Declare plus ass","{boolean a = true;}");
 		invalids.put("Empty While", 	"{while(a)}");
 		invalids.put("empty", 			"");

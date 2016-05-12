@@ -53,6 +53,6 @@ Comment     = "//"[^\n\r]*[\n\r]?
 {Comment}     { /* ignore */ }
 {Identifier}  { return sym(Terminals.IDENTIFIER); }
 
-[^]       { throw new RuntimeException("Error: `"+yytext()+ "` (l:"+yyline+",c:"+yycolumn+")"); }
+[^]           { throw new RuntimeException("Error: `"+yytext()+ "` (l:"+yyline+",c:"+yycolumn+")"); }
 <<EOF>>       { return sym(Terminals.EOF); }
 
