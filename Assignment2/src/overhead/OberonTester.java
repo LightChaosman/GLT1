@@ -132,6 +132,8 @@ public class OberonTester {
 		valids.put("no trim", " MODULE Sample; END Sample. ");
 		valids.put("no trim", "\n MODULE Sample; END Sample. \n ");
 		
+		invalids.put("two programs", "MODULE a; VAR END a. MODULE a; VAR END a.");
+		
 		valids.put("there is no semantics", "MODULE a; END b.");
 		
 		invalids.put("early EOS", "MODULE Sample; END Sample");
@@ -160,24 +162,31 @@ public class OberonTester {
 		
 		invalids.put("empty procedure", "MODULE a; PROCEDURE p END p END a.");
 		
-		valids.put("simple procedure call", "MODULE a; BEGIN p.c; END a.");
-		valids.put("complex procedure call", "MODULE a; BEGIN p.c(+~a DIV~c#g); END a.");
+		valids.put("simple procedure call", "MODULE a; BEGIN p.c END a.");
+		valids.put("complex procedure call", "MODULE a; BEGIN p.c(+~a DIV~c#g) END a.");
 		valids.put("complex procedure call", "MODULE a; BEGIN p.c(~(+~1&1),1) END a.");
+		invalid.put("procedure call by expression", "MODULE a; BEGIN a=a() END a.");
+		invalid.put("procedure call by term", "MODULE a; BEGIN ~a() END a.");
 		
-		valids.put("expression multiple =", "MODULE a; BEGIN a=a=a END a.");
-		valids.put("expression multiple =", "MODULE a; BEGIN a=~a=a END a.");
-		valids.put("* only in factors",     "MODULE a; BEGIN a=a*a=a END a.");
-		valids.put("expression multiple +", "MODULE a; BEGIN a=+(+0++0)+(+0++0) END a.");
-		valids.put("expression multiple ~", "MODULE a; BEGIN a=-~~~(-~~~0) END a.");
+		valids.put("expression multiple =", "MODULE a; BEGIN a:=a=a END a.");
+		valids.put("expression multiple =", "MODULE a; BEGIN a:=~a=a END a.");
+		valids.put("expression multiple +", "MODULE a; BEGIN a:=+(+0+0)+(+0+0) END a.");
+		valids.put("expression double negation", "MODULE a; BEGIN a:=~~a END a.");
+		valids.put("expression multiple ~", "MODULE a; BEGIN a:=-~~~(-~~~0) END a.");
 		
-		invalid.put("+ only in expressions", "MODULE a; BEGIN a=a+a=a END a.");
-		invalid.put("missing brackets", "MODULE a; BEGIN a=~a=a+1 END a.");
-		//invalid.put("missing brackets", "MODULE a; BEGIN a= END a.");
+		valids.put("+ forces a expression", "MODULE a; BEGIN a:=a+a=a END a.");
+		invalid.put("+ forces a expression", "MODULE a; BEGIN a:=a+a=a=a END a.");
 		
+		valids.put("* only in factors",     "MODULE a; BEGIN a:=a*a=a END a.");
+		invalid.put("* only in factors", "MODULE a; BEGIN a:=a*a=a=a END a.");
 		
-		invalids.put("empty integer", "MODULE a;  a= END a.");
+		valids.put("missing brackets", "MODULE a; BEGIN a:=~a=a+a END a.");
+		invalid.put("missing brackets", "MODULE a; BEGIN a:=a=a+a=a END a.");
+		invalid.put("brackets mismatch", "MODULE a; BEGIN a:=a[a[(])] END a.");
+		valids.put("brackets match", "MODULE a; BEGIN a:=a[(a[(0)])] END a.");
+		valids.put("brackets match", "MODULE a; BEGIN a:=a[a[a[a]]] END a.");
 		
-		valids.put("double negation", "MODULE a; a END a.");
+		invalids.put("empty integer", "MODULE a; a:= END a.");
 	}
 	
 
