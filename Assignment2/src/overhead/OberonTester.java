@@ -128,8 +128,9 @@ public class OberonTester {
 		
 		invalids.put("Empty", "");
 		invalids.put("only layout", " ");
-		
+
 		valids.put("no trim", " MODULE Sample; END Sample. ");
+		valids.put("no trim", "\n MODULE Sample; END Sample. \n ");
 		
 		valids.put("there is no semantics", "MODULE a; END b.");
 		

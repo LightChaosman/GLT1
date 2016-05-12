@@ -71,14 +71,14 @@ public class PicoJavaTester {
 		valids.put("assignment dot",	"{a=b.c;}");
 
 		valids.put("rev ord BLCK-STMT", "{a=true; a a; class a {}}");
-		invalids.put("no trim",         "\n {} \n");
+		valids.put("no trim",           "\n {} \n");
 		
 		invalids.put("keyword as ID 1", "{true=true;}");
 		invalids.put("keyword as ID 2", "{class class{}}");
 		valids.put("keyword in ID 3",   "{class aclass{}}");
 		valids.put("keyword in ID 4",   "{class classa{}}");
 		
-		valids.put("valid no layout",   "{classname{}}");
+		invalids.put("valid no layout", "{classname{}}");
 		invalids.put("inV no layout",   "{declareid;}");
 		
 		invalids.put("Two programs",	"{}{}");
