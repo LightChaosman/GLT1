@@ -154,9 +154,29 @@ public class OberonTester {
 		
 		invalids.put("decl ordering", "MODULE a; BEGIN b:=c+d; CONST e=f; END a.");
 		
-		invalids.put("empty if", "MODULE a; IF a=0 END END a.");
-		invalids.put("if else ordering", "MODULE a; IF a=0 ELSE a=0 THEN a=0 END END a.");
-		//invalids.put("empty procedure", "MODULE a; END a.");
+		invalids.put("empty if", "MODULE a; BEGIN IF a=0 END END a.");
+		invalids.put("if else ordering", "MODULE a; BEGIN IF a=0 ELSE a=0 THEN a=0 END END a.");
+		
+		invalids.put("empty procedure", "MODULE a; PROCEDURE p END p END a.");
+		
+		valids.put("simple procedure call", "MODULE a; BEGIN p.c; END a.");
+		valids.put("complex procedure call", "MODULE a; BEGIN p.c(+~a DIV~c#g); END a.");
+		valids.put("complex procedure call", "MODULE a; BEGIN p.c(~(+~1&1),1) END a.");
+		
+		valids.put("expression multiple =", "MODULE a; BEGIN a=a=a END a.");
+		valids.put("expression multiple =", "MODULE a; BEGIN a=~a=a END a.");
+		valids.put("* only in factors",     "MODULE a; BEGIN a=a*a=a END a.");
+		valids.put("expression multiple +", "MODULE a; BEGIN a=+(+0++0)+(+0++0) END a.");
+		valids.put("expression multiple ~", "MODULE a; BEGIN a=-~~~(-~~~0) END a.");
+		
+		invalid.put("+ only in expressions", "MODULE a; BEGIN a=a+a=a END a.");
+		invalid.put("missing brackets", "MODULE a; BEGIN a=~a=a+1 END a.");
+		//invalid.put("missing brackets", "MODULE a; BEGIN a= END a.");
+		
+		
+		invalids.put("empty integer", "MODULE a;  a= END a.");
+		
+		valids.put("double negation", "MODULE a; a END a.");
 	}
 	
 
