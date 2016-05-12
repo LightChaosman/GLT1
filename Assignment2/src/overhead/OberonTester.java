@@ -147,7 +147,7 @@ public class OberonTester {
 		invalids.put("keywords as ID", "MODULE MODULE; END MODULE.");
 		invalids.put("keywords as ID", "MODULE MODULE; END END.");
 		valids.put("case sensitivity of keywords", "MODULE Module; END End.");
-		valids.put("case sensitivity of keywords", "MODULE a; WHILE Do > 0 DO ENd(); END; END a.");
+		valids.put("case sensitivity of keywords", "MODULE a; BEGIN WHILE Do > 0 DO ENd(); END; END a.");
 		
 		invalids.put("No END id", "MODULE a; END.");
 		invalids.put("No MODULE id", "a; END a.");
