@@ -95,6 +95,31 @@ public class OberonTester {
 		valids.put("procedure", "MODULE Sample; PROCEDURE x(VAR a:b);  END x; END Sample.");
 		valids.put("procedure", "MODULE Sample; PROCEDURE x(VAR a:b;c,e:d);  END x; END Sample.");
 		valids.put("procedure", "MODULE Sample; PROCEDURE x(VAR a:b;VAR c,e:d);  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; PROCEDURE x;   END x;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; VAR a,b:c;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; TYPE a=c;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; CONST a=c;  END x; END Sample.");
+		valids.put("procedurebody", "MODULE Sample; PROCEDURE x; CONST a=c;TYPE a=b; VAR a,b:c;  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN a:=b  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN a:=b;a:=c  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN END x; END Sample.");
+		valids.put("statementseq", "MODULE Sample; PROCEDURE x; BEGIN ;  END x; END Sample.");
+		valids.put("statementseq", "MODULE Sample; PROCEDURE x; BEGIN ;;;;  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN WHILE x=0 DO x:=1; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSEIF x=2 THEN x:=3; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSEIF x=2 THEN x:=3;ELSEIF x=4 THEN x:=5; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSEIF x=2 THEN x:=3;ELSEIF x=4 THEN x:=5; ELSE x:=6; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN IF x=0 THEN x:=1; ELSE x:=6; END  END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z[1] END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z[1]() END x; END Sample.");
+		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z[1](10,6) END x; END Sample.");
+		valids.put("statementseq", "MODULE Sample; PROCEDURE x; BEGIN y.z[1](10,6);y.z[1](10,6); END x; END Sample.");
+		
+		
+		
 		invalids.put("Empty", "");
 		
 	}
