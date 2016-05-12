@@ -123,10 +123,37 @@ public class OberonTester {
 		valids.put("statement", "MODULE Sample; PROCEDURE x; BEGIN y.z[1](10,6) END x; END Sample.");
 		valids.put("statementseq", "MODULE Sample; PROCEDURE x; BEGIN y.z[1](10,6);y.z[1](10,6); END x; END Sample.");
 		
-		
-		
 		invalids.put("Empty", "");
+		invalids.put("only layout", " ");
 		
+		valids.put("no trim", " MODULE Sample; END Sample. ");
+		
+		valids.put("there is no semantics", "MODULE a; END b.");
+		
+		invalids.put("early EOS", "MODULE Sample; END Sample");
+		invalids.put("early EOS", "MODULE Sample; END ");
+		invalids.put("early EOS", "MODULE Sample; END");
+		invalids.put("early EOS", "MODULE Sample; EN");
+		invalids.put("early EOS", "MODULE Sample; ");
+		invalids.put("early EOS", "MODULE Sample;");
+		invalids.put("early EOS", "MODULE Sample");
+		invalids.put("early EOS", "MODULE ");
+		invalids.put("early EOS", "MODULE");
+		invalids.put("early EOS", "MOD");
+		
+		invalids.put("keywords as ID", "MODULE MODULE; END MODULE.");
+		invalids.put("keywords as ID", "MODULE MODULE; END END.");
+		valids.put("case sensitivity of keywords", "MODULE Module; END End.");
+		valids.put("case sensitivity of keywords", "MODULE a; WHILE Do > 0 DO ENd(); END; END a.");
+		
+		invalids.put("No END id", "MODULE a; END.");
+		invalids.put("No MODULE id", "a; END a.");
+		
+		invalids.put("decl ordering", "MODULE a; BEGIN b:=c+d; CONST e=f; END a.");
+		
+		invalids.put("empty if", "MODULE a; IF a=0 END END a.");
+		invalids.put("if else ordering", "MODULE a; IF a=0 ELSE a=0 THEN a=0 END END a.");
+		//invalids.put("empty procedure", "MODULE a; END a.");
 	}
 	
 

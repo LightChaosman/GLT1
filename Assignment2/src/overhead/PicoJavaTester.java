@@ -84,7 +84,8 @@ public class PicoJavaTester {
 		invalids.put("Two programs",	"{}{}");
 		invalids.put("Declare plus ass","{boolean a = true;}");
 		invalids.put("Empty While", 	"{while(a)}");
-		invalids.put("empty", 			"");
+		invalids.put("empty",		    "");
+		invalids.put("only layout",		" ");
 		invalids.put("infinite while", 	"{while(a);}");
 		invalids.put("no ext. brack", 	"a=b;");
 		invalids.put("no semicolon", 	"{a=b}");
