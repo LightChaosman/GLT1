@@ -193,14 +193,17 @@ public class OberonTester {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		String r = System.getProperty("user.dir");
 		runCommandLine(r);
+		int i =0;
 		for(String k:valids.keySet())
 		{
 			executeTest(k,valids.get(k),true);
+			i++;
 		}for(String k:invalids.keySet())
 		{
 			executeTest(k,invalids.get(k),false);
+			i++;
 		}
-
+		System.err.println(i+ " test cases");
 	}
 
 	private static void runCommandLine(String curdir) throws IOException, InterruptedException {
