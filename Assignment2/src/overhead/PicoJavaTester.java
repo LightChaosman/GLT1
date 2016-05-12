@@ -11,8 +11,39 @@ import picoJava.PicoJavaScanner;
 
 public class PicoJavaTester {
 	
-	private final static HashMap<String,String> valids = new HashMap<>();
-	private final static HashMap<String,String> invalids = new HashMap<>();
+	@SuppressWarnings("serial")
+	private final static HashMap<String,String> valids = new HashMap<String,String>(){
+
+
+		@Override
+		public String put(String key, String value){
+			if(!this.containsKey(key))
+			{
+				return super.put(key, value);
+			}
+			int i = 1;
+			while(this.containsKey(key+""+i))i++;
+			return super.put(key+i, value);
+		}
+		
+	};
+	
+	@SuppressWarnings("serial")
+	private final static HashMap<String,String> invalids = new HashMap<String,String>(){
+
+
+		@Override
+		public String put(String key, String value){
+			if(!this.containsKey(key))
+			{
+				return super.put(key, value);
+			}
+			int i = 1;
+			while(this.containsKey(key+""+i))i++;
+			return super.put(key+i, value);
+		}
+		
+	};
 	
 	static{
 		valids.put("Assignment", 		"{Boolean a; a = true;}");
