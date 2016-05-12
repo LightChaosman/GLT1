@@ -45,7 +45,7 @@ expression3 			= expression2 SimpleExpression;
 assignment 				= IDENTIFIER selector ASSIGN expression;
  
 ActualParameters  		= LPAREN ActualParameters3? RPAREN;
-ActualParameters2 		= COMMA expression ActualParameters2;
+ActualParameters2 		= COMMA expression;
 ActualParameters3 		= expression ActualParameters2*;
 				  
 ProcedureCall 			= IDENTIFIER selector ActualParameters?; 
