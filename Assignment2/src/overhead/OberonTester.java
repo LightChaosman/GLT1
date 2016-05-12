@@ -11,7 +11,10 @@ import oberon.OberonScanner;
 
 public class OberonTester {
 	
+	
+	@SuppressWarnings("serial")
 	private final static HashMap<String,String> valids = new HashMap<String,String>(){
+
 
 		@Override
 		public String put(String key, String value){
@@ -26,7 +29,9 @@ public class OberonTester {
 		
 	};
 	
+	@SuppressWarnings("serial")
 	private final static HashMap<String,String> invalids = new HashMap<String,String>(){
+
 
 		@Override
 		public String put(String key, String value){

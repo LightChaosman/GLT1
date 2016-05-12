@@ -100,21 +100,22 @@ public class PicoJavaTester {
 		Reader reader = new StringReader(program);
 		PicoJavaScanner scanner = new PicoJavaScanner(reader);
 		PicoJavaParser parser = new PicoJavaParser();
+		Object o = null;
 		try {
-			Object o = parser.parse(scanner);
+			o = parser.parse(scanner);
 			
 			if(valid)
 			{
 				System.out.println("Passed (valid) test "+ name);
 			}else{
-				System.err.println("Failed (invalid) test "+ name);
+				System.err.println("Failed (invalid) test "+ name + " " +  o);
 			}
 		} catch (RuntimeException |Exception e) {
 			if(!valid)
 			{
 				System.out.println("Passed (invalid) test "+ name);
 			}else{
-				System.err.println("Failed (valid) test "+ name);
+				System.err.println("Failed (valid) test "+ name + " " + o + " " + e);
 			}
 		}
 		reader.close();
