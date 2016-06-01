@@ -4,7 +4,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="World"/>
   <eClassifiers xsi:type="ecore:EClass" name="Move" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="moveCommands" upperBound="-1"
         eType="#//Move" containment="true"/>
   </eClassifiers>
