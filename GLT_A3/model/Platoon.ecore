@@ -18,7 +18,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="leader" lowerBound="1"
           eType="#//platoon/LeadVehicle"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="followers" upperBound="-1"
-          eType="#//platoon/Vehicle"/>
+          eType="#//platoon/FollowVehicle"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Vehicle" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="LeadVehicle" eSuperTypes="#//platoon/Vehicle">
