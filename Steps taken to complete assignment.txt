@@ -19,3 +19,13 @@ When altering the grammar of the platoon language we stumpled upon the problem o
 We adapted the ecore model and regenerated the xtext project.
 
 With the IDs in place, the conversion to the desired syntax was quitte straightforward.
+
+A final remark:
+We could create a slightly smaller metamodel for the platooning language.
+Currently an instance has a 'constraints' field, which refers to a single 'Constraints' object.
+This 'Constraints' object is currently a list of length 1 of 'Constraint' objects.
+Constraint objects are abstract and the only subtype is 'headway'.
+This means that 'constraints' is a singleton list of a single 'headway', which could simply be replaced by a simple 'headway' field in the instance.
+
+We chose this approach because it is more extendable, as seems to be the intention, since the constraints section is written in plural form.
+Furthemore, now an instance is a triple of lists, so being more consistent that a triple of two lists and a constraint.
