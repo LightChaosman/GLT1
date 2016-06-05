@@ -1,0 +1,21 @@
+We started out by installing the required software, following the installation guide.
+
+Next we followed the dsl modelling tutorial step-by-step (Even before reading the assignment).
+
+After reading the assignment we tried to infer the metamodel behind the image of the Platoon language, and made a first attempt to create the corrosponding Ecore model.
+
+This had some inheritence flaws, which were quickly flushed out.
+
+A problem that took a bit longer to solve was making sure that after we generated the plug in, that we would be able to create the 3 desired objects.
+It turned out to be the flag 'containment' that was causing these flaws. (which we had set to false instead of true)
+
+After making sure that the models we could create using the plug ins allowed all desired behaviour, and nothing more, we continued.
+
+From both projects' genmodel file we generated Xtext projects.
+These projects ran out of the box, and allowed the desired models to be expressed.
+However, not in the syntax displayed in the assignment.
+
+When altering the grammar of the platoon language we stumpled upon the problem of not having IDs for vehicles and routes.
+We adapted the ecore model and regenerated the xtext project.
+
+With the IDs in place, the conversion to the desired syntax was quitte straightforward.
