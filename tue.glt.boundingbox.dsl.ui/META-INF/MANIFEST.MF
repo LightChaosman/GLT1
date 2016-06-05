@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: tue.glt.boundingbox.dsl.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: tue.glt.boundingbox.dsl.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: tue.glt.boundingbox.dsl,
+ tue.glt.boundingbox.dsl.ide,
+ tue.glt.boundingbox,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtend.lib;resolution:=optional,
+ org.eclipse.xtext.xbase.lib
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: tue.glt.boundingbox.dsl.ui.quickfix,
+ tue.glt.boundingbox.dsl.ui.contentassist,
+ tue.glt.boundingbox.dsl.ui.internal
+Bundle-Activator: tue.glt.boundingbox.dsl.ui.internal.DslActivator
