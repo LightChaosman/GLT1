@@ -14,7 +14,7 @@ import platoon.Turn;
  *
  * @generated
  */
-public abstract class TurnImpl extends CommandImpl implements Turn {
+public abstract class TurnImpl extends StepImpl implements Turn {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

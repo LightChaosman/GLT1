@@ -22,6 +22,42 @@ public interface PlatoonFactory extends EFactory {
 	PlatoonFactory eINSTANCE = platoon.impl.PlatoonFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>World</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>World</em>'.
+	 * @generated
+	 */
+	World createWorld();
+
+	/**
+	 * Returns a new object of class '<em>Platoon</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Platoon</em>'.
+	 * @generated
+	 */
+	Platoon createPlatoon();
+
+	/**
+	 * Returns a new object of class '<em>Lead Vehicle</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lead Vehicle</em>'.
+	 * @generated
+	 */
+	LeadVehicle createLeadVehicle();
+
+	/**
+	 * Returns a new object of class '<em>Follow Vehicle</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Follow Vehicle</em>'.
+	 * @generated
+	 */
+	FollowVehicle createFollowVehicle();
+
+	/**
 	 * Returns a new object of class '<em>Route</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,42 +94,6 @@ public interface PlatoonFactory extends EFactory {
 	TurnRight createTurnRight();
 
 	/**
-	 * Returns a new object of class '<em>Platoon</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Platoon</em>'.
-	 * @generated
-	 */
-	Platoon createPlatoon();
-
-	/**
-	 * Returns a new object of class '<em>Lead Vehicle</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Lead Vehicle</em>'.
-	 * @generated
-	 */
-	LeadVehicle createLeadVehicle();
-
-	/**
-	 * Returns a new object of class '<em>Follow Vehicle</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Follow Vehicle</em>'.
-	 * @generated
-	 */
-	FollowVehicle createFollowVehicle();
-
-	/**
-	 * Returns a new object of class '<em>Constraints</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraints</em>'.
-	 * @generated
-	 */
-	Constraints createConstraints();
-
-	/**
 	 * Returns a new object of class '<em>headway</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,13 +103,13 @@ public interface PlatoonFactory extends EFactory {
 	headway createheadway();
 
 	/**
-	 * Returns a new object of class '<em>World</em>'.
+	 * Returns a new object of class '<em>Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>World</em>'.
+	 * @return a new object of class '<em>Constraints</em>'.
 	 * @generated
 	 */
-	World createWorld();
+	Constraints createConstraints();
 
 	/**
 	 * Returns the package supported by this factory.

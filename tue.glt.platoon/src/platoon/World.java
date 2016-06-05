@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link platoon.World#getPlatoon <em>Platoon</em>}</li>
- *   <li>{@link platoon.World#getRoute <em>Route</em>}</li>
+ *   <li>{@link platoon.World#getRoutes <em>Routes</em>}</li>
  *   <li>{@link platoon.World#getConstraints <em>Constraints</em>}</li>
  * </ul>
  *
@@ -24,56 +24,56 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface World extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Platoon</b></em>' reference.
+	 * Returns the value of the '<em><b>Platoon</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Platoon</em>' reference isn't clear,
+	 * If the meaning of the '<em>Platoon</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Platoon</em>' reference.
+	 * @return the value of the '<em>Platoon</em>' containment reference.
 	 * @see #setPlatoon(Platoon)
 	 * @see platoon.PlatoonPackage#getWorld_Platoon()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Platoon getPlatoon();
 
 	/**
-	 * Sets the value of the '{@link platoon.World#getPlatoon <em>Platoon</em>}' reference.
+	 * Sets the value of the '{@link platoon.World#getPlatoon <em>Platoon</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Platoon</em>' reference.
+	 * @param value the new value of the '<em>Platoon</em>' containment reference.
 	 * @see #getPlatoon()
 	 * @generated
 	 */
 	void setPlatoon(Platoon value);
 
 	/**
-	 * Returns the value of the '<em><b>Route</b></em>' reference.
+	 * Returns the value of the '<em><b>Routes</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Route</em>' reference isn't clear,
+	 * If the meaning of the '<em>Routes</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Route</em>' reference.
-	 * @see #setRoute(Route)
-	 * @see platoon.PlatoonPackage#getWorld_Route()
-	 * @model required="true"
+	 * @return the value of the '<em>Routes</em>' containment reference.
+	 * @see #setRoutes(Route)
+	 * @see platoon.PlatoonPackage#getWorld_Routes()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Route getRoute();
+	Route getRoutes();
 
 	/**
-	 * Sets the value of the '{@link platoon.World#getRoute <em>Route</em>}' reference.
+	 * Sets the value of the '{@link platoon.World#getRoutes <em>Routes</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Route</em>' reference.
-	 * @see #getRoute()
+	 * @param value the new value of the '<em>Routes</em>' containment reference.
+	 * @see #getRoutes()
 	 * @generated
 	 */
-	void setRoute(Route value);
+	void setRoutes(Route value);
 
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference.

@@ -13,5 +13,5 @@ package platoon;
  * @model abstract="true"
  * @generated
  */
-public interface Turn extends Command {
+public interface Turn extends Step {
 } // Turn

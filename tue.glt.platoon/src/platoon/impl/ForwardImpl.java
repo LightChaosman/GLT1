@@ -24,7 +24,7 @@ import platoon.PlatoonPackage;
  *
  * @generated
  */
-public class ForwardImpl extends CommandImpl implements Forward {
+public class ForwardImpl extends StepImpl implements Forward {
 	/**
 	 * The default value of the '{@link #getDistance() <em>Distance</em>}' attribute.
 	 * <!-- begin-user-doc -->

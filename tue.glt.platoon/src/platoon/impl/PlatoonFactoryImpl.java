@@ -56,19 +56,59 @@ public class PlatoonFactoryImpl extends EFactoryImpl implements PlatoonFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case PlatoonPackage.WORLD: return createWorld();
+			case PlatoonPackage.PLATOON: return createPlatoon();
+			case PlatoonPackage.LEAD_VEHICLE: return createLeadVehicle();
+			case PlatoonPackage.FOLLOW_VEHICLE: return createFollowVehicle();
 			case PlatoonPackage.ROUTE: return createRoute();
 			case PlatoonPackage.FORWARD: return createForward();
 			case PlatoonPackage.TURN_LEFT: return createTurnLeft();
 			case PlatoonPackage.TURN_RIGHT: return createTurnRight();
-			case PlatoonPackage.PLATOON: return createPlatoon();
-			case PlatoonPackage.LEAD_VEHICLE: return createLeadVehicle();
-			case PlatoonPackage.FOLLOW_VEHICLE: return createFollowVehicle();
-			case PlatoonPackage.CONSTRAINTS: return createConstraints();
 			case PlatoonPackage.HEADWAY: return createheadway();
-			case PlatoonPackage.WORLD: return createWorld();
+			case PlatoonPackage.CONSTRAINTS: return createConstraints();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public World createWorld() {
+		WorldImpl world = new WorldImpl();
+		return world;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Platoon createPlatoon() {
+		PlatoonImpl platoon = new PlatoonImpl();
+		return platoon;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LeadVehicle createLeadVehicle() {
+		LeadVehicleImpl leadVehicle = new LeadVehicleImpl();
+		return leadVehicle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FollowVehicle createFollowVehicle() {
+		FollowVehicleImpl followVehicle = new FollowVehicleImpl();
+		return followVehicle;
 	}
 
 	/**
@@ -116,46 +156,6 @@ public class PlatoonFactoryImpl extends EFactoryImpl implements PlatoonFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Platoon createPlatoon() {
-		PlatoonImpl platoon = new PlatoonImpl();
-		return platoon;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LeadVehicle createLeadVehicle() {
-		LeadVehicleImpl leadVehicle = new LeadVehicleImpl();
-		return leadVehicle;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public FollowVehicle createFollowVehicle() {
-		FollowVehicleImpl followVehicle = new FollowVehicleImpl();
-		return followVehicle;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Constraints createConstraints() {
-		ConstraintsImpl constraints = new ConstraintsImpl();
-		return constraints;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public headway createheadway() {
 		headwayImpl headway = new headwayImpl();
 		return headway;
@@ -166,9 +166,9 @@ public class PlatoonFactoryImpl extends EFactoryImpl implements PlatoonFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public World createWorld() {
-		WorldImpl world = new WorldImpl();
-		return world;
+	public Constraints createConstraints() {
+		ConstraintsImpl constraints = new ConstraintsImpl();
+		return constraints;
 	}
 
 	/**

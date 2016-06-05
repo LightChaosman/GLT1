@@ -68,28 +68,8 @@ public class PlatoonAdapterFactory extends AdapterFactoryImpl {
 	protected PlatoonSwitch<Adapter> modelSwitch =
 		new PlatoonSwitch<Adapter>() {
 			@Override
-			public Adapter caseRoute(Route object) {
-				return createRouteAdapter();
-			}
-			@Override
-			public Adapter caseCommand(Command object) {
-				return createCommandAdapter();
-			}
-			@Override
-			public Adapter caseForward(Forward object) {
-				return createForwardAdapter();
-			}
-			@Override
-			public Adapter caseTurn(Turn object) {
-				return createTurnAdapter();
-			}
-			@Override
-			public Adapter caseTurnLeft(TurnLeft object) {
-				return createTurnLeftAdapter();
-			}
-			@Override
-			public Adapter caseTurnRight(TurnRight object) {
-				return createTurnRightAdapter();
+			public Adapter caseWorld(World object) {
+				return createWorldAdapter();
 			}
 			@Override
 			public Adapter casePlatoon(Platoon object) {
@@ -108,8 +88,28 @@ public class PlatoonAdapterFactory extends AdapterFactoryImpl {
 				return createFollowVehicleAdapter();
 			}
 			@Override
-			public Adapter caseConstraints(Constraints object) {
-				return createConstraintsAdapter();
+			public Adapter caseRoute(Route object) {
+				return createRouteAdapter();
+			}
+			@Override
+			public Adapter caseStep(Step object) {
+				return createStepAdapter();
+			}
+			@Override
+			public Adapter caseForward(Forward object) {
+				return createForwardAdapter();
+			}
+			@Override
+			public Adapter caseTurn(Turn object) {
+				return createTurnAdapter();
+			}
+			@Override
+			public Adapter caseTurnLeft(TurnLeft object) {
+				return createTurnLeftAdapter();
+			}
+			@Override
+			public Adapter caseTurnRight(TurnRight object) {
+				return createTurnRightAdapter();
 			}
 			@Override
 			public Adapter caseConstraint(Constraint object) {
@@ -120,8 +120,8 @@ public class PlatoonAdapterFactory extends AdapterFactoryImpl {
 				return createheadwayAdapter();
 			}
 			@Override
-			public Adapter caseWorld(World object) {
-				return createWorldAdapter();
+			public Adapter caseConstraints(Constraints object) {
+				return createConstraintsAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -144,86 +144,16 @@ public class PlatoonAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link platoon.Route <em>Route</em>}'.
+	 * Creates a new adapter for an object of class '{@link platoon.World <em>World</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see platoon.Route
+	 * @see platoon.World
 	 * @generated
 	 */
-	public Adapter createRouteAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link platoon.Command <em>Command</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see platoon.Command
-	 * @generated
-	 */
-	public Adapter createCommandAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link platoon.Forward <em>Forward</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see platoon.Forward
-	 * @generated
-	 */
-	public Adapter createForwardAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link platoon.Turn <em>Turn</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see platoon.Turn
-	 * @generated
-	 */
-	public Adapter createTurnAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link platoon.TurnLeft <em>Turn Left</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see platoon.TurnLeft
-	 * @generated
-	 */
-	public Adapter createTurnLeftAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link platoon.TurnRight <em>Turn Right</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see platoon.TurnRight
-	 * @generated
-	 */
-	public Adapter createTurnRightAdapter() {
+	public Adapter createWorldAdapter() {
 		return null;
 	}
 
@@ -284,16 +214,86 @@ public class PlatoonAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link platoon.Constraints <em>Constraints</em>}'.
+	 * Creates a new adapter for an object of class '{@link platoon.Route <em>Route</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see platoon.Constraints
+	 * @see platoon.Route
 	 * @generated
 	 */
-	public Adapter createConstraintsAdapter() {
+	public Adapter createRouteAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link platoon.Step <em>Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see platoon.Step
+	 * @generated
+	 */
+	public Adapter createStepAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link platoon.Forward <em>Forward</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see platoon.Forward
+	 * @generated
+	 */
+	public Adapter createForwardAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link platoon.Turn <em>Turn</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see platoon.Turn
+	 * @generated
+	 */
+	public Adapter createTurnAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link platoon.TurnLeft <em>Turn Left</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see platoon.TurnLeft
+	 * @generated
+	 */
+	public Adapter createTurnLeftAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link platoon.TurnRight <em>Turn Right</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see platoon.TurnRight
+	 * @generated
+	 */
+	public Adapter createTurnRightAdapter() {
 		return null;
 	}
 
@@ -326,16 +326,16 @@ public class PlatoonAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link platoon.World <em>World</em>}'.
+	 * Creates a new adapter for an object of class '{@link platoon.Constraints <em>Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see platoon.World
+	 * @see platoon.Constraints
 	 * @generated
 	 */
-	public Adapter createWorldAdapter() {
+	public Adapter createConstraintsAdapter() {
 		return null;
 	}
 

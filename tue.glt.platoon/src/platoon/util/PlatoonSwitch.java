@@ -66,45 +66,9 @@ public class PlatoonSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case PlatoonPackage.ROUTE: {
-				Route route = (Route)theEObject;
-				T result = caseRoute(route);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case PlatoonPackage.COMMAND: {
-				Command command = (Command)theEObject;
-				T result = caseCommand(command);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case PlatoonPackage.FORWARD: {
-				Forward forward = (Forward)theEObject;
-				T result = caseForward(forward);
-				if (result == null) result = caseCommand(forward);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case PlatoonPackage.TURN: {
-				Turn turn = (Turn)theEObject;
-				T result = caseTurn(turn);
-				if (result == null) result = caseCommand(turn);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case PlatoonPackage.TURN_LEFT: {
-				TurnLeft turnLeft = (TurnLeft)theEObject;
-				T result = caseTurnLeft(turnLeft);
-				if (result == null) result = caseTurn(turnLeft);
-				if (result == null) result = caseCommand(turnLeft);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case PlatoonPackage.TURN_RIGHT: {
-				TurnRight turnRight = (TurnRight)theEObject;
-				T result = caseTurnRight(turnRight);
-				if (result == null) result = caseTurn(turnRight);
-				if (result == null) result = caseCommand(turnRight);
+			case PlatoonPackage.WORLD: {
+				World world = (World)theEObject;
+				T result = caseWorld(world);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -134,9 +98,45 @@ public class PlatoonSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PlatoonPackage.CONSTRAINTS: {
-				Constraints constraints = (Constraints)theEObject;
-				T result = caseConstraints(constraints);
+			case PlatoonPackage.ROUTE: {
+				Route route = (Route)theEObject;
+				T result = caseRoute(route);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PlatoonPackage.STEP: {
+				Step step = (Step)theEObject;
+				T result = caseStep(step);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PlatoonPackage.FORWARD: {
+				Forward forward = (Forward)theEObject;
+				T result = caseForward(forward);
+				if (result == null) result = caseStep(forward);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PlatoonPackage.TURN: {
+				Turn turn = (Turn)theEObject;
+				T result = caseTurn(turn);
+				if (result == null) result = caseStep(turn);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PlatoonPackage.TURN_LEFT: {
+				TurnLeft turnLeft = (TurnLeft)theEObject;
+				T result = caseTurnLeft(turnLeft);
+				if (result == null) result = caseTurn(turnLeft);
+				if (result == null) result = caseStep(turnLeft);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PlatoonPackage.TURN_RIGHT: {
+				TurnRight turnRight = (TurnRight)theEObject;
+				T result = caseTurnRight(turnRight);
+				if (result == null) result = caseTurn(turnRight);
+				if (result == null) result = caseStep(turnRight);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -153,9 +153,9 @@ public class PlatoonSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PlatoonPackage.WORLD: {
-				World world = (World)theEObject;
-				T result = caseWorld(world);
+			case PlatoonPackage.CONSTRAINTS: {
+				Constraints constraints = (Constraints)theEObject;
+				T result = caseConstraints(constraints);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -164,92 +164,17 @@ public class PlatoonSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Route</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>World</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Route</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>World</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoute(Route object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Command</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Command</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCommand(Command object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Forward</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Forward</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseForward(Forward object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Turn</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Turn</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTurn(Turn object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Turn Left</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Turn Left</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTurnLeft(TurnLeft object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Turn Right</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Turn Right</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTurnRight(TurnRight object) {
+	public T caseWorld(World object) {
 		return null;
 	}
 
@@ -314,17 +239,92 @@ public class PlatoonSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraints</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Route</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraints</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Route</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstraints(Constraints object) {
+	public T caseRoute(Route object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStep(Step object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Forward</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Forward</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseForward(Forward object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Turn</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Turn</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTurn(Turn object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Turn Left</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Turn Left</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTurnLeft(TurnLeft object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Turn Right</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Turn Right</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTurnRight(TurnRight object) {
 		return null;
 	}
 
@@ -359,17 +359,17 @@ public class PlatoonSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>World</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Constraints</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>World</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Constraints</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWorld(World object) {
+	public T caseConstraints(Constraints object) {
 		return null;
 	}
 

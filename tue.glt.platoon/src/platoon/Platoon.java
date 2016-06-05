@@ -25,43 +25,43 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Platoon extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Leader</b></em>' reference.
+	 * Returns the value of the '<em><b>Leader</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Leader</em>' reference isn't clear,
+	 * If the meaning of the '<em>Leader</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Leader</em>' reference.
+	 * @return the value of the '<em>Leader</em>' containment reference.
 	 * @see #setLeader(LeadVehicle)
 	 * @see platoon.PlatoonPackage#getPlatoon_Leader()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	LeadVehicle getLeader();
 
 	/**
-	 * Sets the value of the '{@link platoon.Platoon#getLeader <em>Leader</em>}' reference.
+	 * Sets the value of the '{@link platoon.Platoon#getLeader <em>Leader</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Leader</em>' reference.
+	 * @param value the new value of the '<em>Leader</em>' containment reference.
 	 * @see #getLeader()
 	 * @generated
 	 */
 	void setLeader(LeadVehicle value);
 
 	/**
-	 * Returns the value of the '<em><b>Followers</b></em>' reference list.
+	 * Returns the value of the '<em><b>Followers</b></em>' containment reference list.
 	 * The list contents are of type {@link platoon.FollowVehicle}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Followers</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Followers</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Followers</em>' reference list.
+	 * @return the value of the '<em>Followers</em>' containment reference list.
 	 * @see platoon.PlatoonPackage#getPlatoon_Followers()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<FollowVehicle> getFollowers();

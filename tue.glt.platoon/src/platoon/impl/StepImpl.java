@@ -6,23 +6,23 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import platoon.Command;
 import platoon.PlatoonPackage;
+import platoon.Step;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Command</b></em>'.
+ * An implementation of the model object '<em><b>Step</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class CommandImpl extends MinimalEObjectImpl.Container implements Command {
+public abstract class StepImpl extends MinimalEObjectImpl.Container implements Step {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CommandImpl() {
+	protected StepImpl() {
 		super();
 	}
 
@@ -33,7 +33,7 @@ public abstract class CommandImpl extends MinimalEObjectImpl.Container implement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return PlatoonPackage.Literals.COMMAND;
+		return PlatoonPackage.Literals.STEP;
 	}
 
-} //CommandImpl
+} //StepImpl

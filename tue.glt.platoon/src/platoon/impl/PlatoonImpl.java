@@ -5,6 +5,7 @@ package platoon.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -14,7 +15,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import platoon.FollowVehicle;
 import platoon.LeadVehicle;
@@ -37,7 +39,7 @@ import platoon.PlatoonPackage;
  */
 public class PlatoonImpl extends MinimalEObjectImpl.Container implements Platoon {
 	/**
-	 * The cached value of the '{@link #getLeader() <em>Leader</em>}' reference.
+	 * The cached value of the '{@link #getLeader() <em>Leader</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLeader()
@@ -47,7 +49,7 @@ public class PlatoonImpl extends MinimalEObjectImpl.Container implements Platoon
 	protected LeadVehicle leader;
 
 	/**
-	 * The cached value of the '{@link #getFollowers() <em>Followers</em>}' reference list.
+	 * The cached value of the '{@link #getFollowers() <em>Followers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFollowers()
@@ -81,14 +83,6 @@ public class PlatoonImpl extends MinimalEObjectImpl.Container implements Platoon
 	 * @generated
 	 */
 	public LeadVehicle getLeader() {
-		if (leader != null && leader.eIsProxy()) {
-			InternalEObject oldLeader = (InternalEObject)leader;
-			leader = (LeadVehicle)eResolveProxy(oldLeader);
-			if (leader != oldLeader) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PlatoonPackage.PLATOON__LEADER, oldLeader, leader));
-			}
-		}
 		return leader;
 	}
 
@@ -97,8 +91,14 @@ public class PlatoonImpl extends MinimalEObjectImpl.Container implements Platoon
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LeadVehicle basicGetLeader() {
-		return leader;
+	public NotificationChain basicSetLeader(LeadVehicle newLeader, NotificationChain msgs) {
+		LeadVehicle oldLeader = leader;
+		leader = newLeader;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PlatoonPackage.PLATOON__LEADER, oldLeader, newLeader);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -107,10 +107,17 @@ public class PlatoonImpl extends MinimalEObjectImpl.Container implements Platoon
 	 * @generated
 	 */
 	public void setLeader(LeadVehicle newLeader) {
-		LeadVehicle oldLeader = leader;
-		leader = newLeader;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PlatoonPackage.PLATOON__LEADER, oldLeader, leader));
+		if (newLeader != leader) {
+			NotificationChain msgs = null;
+			if (leader != null)
+				msgs = ((InternalEObject)leader).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - PlatoonPackage.PLATOON__LEADER, null, msgs);
+			if (newLeader != null)
+				msgs = ((InternalEObject)newLeader).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - PlatoonPackage.PLATOON__LEADER, null, msgs);
+			msgs = basicSetLeader(newLeader, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PlatoonPackage.PLATOON__LEADER, newLeader, newLeader));
 	}
 
 	/**
@@ -120,9 +127,25 @@ public class PlatoonImpl extends MinimalEObjectImpl.Container implements Platoon
 	 */
 	public EList<FollowVehicle> getFollowers() {
 		if (followers == null) {
-			followers = new EObjectResolvingEList<FollowVehicle>(FollowVehicle.class, this, PlatoonPackage.PLATOON__FOLLOWERS);
+			followers = new EObjectContainmentEList<FollowVehicle>(FollowVehicle.class, this, PlatoonPackage.PLATOON__FOLLOWERS);
 		}
 		return followers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case PlatoonPackage.PLATOON__LEADER:
+				return basicSetLeader(null, msgs);
+			case PlatoonPackage.PLATOON__FOLLOWERS:
+				return ((InternalEList<?>)getFollowers()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -134,8 +157,7 @@ public class PlatoonImpl extends MinimalEObjectImpl.Container implements Platoon
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case PlatoonPackage.PLATOON__LEADER:
-				if (resolve) return getLeader();
-				return basicGetLeader();
+				return getLeader();
 			case PlatoonPackage.PLATOON__FOLLOWERS:
 				return getFollowers();
 		}

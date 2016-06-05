@@ -19,7 +19,7 @@ package platoon;
  * @model
  * @generated
  */
-public interface Forward extends Command {
+public interface Forward extends Step {
 	/**
 	 * Returns the value of the '<em><b>Distance</b></em>' attribute.
 	 * <!-- begin-user-doc -->
