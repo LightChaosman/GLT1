@@ -47,4 +47,33 @@ local.properties
 .springBeans
 
 # Code Recommenders
-.recommenders/
+.recommenders/workspace/BoundingBoxTest/.project
+
+workspace/tue.glt.boundingbox.dsl.ide/
+workspace/tue.glt.boundingbox.dsl.tests/
+workspace/tue.glt.boundingbox.dsl.ui.tests/
+workspace/tue.glt.boundingbox.dsl.ui/
+workspace/tue.glt.boundingbox.dsl/.antlr-generator-3.2.0-patch.jar
+workspace/tue.glt.boundingbox.dsl/.project
+workspace/tue.glt.boundingbox.dsl/META-INF/
+workspace/tue.glt.boundingbox.dsl/build.properties
+workspace/tue.glt.boundingbox.dsl/src-gen/
+workspace/tue.glt.boundingbox.dsl/src/tue/glt/boundingbox/dsl/BBDSLRuntimeModule.xtend
+workspace/tue.glt.boundingbox.dsl/src/tue/glt/boundingbox/dsl/BBDSLStandaloneSetup.xtend
+workspace/tue.glt.boundingbox.dsl/src/tue/glt/boundingbox/dsl/GenerateBoundingBoxDsl.mwe2
+workspace/tue.glt.boundingbox.dsl/src/tue/glt/boundingbox/dsl/formatting/
+workspace/tue.glt.boundingbox.dsl/src/tue/glt/boundingbox/dsl/generator/
+workspace/tue.glt.boundingbox.dsl/src/tue/glt/boundingbox/dsl/scoping/
+workspace/tue.glt.boundingbox.dsl/src/tue/glt/boundingbox/dsl/validation/
+workspace/tue.glt.boundingbox.dsl/xtend-gen/
+workspace/tue.glt.boundingbox.edit/
+workspace/tue.glt.boundingbox.editor/
+workspace/tue.glt.boundingbox.tests/
+workspace/tue.glt.boundingbox/.project
+workspace/tue.glt.boundingbox/META-INF/
+workspace/tue.glt.boundingbox/build.properties
+workspace/tue.glt.boundingbox/model/BoundingBox.genmodel
+workspace/tue.glt.boundingbox/plugin.properties
+workspace/tue.glt.boundingbox/plugin.xml
+workspace/tue.glt.boundingbox/src/
+workspace/BoundingBoxTest/.project
