@@ -1,4 +1,4 @@
-## BoudningBox installation from scratch
+## BoundingBox installation from scratch
 Open workspace
 Create a new "Empty EMF Project" called "tue.glt.boundingbox"
 Then we added a BoundingBox.ecore model as defined in "tue.glt.boundingbox/model/BoundingBox.ecore"
@@ -16,4 +16,13 @@ The xText file can then be runned as "Generate Xtext artifacts" to generate the 
 Now the "tue.glt.boundingbox.dsl" project can be runned as an "Eclipse application".
 Then create a new "General">"Project" called "BoundingBoxTest"
 When opening a ".bb" file you should confirm it to make a xText project.
+
+## Platooning
+Similar to BoundingBox.
+Only the main project is called "tue.glt.platoon"
+The Xtext project is defined by:
+    The project name is "tue.glt.platoon.dsl"
+    The language name is "tue.glt.platoon.dsl.PlatoonDsl"
+    The extension is "pl"
+
 
