@@ -4,25 +4,25 @@
   * Generated class for calculating the bound of a BoundingBox model
   */
 public class BoundsCalculator {
-	public static void main(String.. args) {
-		[% for mc in BoundingBox.all().moveCommands {
+	public static void main(String... args) {
+		[% for (mc in Move.all()) {
 			var d;
-			if(mc.isInstanceOf(MoveX)){
+			if(mc.instanceOf(MoveX)){
 				// Extract the x coordinate from a Move command
-				if(mc.isInstanceOf(MoveLeft)){
+				if(mc.instanceOf(MoveLeft)){
 					d = -mc.distance;
-				} else if (mc.isInstanceOf(MoveRight)) {
+				} else if (mc.instanceOf(MoveRight)) {
 					d = mc.distance;
 				} %]
-		processX("+d+");
-		[%	} else if (mc.isInstanceOf(MoveY)) {
+		processX([%=d%]);
+		[%	} else if (mc.instanceOf(MoveY)) {
 				// Extract the y coordinate from a Move command
-				if(mc.isInstanceOf(MoveDown)){
+				if(mc.instanceOf(MoveDown)){
 					d = -mc.distance;
-				} else if (mc.isInstanceOf(MoveUp)) {
+				} else if (mc.instanceOf(MoveUp)) {
 					d = mc.distance;
 				} %]
-		processY("+d+");
+		processY([%=d%]);
 		[%	}
 		} %]
 		System.out.printf("(%d, %d) (%d, %d)%n", xMin, xMax, yMin, yMax);
@@ -44,8 +44,8 @@ public class BoundsCalculator {
 		y += dy;
 		if(y < yMin) {
 			yMin = y;
-		} else if (y > yMin){
-			yMin = y;
+		} else if (y > yMax){
+			yMax = y;
 		}
 	}
 }

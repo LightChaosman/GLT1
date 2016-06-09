@@ -1,5 +1,5 @@
 rule BoundingBox2Master
-	transform platoon : Platoon {
+	transform w : World {
 	
 	template : "BoundsCalculator.java.egl"
 	

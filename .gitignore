@@ -113,3 +113,5 @@ workspace/tue.glt.platoon/model/MyTestPlatoon.platoon
 workspace/tue.glt.platoon/model/Platoon.emf
 workspace-minimal.zip
 workspace/tue.glt.boundingbox/model/BoundingBox.emf
+workspace/tue.glt.platoon2boundingbox/result.boundingbox
+workspace/tue.glt.boundingbox/output/
