@@ -1,6 +1,82 @@
+[% // File template for generating slave.nxc
+%]
 /**
  * Generated file from autoconnect.egl
  * This file contains the NXC code for a following platoon vehicle
  */
 
 #include "AutoConnect.nxc"
+
+// Bluetooth constants
+#define BT_CONN 1
+#define BT_INBOX 1
+#define BT_OUTBOX 5
+
+// Motor constants
+#define MOTOR_POWER 75
+#define MOTOR_TURN_TIME 1500
+#define MOTOR_L OUT_A
+#define MOTOR_R OUT_B
+#define MOTOR_RL OUT_AB 
+
+task main() {
+	string in;
+	ConnectNXT(?, ?);
+	
+	do {
+		// Wait for commands from master
+		ReceiveRemoteString(BT_INBOX, true, in);
+		
+		if(//TODO: Check if time is set){
+			time = //TODO: get from string
+		} else {
+			time = MOTOR_TURN_TIME;
+		}
+
+		char command = //TODO: parse from `in`
+		
+		boolean stopped = true;
+		int t = 0;
+		
+		do{
+			if (Sensor(SENSOR_DISTANCE) >= [%=constraints.headway.Lowbound%]
+				 && Sensor(SENSOR_DISTANCE) <= [%=constraints.headway.Highbound%]) {
+				if(stopped){
+					execute(command);
+					stopped = false;
+				}
+			} else {
+				if(!stopped){
+					Off(MOTOR_RL);
+					stopped = true;
+				}
+			}
+			wait(5);
+			t += 5;
+		}while(t < time);
+		
+		// Done executing command
+		Off(MOTOR_RL);
+		
+	} while(true);
+}
+
+sub execute(char command){
+	int time;
+	switch(command){
+		case 'f':
+			OnFwd(MOTOR_RL, MOTOR_POWER);
+			break;
+		case 'b':
+			OnRev(MOTOR_RL, MOTOR_POWER);
+			break;
+		case 'l':
+			OnFwd(MOTOR_R, MOTOR_POWER); OnRev(MOTOR_L, MOTOR_POWER);
+			break;
+		case 'r':
+			OnFwd(MOTOR_L, MOTOR_POWER); OnRev(MOTOR_R, MOTOR_POWER);
+			break;
+		default:
+			break;
+	}
+}
