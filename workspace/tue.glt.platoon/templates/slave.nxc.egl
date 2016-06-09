@@ -39,8 +39,18 @@ task main() {
 		int t = 0;
 		
 		do{
-			if (Sensor(SENSOR_DISTANCE) >= [%=constraints.headway.Lowbound%]
-				 && Sensor(SENSOR_DISTANCE) <= [%=constraints.headway.Highbound%]) {
+			[%
+				var cs = platoon.constraints.list;// extract headway information.
+				var c;
+				for(c2 in cs)
+				{
+					c = c2; // hacky way to extract first and only contraint: headway
+				}
+				var lb = c.lowbound;
+				var ub = c.upbound;
+			%]
+			if (Sensor(SENSOR_DISTANCE) >= [%=lb%]
+				 && Sensor(SENSOR_DISTANCE) <= [%=ub%]) {
 				if(stopped){
 					execute(command);
 					stopped = false;

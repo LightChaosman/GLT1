@@ -1,5 +1,5 @@
 rule Platoon2Master
-	transform platoon : Platoon {
+	transform platoon : World {
 	
 	template : "master.nxc.egl"
 	
@@ -7,7 +7,7 @@ rule Platoon2Master
 }
 
 rule Platoon2Slave
-	transform platoon : Platoon {
+	transform platoon : World {
 	
 	template : "slave.nxc.egl"
 	

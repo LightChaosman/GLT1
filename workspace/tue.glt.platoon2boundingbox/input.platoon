@@ -29,4 +29,3 @@
     <list xsi:type="platoon:headway" lowbound="20" upbound="30"/>
   </constraints>
 </platoon:World>
-	
