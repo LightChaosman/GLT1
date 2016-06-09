@@ -1,0 +1,6 @@
+/**
+ * Generated file from autoconnect.egl
+ * This file contains the NXC code for a following platoon vehicle
+ */
+
+#include "AutoConnect.nxc"

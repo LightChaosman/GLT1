@@ -1,0 +1,15 @@
+rule Platoon2Master
+	transform platoon : Platoon {
+	
+	template : "master.nxc.egl"
+	
+	target : "../output/master.nxc"
+}
+
+rule Platoon2Slave
+	transform platoon : Platoon {
+	
+	template : "slave.nxc.egl"
+	
+	target : "../output/slave.nxc"
+}

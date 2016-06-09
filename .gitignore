@@ -105,3 +105,10 @@ workspace/tue.glt.platoon/plugin.properties
 workspace/tue.glt.platoon/plugin.xml
 workspace/tue.glt.platoon/src/
 runtime-EclipseApplication/
+workspace/PlatoonTest/.project
+workspace/tue.glt.platoon/output/master.nxc
+workspace/tue.glt.platoon/output/slave.nxc
+workspace/org.eclipse.epsilon.examples.egl.flowchart/
+workspace/tue.glt.platoon/model/MyTestPlatoon.platoon
+workspace/tue.glt.platoon/model/Platoon.emf
+workspace-minimal.zip
