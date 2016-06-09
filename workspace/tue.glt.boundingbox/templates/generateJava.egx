@@ -1,0 +1,7 @@
+rule BoundingBox2Master
+	transform platoon : Platoon {
+	
+	template : "BoundsCalculator.java.egl"
+	
+	target : "../output/BoundsCalculator.java"
+}

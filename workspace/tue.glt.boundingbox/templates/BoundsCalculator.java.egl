@@ -1,0 +1,51 @@
+[% // Generation template for creating the BoundsCalculator class
+%]
+/**
+  * Generated class for calculating the bound of a BoundingBox model
+  */
+public class BoundsCalculator {
+	public static void main(String.. args) {
+		[% for mc in BoundingBox.all().moveCommands {
+			var d;
+			if(mc.isInstanceOf(MoveX)){
+				// Extract the x coordinate from a Move command
+				if(mc.isInstanceOf(MoveLeft)){
+					d = -mc.distance;
+				} else if (mc.isInstanceOf(MoveRight)) {
+					d = mc.distance;
+				} %]
+		processX("+d+");
+		[%	} else if (mc.isInstanceOf(MoveY)) {
+				// Extract the y coordinate from a Move command
+				if(mc.isInstanceOf(MoveDown)){
+					d = -mc.distance;
+				} else if (mc.isInstanceOf(MoveUp)) {
+					d = mc.distance;
+				} %]
+		processY("+d+");
+		[%	}
+		} %]
+		System.out.printf("(%d, %d) (%d, %d)%n", xMin, xMax, yMin, yMax);
+	}
+	
+	static int x = 0, y = 0;
+	static int xMin = 0, xMax = 0, yMin = 0, yMax = 0;
+	
+	static void processX(int dx) {
+		x += dx;
+		if(x < xMin) {
+			xMin = x;
+		} else if (x > xMax) {
+			xMax = x;
+		}
+	}
+	
+	static void processY(int dy) {
+		y += dy;
+		if(y < yMin) {
+			yMin = y;
+		} else if (y > yMin){
+			yMin = y;
+		}
+	}
+}

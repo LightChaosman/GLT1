@@ -112,3 +112,4 @@ workspace/org.eclipse.epsilon.examples.egl.flowchart/
 workspace/tue.glt.platoon/model/MyTestPlatoon.platoon
 workspace/tue.glt.platoon/model/Platoon.emf
 workspace-minimal.zip
+workspace/tue.glt.boundingbox/model/BoundingBox.emf
