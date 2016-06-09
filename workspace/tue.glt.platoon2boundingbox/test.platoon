@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<platoon:World xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:platoon="platoon">
+  <platoon>
+    <leader name="Henk" route="Route666"/>
+    <followers name="Jan" frontrunner="Henk"/>
+    <followers name="Klaassen" frontrunner="Jan"/>
+  </platoon>
+  <routes name="Route666">
+    <steps xsi:type="platoon:Forward" distance="50"/>
+    <steps xsi:type="platoon:TurnLeft"/>
+    <steps xsi:type="platoon:Forward" distance="20"/>
+    <steps xsi:type="platoon:Forward" distance="10"/>
+    <steps xsi:type="platoon:TurnLeft"/>
+    <steps xsi:type="platoon:Forward" distance="30"/>
+    <steps xsi:type="platoon:TurnLeft"/>
+    <steps xsi:type="platoon:Forward" distance="1000"/>
+    <steps xsi:type="platoon:TurnLeft"/>
+    <steps xsi:type="platoon:Forward"/>
+    <steps xsi:type="platoon:TurnLeft"/>
+    <steps xsi:type="platoon:Forward"/>
+    <steps xsi:type="platoon:TurnRight"/>
+    <steps xsi:type="platoon:Forward"/>
+    <steps xsi:type="platoon:TurnRight"/>
+    <steps xsi:type="platoon:TurnRight"/>
+    <steps xsi:type="platoon:TurnRight"/>
+    <steps xsi:type="platoon:Forward"/>
+  </routes>
+  <constraints>
+    <list xsi:type="platoon:headway" lowbound="20" upbound="30"/>
+  </constraints>
+</platoon:World>

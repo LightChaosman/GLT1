@@ -1,0 +1,56 @@
+pre {
+  "Running ETL".println();
+}
+
+rule RouteToBox 
+  transform plat : platoon!World
+  to box : boundingbox!World {
+  
+  	var route: platoon!Route;
+  	for( r in plat.routes){
+  		route = r;// hacky way to extract singleton element from routes
+  	}
+  	
+  	var dir = 0;//0 = North, 1 = West, 2 = South, 3 = East
+  	box.moveCommands = new List;//Initialize the list of boundingbox commands
+  	var mc = box.moveCommands;
+  	
+  	for(step in route.steps)
+  	{
+  		if(step.isTypeOf(platoon!TurnLeft))
+  		{
+  			dir = (dir +1);
+  			dir = dir.mod(4);//trim it to 0..3
+  			
+  		}else if(step.isTypeOf(platoon!TurnRight)){
+  			dir = (dir -1+4);//keep it positive, just to be sure
+  			dir = dir.mod(4);//trim it to 0..3
+  			
+  		}else{//forward
+  			var command: boundingbox!Move;
+  			switch(dir){//determine the direction
+  				case(0)://north
+  					command = new boundingbox!MoveUp;
+  					break;
+  				case(1)://west
+  					command = new boundingbox!MoveLeft;
+  					break;
+  				case(2)://south
+  					command = new boundingbox!MoveDown;
+  					break;
+  				case(3)://east
+  					command = new boundingbox!MoveRight;
+  					break;
+  				//no other cases -> could add a default and throw an exception....
+  			}
+  			command.distance = step.distance;
+  			mc.add(command);//add the next step to the movecommands
+  			step.println();
+  		}
+  	}
+}
+
+
+operation Integer mod(i : Integer) {
+	return self - (self/i * i);
+}
