@@ -28,6 +28,9 @@ void ConnectNXT(const string name, byte channel)
 #define BT_INBOX 1
 #define BT_OUTBOX 5
 
+#define MOTOR_POWER 33
+[%/*No need for other levels -> master vehicle*/%]
+
 #define COM_MAX [%=platoon.routes.steps.size()%]
 
 
@@ -60,5 +63,6 @@ task main(){
 			i++;
 		}
 	%]
+	
  
 }
