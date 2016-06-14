@@ -5,7 +5,25 @@
  * This file contains the NXC code for a following platoon vehicle
  */
 
-#include "AutoConnect.nxc"
+#ifndef __AUTOCONNECT_LIB__NXC
+#define __AUTOCONNECT_LIB__NXC
+
+// The master tries to connect to the slave "name".
+void ConnectNXT(const string name, byte channel)
+{
+	CommBTConnectionType args;
+	args.Name = name;
+	args.ConnectionSlot = channel;
+	args.Action = TRUE;
+	
+	if(!BluetoothStatus(channel) == NO_ERR)
+	{
+		SysCommBTConnection(args); // try to connect.
+		Wait(5000); // let the connection get created
+	}
+}
+
+#endif
 
 // Bluetooth constants
 #define BT_CONN 1
@@ -13,16 +31,48 @@
 #define BT_OUTBOX 5
 
 // Motor constants
-#define MOTOR_POWER 75
+#define MOTOR_CASUAL 33 // speed for casual following
+#define MOTOR_HURRY 66 // speed for catching up small delays
+#define MOTOR_PANIC 100 // speed for catching up as fast as possible
 #define MOTOR_TURN_TIME 1500
 #define MOTOR_L OUT_A
 #define MOTOR_R OUT_B
 #define MOTOR_RL OUT_AB 
 
+[%
+	var cs = platoon.constraints.list;// extract headway information.
+	var c;
+	for(c2 in cs)
+	{
+		c = c2; // hacky way to extract first and only contraint: headway
+	}
+	var lb = c.lowbound;
+	var ub = c.upbound;
+	var steps = platoon.routes.steps;
+	var commax = steps.size();
+%]
+
+//headway information
+#define DIST_MIN [%=lb%]
+#define DIST_MAX [%=ub%]
+#define DIST_RANGE [%=ub-lb%]
+#define DIST_HURRY [%=lb+(ub-lb)/3%] // if further away than this, hurry up
+#define DIST_PANIC [%=lb+2*(ub-lb)/3%] // if further away than this, panic, full throtle
+
+#define COM_MAX [%=commax%]
+
+string commands[]; //The list of commands to be executed
+int curCommand; //the index of the current command
+int lastCommand; //the index of first empty spot in the commands array
+
 task main() {
-	string in;
-	ConnectNXT(?, ?);
+	ArrayInit(commands, "", COM_MAX);
+	curCommand = 0;
+	lastCommand = 0;
 	
+	string in;
+	ConnectNXT(?, ?);//Connect to slave
+		
 	do {
 		// Wait for commands from master
 		ReceiveRemoteString(BT_INBOX, true, in);
@@ -39,20 +89,14 @@ task main() {
 		int t = 0;
 		
 		do{
-			[%
-				var cs = platoon.constraints.list;// extract headway information.
-				var c;
-				for(c2 in cs)
-				{
-					c = c2; // hacky way to extract first and only contraint: headway
-				}
-				var lb = c.lowbound;
-				var ub = c.upbound;
-			%]
+			
+			
+			double dist = Sensor(SENSOR_DISTANCE);
+			double frac;
 			if (Sensor(SENSOR_DISTANCE) >= [%=lb%]
 				 && Sensor(SENSOR_DISTANCE) <= [%=ub%]) {
 				if(stopped){
-					execute(command);
+					execute(command, dist);
 					stopped = false;
 				}
 			} else {

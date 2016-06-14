@@ -3,29 +3,62 @@
  * This file contains the NXC code for the leading platoon vehicle
  */
 
-#include "AutoConnect.nxc"
+#ifndef __AUTOCONNECT_LIB__NXC
+#define __AUTOCONNECT_LIB__NXC
+
+// The master tries to connect to the slave "name".
+void ConnectNXT(const string name, byte channel)
+{
+	CommBTConnectionType args;
+	args.Name = name;
+	args.ConnectionSlot = channel;
+	args.Action = TRUE;
+	
+	if(!BluetoothStatus(channel) == NO_ERR)
+	{
+		SysCommBTConnection(args); // try to connect.
+		Wait(5000); // let the connection get created
+	}
+}
+
+#endif
 
 // Bluetooth constants
 #define BT_CONN 1
 #define BT_INBOX 1
 #define BT_OUTBOX 5
 
+#define COM_MAX [%=platoon.routes.steps.size()%]
+
+
+string commands[]; //The list of commands to be executed
+int curCommand; //the index of the current command
+
+
 task main(){
-	ConnectNXT(?, ?);
-	
-	string out;
-	[% for step in routes.all().steps { %]
-	out = "[%
- 		if (step.instanceOf(Forward)) {
- 			out.print("f");
- 			out.print(step.distance);
- 		} else if (step.instanceOf(TurnLeft)) {
- 			out.print("l");
- 		} else {
- 			out.print("r");
- 		}
- 	%]";
- 	SendRemoteString(BT_CONN, BT_OUTBOX, out);
- 	Wait(100);
- 	[% } %]
+	ArrayInit(commands, "", COM_MAX);
+	[%
+		var max = platoon.routes.steps.size();
+		var i  = 0;
+		while(i<max)
+		{
+			var com = i + "_";
+			var step = platoon.routes.steps[i];
+			if(step.isTypeOf(Forward))
+			{
+				com += "f_"+step.distance;
+			}else if(step.isTypeOf(TurnLeft))
+			{
+				com += "l";
+			}else
+			{
+				com+= "r";
+			}
+			%]
+	commands[[%=i%]] = "[%=com%]";
+			[%
+			i++;
+		}
+	%]
+ 
 }
