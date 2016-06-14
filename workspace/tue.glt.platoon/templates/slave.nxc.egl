@@ -48,8 +48,6 @@ void ConnectNXT(const string name, byte channel)
 	}
 	var lb = c.lowbound;
 	var ub = c.upbound;
-	var steps = platoon.routes.steps;
-	var commax = steps.size();
 %]
 
 //headway information
@@ -59,7 +57,8 @@ void ConnectNXT(const string name, byte channel)
 #define DIST_HURRY [%=lb+(ub-lb)/3%] // if further away than this, hurry up
 #define DIST_PANIC [%=lb+2*(ub-lb)/3%] // if further away than this, panic, full throtle
 
-#define COM_MAX [%=commax%]
+#define COM_MAX [%=platoon.routes.steps.size()%]
+#define NUM_VEHICLES [%=platoon.platoon.followers.size()+1%]
 #define RESOLUTION 5 //The ammount of miliseconds between state updates
 
 
@@ -70,9 +69,50 @@ string command;
 int progress = 0;
 int reqprogress = 0;
 
+string names[];
+string name; //my name
+int nameIdx; // index of this vehicle
+string slaveName; //name of direct follower
+
+sub acquireNames()
+{
+	name = "";//Do something clever here, not required by assignment
+	ArrayInit(names, "", NUM_VEHICLES);
+	names[0]="[%=platoon.platoon.leader.name%]";
+	[%
+		var max = platoon.platoon.followers.size();
+		
+		var i  = 1;
+		while(i<max+1)
+		{
+			
+			%]
+	names[[%=i%]] = "[%=platoon.platoon.followers[i-1].name%]";
+			[%
+			i++;
+		}
+	%]
+	int i = 1;//since slave it can't be 0
+	while(i < NUM_VEHICLES)
+	{
+		if(names[i]==name)
+		{
+			nameIdx =i;
+		}
+		i++;
+	}
+	if(nameIdx < NUM_VEHICLES -1)
+	{
+		slaveName = names[nameIdx+1];
+	}else//last vehicle
+	{
+		slaveName = "";
+	}
+}
+
 sub exec(int dist)//subroutine that executes commands
 {
-	if(command == "" || progress == reqprogress)//There is no new task or we have completed our task
+	if(command == "" || progress >= reqprogress)//There is no new task or we have completed our task
 	{
 		string curcom = commands[curCommand];
 		Off(MOTOR_RL);//switch off motors
@@ -137,9 +177,13 @@ task main() {
 	ArrayInit(commands, "", COM_MAX);
 	curCommand = 0;
 	command = "";
+	
+	acquireNames();
 	string in;
-	//ConnectNXT(?, ?);//Connect to slave
-		
+	if(slaveName!="")
+	{
+		//ConnectNXT(slaveName, ?);//Connect to slave TODO
+	}	
 	do {
 		// Wait for commands from master
 		ReceiveRemoteString(BT_INBOX, true, in);
@@ -147,6 +191,10 @@ task main() {
 		{
 			int idx = StrToNum(SubStr(in,0,Pos("_",in)));
 			commands[idx] = in ;
+		}
+		if(command!="")//Transmit the current command to slave
+		{
+			SendRemoteString(BT_OUTBOX, true, command);
 		}
 		
 		int dist = Sensor(SENSOR_DISTANCE);
