@@ -28,14 +28,22 @@ void ConnectNXT(const string name, byte channel)
 #define BT_INBOX 1
 #define BT_OUTBOX 5
 
-#define MOTOR_POWER 33
-[%/*No need for other levels -> master vehicle*/%]
+// Motor constants
+#define MOTOR_CASUAL 33 // speed for casual following
+#define MOTOR_HURRY 66 // speed for catching up small delays
+#define MOTOR_PANIC 100 // speed for catching up as fast as possible
+#define MOTOR_L OUT_A
+#define MOTOR_R OUT_B
+#define MOTOR_RL OUT_AB 
 
 #define COM_MAX [%=platoon.routes.steps.size()%]
+#define NUM_VEHICLES [%=platoon.platoon.followers.size()+1%]
+#define RESOLUTION 5 //The ammount of miliseconds between state updates
 
 
 string commands[]; //The list of commands to be executed
 int curCommand; //the index of the current command
+string command;
 
 
 int progress = 0;
@@ -48,7 +56,7 @@ string slaveName; //name of direct follower
 
 sub acquireNames()
 {
-	name = [%=platoon.platoon.leader.name%];
+	name = "[%=platoon.platoon.leader.name%]";
 	ArrayInit(names, "", NUM_VEHICLES);
 	names[0]="[%=platoon.platoon.leader.name%]";
 	[%
@@ -103,8 +111,68 @@ sub acquireRoute()
 	%]
 }
 
+sub exec()//subroutine that executes commands
+{
+	if(command == "" || progress >= reqprogress)//There is no new task or we have completed our task
+	{
+		string curcom = commands[curCommand];
+		Off(MOTOR_RL);//switch off motors
+		if(curcom !="")
+		{
+			command = curcom;
+			progress = 0;
+			string actualcom1 = SubStr(command,Pos("_",command)+1,StrLen(command));
+			char type1 = StrIndex(actualcom1,0);//first character of command
+			if(type1=='f')
+			{
+				string actualcom2 = SubStr(actualcom1,Pos("_",actualcom1)+1,StrLen(actualcom1));
+				int d = StrToNum(actualcom2);//The distance to cover
+				reqprogress = 1000*d;//TODO Rather arbitrary....
+			}else
+			{
+				reqprogress = 500*66;// Rather arbitrary...
+			}
+			curCommand++;
+		}else
+		{
+			return;
+		}
+	}
+	string actualcom = SubStr(command,Pos("_",command)+1,StrLen(command));
+	char type = StrIndex(actualcom,0);//first character of command
+	
+	switch(type){
+		case 'f':
+			int speed = MOTOR_CASUAL;
+			OnFwd(MOTOR_RL, speed);
+			progress += speed * RESOLUTION;
+			break;
+		case 'l':
+			OnFwd(MOTOR_R, MOTOR_HURRY); OnRev(MOTOR_L, MOTOR_HURRY);
+			progress += MOTOR_HURRY * RESOLUTION;
+			break;
+		case 'r':
+			OnFwd(MOTOR_L, MOTOR_HURRY); OnRev(MOTOR_R, MOTOR_HURRY);
+			progress += MOTOR_HURRY * RESOLUTION;
+			break;
+		default:
+			break;
+	}
+}
+
 task main(){
 	acquireRoute();
 	acquireNames();
+	
+	string in;
+	if(slaveName!="")
+	{
+		//ConnectNXT(slaveName, ?);//Connect to slave TODO
+	}	
+	do {
+		SendRemoteString(BT_OUTBOX, true, command);// Send current command to slave
+		exec();
+		Wait(RESOLUTION);
+	} while(true);
  
 }
