@@ -1,4 +1,4 @@
-[% // File template for generating slave.nxc
+[% // File template for generating output/slave.nxc
 %]
 /**
  * Generated file from autoconnect.egl
@@ -16,7 +16,7 @@ void ConnectNXT(const string name, byte channel)
 	args.ConnectionSlot = channel;
 	args.Action = TRUE;
 	
-	if(!BluetoothStatus(channel) == NO_ERR)
+	if (!BluetoothStatus(channel) == NO_ERR)
 	{
 		SysCommBTConnection(args); // try to connect.
 		Wait(5000); // let the connection get created
@@ -25,46 +25,40 @@ void ConnectNXT(const string name, byte channel)
 
 #endif
 
-//Bluetooth constants defined after we learn our name
-
 // Motor constants
-#define MOTOR_CASUAL 33 // speed for casual following
-#define MOTOR_HURRY 66 // speed for catching up small delays
-#define MOTOR_PANIC 100 // speed for catching up as fast as possible
-#define MOTOR_TURN_TIME 1500
-#define MOTOR_L OUT_A
-#define MOTOR_R OUT_B
-#define MOTOR_RL OUT_AB 
+#define MOTOR_CASUAL 33	// Speed for casual following
+#define MOTOR_HURRY 66	// Speed for catching up small delays
+#define MOTOR_PANIC 100	// Speed for catching up as fast as possible
+#define MOTOR_L OUT_A	// Port of motor for left wheel
+#define MOTOR_R OUT_B	// Port of motor for right wheel
+#define MOTOR_RL OUT_AB // Port of motors for both wheels
+#define FWD_STEPS 1000	// An amount that determines how far the robot moves forward per unit
+#define TURN_STEPS 666	// An amount that determines how far the robot rotates per turn
 
 [%
-	var cs = platoon.constraints.list;// extract headway information.
-	var c;
-	for(c2 in cs)
-	{
-		c = c2; // hacky way to extract first and only contraint: headway
-		break;
-	}
-	var lb = c.lowbound;
-	var ub = c.upbound;
+// Extract the headway information.
+var cs = platoon.constraints.list; // For now this is a single constraint
+var lb = cs.lowbound;
+var ub = cs.upbound;
 %]
 
-//headway information
+// Headway constants
 #define DIST_MIN [%=lb%]
 #define DIST_MAX [%=ub%]
-#define DIST_RANGE [%=ub-lb%]
-#define DIST_HURRY [%=lb+(ub-lb)/3%] // if further away than this, hurry up
-#define DIST_PANIC [%=lb+2*(ub-lb)/3%] // if further away than this, panic, full throtle
+#define DIST_RANGE [%=ub-lb%] // Distance tolerance
+#define DIST_HURRY [%=lb+(ub-lb)/3%] // Distance to "hurry up"
+#define DIST_PANIC [%=lb+2*(ub-lb)/3%] // Distance to "panic" a.k.a. full throttle
 
+// Platooning constants
 #define COM_MAX [%=platoon.routes.steps.size()%]
 #define NUM_VEHICLES [%=platoon.platoon.followers.size()+1%]
 #define RESOLUTION 5 //The ammount of miliseconds between state updates
 
-
-//sensor constants
+// Sensor constants
 #define SENSOR_DISTANCE IN_1
 
 
-
+// Internal variables
 string commands[]; //The list of commands to be executed
 int curCommand; //the index of the next command
 string command;
@@ -72,43 +66,43 @@ string command;
 int progress = 0;
 int reqprogress = 0;
 
-string names[];
-string name; //my name
-int nameIdx; // index of this vehicle
-string slaveName; //name of direct follower
+string names[];		// Names of all vehicles in the platoon
+string name;		// Name of this vehicle
+int nameIdx			// Index of this vehicle
+string slaveName;	// Name of the direct follower
 
-//bluetooth constants
+// Bluetooth variables
 int BT_CH_MASTER;
 int BT_CH_SLAVE;
 int BT_IN_MASTER;
 int BT_OUT_SLAVE;
 
-
-inline int mod(int a, int b)//calculate a mod b
+// Returns a mod b
+inline int mod(int a, int b)
 {
-	return a - (a/b)*b;
+	return a - (a / b) * b;
 }
 
 sub acquireNames()
 {
-	name = "";//Do something clever here, not required by assignment
+	name = ""; // Fill in name of this vehicle, not required by assignment
 	ArrayInit(names, "", NUM_VEHICLES);
 	names[0]="[%=platoon.platoon.leader.name%]";
 	[%
-		var max = platoon.platoon.followers.size();
-		
-		var i  = 1;
-		while(i<max+1)
-		{
-			
-			%]
-	names[[%=i%]] = "[%=platoon.platoon.followers[i-1].name%]";
-			[%
-			i++;
-		}
+	// Print all following vehicle names
+	var max = platoon.platoon.followers.size();
+	
+	var i  = 1;
+	while(i<max+1)
+	{
+		out.println("    names[" + i + "] = "
+			+ "\"" + platoon.platoon.followers[i-1].name + "\";");
+		i++;
+	}
 	%]
-	int i = 1;//since slave it can't be 0
-	while(i < NUM_VEHICLES)
+	// Find the current index
+	int i = 1;
+	while (i < NUM_VEHICLES)
 	{
 		if(names[i]==name)
 		{
@@ -116,21 +110,26 @@ sub acquireNames()
 		}
 		i++;
 	}
-	if(nameIdx < NUM_VEHICLES -1)
+	if (nameIdx < NUM_VEHICLES - 1)
 	{
 		slaveName = names[nameIdx+1];
-	}else//last vehicle
+	}
+	else
 	{
+		// Assume this is the last vehicle
 		slaveName = "";
 	}
-	if(mod(nameIdx,2)==0)//Even index
+	if (mod(nameIdx, 2) == 0)
 	{
+		// Settings for even vehicles
 		BT_CH_MASTER = 1;
 		BT_CH_SLAVE = 2;
 		BT_IN_MASTER = 1;
 		BT_OUT_SLAVE = 5;
-	}else
+	}
+	else
 	{
+		// Settings for uneven vehicles
 		BT_CH_MASTER = 2;
 		BT_CH_SLAVE = 1;
 		BT_IN_MASTER = 5;
@@ -138,68 +137,82 @@ sub acquireNames()
 	}
 }
 
-sub exec(int dist)//subroutine that executes commands
+// Execute the received command
+sub exec (int dist)
 {
-	if(command == "" || progress >= reqprogress)//There is no new task or we have completed our task
+	if(command == "" || progress >= reqprogress)
 	{
+		// There is no new task or we have completed our task
 		string curcom = commands[curCommand];
-		Off(MOTOR_RL);//switch off motors
+		Off(MOTOR_RL); // Switch off motors
 		if(curcom !="")
 		{
 			command = curcom;
 			progress = 0;
 			string actualcom1 = SubStr(command,Pos("_",command)+1,StrLen(command));
 			char type1 = StrIndex(actualcom1,0);//first character of command
-			if(type1=='f')
+			if (type1=='f')
 			{
 				string actualcom2 = SubStr(actualcom1,Pos("_",actualcom1)+1,StrLen(actualcom1));
-				int d = StrToNum(actualcom2);//The distance to cover
-				reqprogress = 1000*d;//TODO Rather arbitrary....
-			}else
+				int d = StrToNum(actualcom2); // The distance to cover
+				reqprogress = FWD_STEPS * d;
+			}
+			else
 			{
-				reqprogress = 500*MOTOR_HURRY;// Rather arbitrary...
+				reqprogress = TURN_STEPS;
 			}
 			curCommand++;
-		}else
+		}
+		else
 		{
 			return;
 		}
 	}
-	string actualcom = SubStr(command,Pos("_",command)+1,StrLen(command));
-	char type = StrIndex(actualcom,0);//first character of command
+	string actualcom = SubStr(command, Pos("_", command) + 1, StrLen(command));
+	char type = StrIndex(actualcom, 0); // First character of command
 	
-	switch(type){
+	// Execute the current statement
+	// While being restricted to the constraints
+	switch (type) {
 		case 'f':
 			int speed;
-			if(dist<DIST_MIN)
+			if (dist < DIST_MIN)
 			{
+				// Stop and wait
 				speed = 0;
-			}else if(dist < DIST_HURRY)
+			}
+			else if (dist < DIST_HURRY)
 			{
+				// Constraint is ok
 				speed = MOTOR_CASUAL;
-			}else if(dist < DIST_PANIC)
+			}
+			else if (dist < DIST_PANIC)
 			{
+				// Hury up, falling behind
 				speed = MOTOR_HURRY;
-			}else
+			}
+			else
 			{
+				// Constraint violated, panic
 				speed = MOTOR_PANIC;
 			}
 			OnFwd(MOTOR_RL, speed);
 			progress += speed * RESOLUTION;
 			break;
 		case 'l':
-			OnFwd(MOTOR_R, MOTOR_HURRY); OnRev(MOTOR_L, MOTOR_HURRY);
+			OnFwd(MOTOR_R, MOTOR_HURRY);
+			OnRev(MOTOR_L, MOTOR_HURRY);
 			progress += MOTOR_HURRY * RESOLUTION;
 			break;
 		case 'r':
-			OnFwd(MOTOR_L, MOTOR_HURRY); OnRev(MOTOR_R, MOTOR_HURRY);
+			OnFwd(MOTOR_L, MOTOR_HURRY);
+			OnRev(MOTOR_R, MOTOR_HURRY);
 			progress += MOTOR_HURRY * RESOLUTION;
 			break;
 		default:
 			break;
 	}
 }
-
 
 task main() {
 	ArrayInit(commands, "", COM_MAX);
@@ -208,26 +221,30 @@ task main() {
 	
 	acquireNames();
 	string in;
-	if(slaveName!="")
+	if(slaveName != "")
 	{
+		// Connect to the followed vehicle
 		ConnectNXT(slaveName, BT_CH_SLAVE);
 	}
-	//initialize sensor
+	// Initialize sensor
 	SetSensorLowspeed(SENSOR_DISTANCE);	
 	do {
 		// Wait for commands from master
 		ReceiveRemoteString(BT_IN_MASTER, true, in);
-		if(in !="")
+		if(in != "")
 		{
-			int idx = StrToNum(SubStr(in,0,Pos("_",in)));
+			// Append command to the queue
+			int idx = StrToNum(SubStr(in, 0, Pos("_", in)));
 			commands[idx] = in ;
 		}
-		if(command!="")//Transmit the current command to slave
+		if(command != "")
 		{
+			// Transmit the current command to the next vehicle
 			SendRemoteString(BT_OUT_SLAVE, true, command);
 		}
 		
 		int dist = Sensor(SENSOR_DISTANCE);
+		// Continue execution
 		exec(dist);
 		Wait(RESOLUTION);
 	} while(true);
