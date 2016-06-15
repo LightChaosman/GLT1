@@ -25,10 +25,7 @@ void ConnectNXT(const string name, byte channel)
 
 #endif
 
-// Bluetooth constants
-#define BT_CONN 1
-#define BT_INBOX 1
-#define BT_OUTBOX 5
+//Bluetooth constants defined after we learn our name
 
 // Motor constants
 #define MOTOR_CASUAL 33 // speed for casual following
@@ -45,6 +42,7 @@ void ConnectNXT(const string name, byte channel)
 	for(c2 in cs)
 	{
 		c = c2; // hacky way to extract first and only contraint: headway
+		break;
 	}
 	var lb = c.lowbound;
 	var ub = c.upbound;
@@ -62,6 +60,11 @@ void ConnectNXT(const string name, byte channel)
 #define RESOLUTION 5 //The ammount of miliseconds between state updates
 
 
+//sensor constants
+#define SENSOR_DISTANCE IN_1
+
+
+
 string commands[]; //The list of commands to be executed
 int curCommand; //the index of the next command
 string command;
@@ -73,6 +76,18 @@ string names[];
 string name; //my name
 int nameIdx; // index of this vehicle
 string slaveName; //name of direct follower
+
+//bluetooth constants
+int BT_CH_MASTER;
+int BT_CH_SLAVE;
+int BT_IN_MASTER;
+int BT_OUT_SLAVE;
+
+
+inline int mod(int a, int b)//calculate a mod b
+{
+	return a - (a/b)*b;
+}
 
 sub acquireNames()
 {
@@ -107,6 +122,19 @@ sub acquireNames()
 	}else//last vehicle
 	{
 		slaveName = "";
+	}
+	if(mod(nameIdx,2)==0)//Even index
+	{
+		BT_CH_MASTER = 1;
+		BT_CH_SLAVE = 2;
+		BT_IN_MASTER = 1;
+		BT_OUT_SLAVE = 5;
+	}else
+	{
+		BT_CH_MASTER = 2;
+		BT_CH_SLAVE = 1;
+		BT_IN_MASTER = 5;
+		BT_OUT_SLAVE = 1;
 	}
 }
 
@@ -182,11 +210,13 @@ task main() {
 	string in;
 	if(slaveName!="")
 	{
-		//ConnectNXT(slaveName, ?);//Connect to slave TODO
-	}	
+		ConnectNXT(slaveName, BT_CH_SLAVE);
+	}
+	//initialize sensor
+	SetSensorLowspeed(SENSOR_DISTANCE);	
 	do {
 		// Wait for commands from master
-		ReceiveRemoteString(BT_INBOX, true, in);
+		ReceiveRemoteString(BT_IN_MASTER, true, in);
 		if(in !="")
 		{
 			int idx = StrToNum(SubStr(in,0,Pos("_",in)));
@@ -194,7 +224,7 @@ task main() {
 		}
 		if(command!="")//Transmit the current command to slave
 		{
-			SendRemoteString(BT_OUTBOX, true, command);
+			SendRemoteString(BT_OUT_SLAVE, true, command);
 		}
 		
 		int dist = Sensor(SENSOR_DISTANCE);

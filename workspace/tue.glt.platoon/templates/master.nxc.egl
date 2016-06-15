@@ -24,9 +24,8 @@ void ConnectNXT(const string name, byte channel)
 #endif
 
 // Bluetooth constants
-#define BT_CONN 1
-#define BT_INBOX 1
-#define BT_OUTBOX 5
+#define BT_CH_SLAVE 2
+#define BT_OUT_SLAVE 5
 
 // Motor constants
 #define MOTOR_CASUAL 33 // speed for casual following
@@ -53,6 +52,7 @@ string names[];
 string name; //my name
 int nameIdx; // index of this vehicle
 string slaveName; //name of direct follower
+
 
 sub acquireNames()
 {
@@ -167,10 +167,10 @@ task main(){
 	string in;
 	if(slaveName!="")
 	{
-		//ConnectNXT(slaveName, ?);//Connect to slave TODO
+		ConnectNXT(slaveName, BT_CH_SLAVE);//Connect to slave TODO
 	}	
 	do {
-		SendRemoteString(BT_OUTBOX, true, command);// Send current command to slave
+		SendRemoteString(BT_OUT_SLAVE, true, command);// Send current command to slave
 		exec();
 		Wait(RESOLUTION);
 	} while(true);
