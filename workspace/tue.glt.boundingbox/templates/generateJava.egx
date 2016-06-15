@@ -1,7 +1,15 @@
+pre {
+	"Converting boundingbox to Java code".println();
+}
+
 rule BoundingBox2Master
-	transform w : World {
+	transform world : World {
 	
 	template : "BoundsCalculator.java.egl"
 	
 	target : "../output/BoundsCalculator.java"
+}
+
+post {
+  "Java code is written to the /output folder".println();
 }

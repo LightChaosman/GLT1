@@ -1,5 +1,5 @@
 pre {
-  "Running ETL".println();
+  "Converting platoon to bounding box".println();
 }
 
 rule RouteToBox 
@@ -7,50 +7,59 @@ rule RouteToBox
   to box : boundingbox!World {
   
   	var route: platoon!Route;
-  	for( r in plat.routes){
-  		route = r;// hacky way to extract singleton element from routes
-  	}
+  	route = plat.routes;
   	
-  	var dir = 0;//0 = North, 1 = West, 2 = South, 3 = East
-  	box.moveCommands = new List;//Initialize the list of boundingbox commands
+  	// Initialize the list of boundingbox commands
+  	box.moveCommands = new List;
   	var mc = box.moveCommands;
   	
+  	var dir = 0; // Initial direction is: north
+  	
+  	// Go through all the steps and add them to the output model
+  	// Design desision: Movements of length 0 are added to the bounding box.
+  	// So when (Right, Right, Forward 0) is a route, then (Down 0) is the output. 
   	for(step in route.steps)
   	{
   		if(step.isTypeOf(platoon!TurnLeft))
   		{
-  			dir = (dir +1);
-  			dir = dir.mod(4);//trim it to 0..3
-  			
+  			// Turn direction to the left
+  			dir = (dir + 1);
+  			dir = dir.mod(4);
   		}else if(step.isTypeOf(platoon!TurnRight)){
-  			dir = (dir -1+4);//keep it positive, just to be sure
-  			dir = dir.mod(4);//trim it to 0..3
-  			
-  		}else{//forward
+  			// Turn direction to the right
+  			dir = (dir + 3);
+  			dir = dir.mod(4);
+  		}else{
+  			// Forward movement
   			var command: boundingbox!Move;
-  			switch(dir){//determine the direction
-  				case(0)://north
+  			switch(dir){
+  				case(0): // North
   					command = new boundingbox!MoveUp;
   					break;
-  				case(1)://west
+  				case(1): // West
   					command = new boundingbox!MoveLeft;
   					break;
-  				case(2)://south
+  				case(2): // South
   					command = new boundingbox!MoveDown;
   					break;
-  				case(3)://east
+  				case(3): // East
   					command = new boundingbox!MoveRight;
   					break;
-  				//no other cases -> could add a default and throw an exception....
+  				default:
+  					throw "Direction not known";
   			}
   			command.distance = step.distance;
-  			mc.add(command);//add the next step to the movecommands
-  			step.println();
+  			// Add the next step to the movecommands
+  			mc.add(command);
   		}
   	}
 }
 
-
+// Returns the modulo i of an integer
 operation Integer mod(i : Integer) {
-	return self - (self/i * i);
+  return self - (self / i * i);
+}
+
+post {
+  "Bounding box model created".println();
 }

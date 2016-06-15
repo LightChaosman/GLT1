@@ -37,7 +37,7 @@ void ConnectNXT(const string name, byte channel)
 
 [%
 // Extract the headway information.
-var cs = world.constraints.list; // For now this is a single constraint
+var cs = world.constraints.list; // Note: for now this is a single constraint
 var lb = cs.lowbound;
 var ub = cs.upbound;
 %]
@@ -249,4 +249,3 @@ task main() {
 		Wait(RESOLUTION);
 	} while(true);
 }
-

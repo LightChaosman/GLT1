@@ -1,3 +1,7 @@
+pre {
+	"Converting platoon to NXC code".println();
+}
+
 rule Platoon2Master
 	transform world : World {
 	
@@ -12,4 +16,8 @@ rule Platoon2Slave
 	template : "slave.nxc.egl"
 	
 	target : "../output/slave.nxc"
+}
+
+post {
+	"NXC code is written to the /output folder".println();
 }
