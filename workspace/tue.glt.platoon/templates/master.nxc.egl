@@ -40,8 +40,8 @@ void ConnectNXT(const string name, byte channel)
 #define TURN_STEPS 666	// An amount that determines how far the robot rotates per turn
 
 // Platooning constants
-#define COM_MAX [%=platoon.routes.steps.size()%]
-#define NUM_VEHICLES [%=platoon.platoon.followers.size()+1%]
+#define COM_MAX [%=world.routes.steps.size()%]
+#define NUM_VEHICLES [%=world.platoon.followers.size()+1%]
 #define RESOLUTION 5 // The ammount of miliseconds between state updates
 
 // Internal variables
@@ -59,18 +59,18 @@ string slaveName;	// Name of the direct follower
 
 sub acquireNames()
 {
-	name = "[%=platoon.platoon.leader.name%]";
+	name = "[%=world.platoon.leader.name%]";
 	ArrayInit(names, "", NUM_VEHICLES);
-	names[0] = "[%=platoon.platoon.leader.name%]";
+	names[0] = "[%=world.platoon.leader.name%]";
 	[%
 	// Print all following vehicle names
-	var max = platoon.platoon.followers.size();
+	var max = world.platoon.followers.size();
 	
 	var i  = 1;
 	while(i<max+1)
 	{
 		out.println("    names[" + i + "] = "
-			+ "\"" + platoon.platoon.followers[i-1].name + "\";");
+			+ "\"" + world.platoon.followers[i-1].name + "\";");
 		i++;
 	}
 	%]
@@ -92,12 +92,12 @@ sub acquireRoute()
 {
 	ArrayInit(commands, "", COM_MAX);
 	[%
-	var max = platoon.routes.steps.size();
+	var max = world.routes.steps.size();
 	var i  = 0;
 	while(i<max)
 	{
 		var com = i + "_";
-		var step = platoon.routes.steps[i];
+		var step = world.routes.steps[i];
 		if (step.isTypeOf(Forward))
 		{
 			com += "f_"+step.distance;

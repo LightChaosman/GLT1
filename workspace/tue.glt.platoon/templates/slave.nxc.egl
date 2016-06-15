@@ -37,7 +37,7 @@ void ConnectNXT(const string name, byte channel)
 
 [%
 // Extract the headway information.
-var cs = platoon.constraints.list; // For now this is a single constraint
+var cs = world.constraints.list; // For now this is a single constraint
 var lb = cs.lowbound;
 var ub = cs.upbound;
 %]
@@ -50,8 +50,8 @@ var ub = cs.upbound;
 #define DIST_PANIC [%=lb+2*(ub-lb)/3%] // Distance to "panic" a.k.a. full throttle
 
 // Platooning constants
-#define COM_MAX [%=platoon.routes.steps.size()%]
-#define NUM_VEHICLES [%=platoon.platoon.followers.size()+1%]
+#define COM_MAX [%=world.routes.steps.size()%]
+#define NUM_VEHICLES [%=world.platoon.followers.size()+1%]
 #define RESOLUTION 5 //The ammount of miliseconds between state updates
 
 // Sensor constants
@@ -87,16 +87,16 @@ sub acquireNames()
 {
 	name = ""; // Fill in name of this vehicle, not required by assignment
 	ArrayInit(names, "", NUM_VEHICLES);
-	names[0]="[%=platoon.platoon.leader.name%]";
+	names[0]="[%=world.platoon.leader.name%]";
 	[%
 	// Print all following vehicle names
-	var max = platoon.platoon.followers.size();
+	var max = world.platoon.followers.size();
 	
 	var i  = 1;
 	while(i<max+1)
 	{
 		out.println("    names[" + i + "] = "
-			+ "\"" + platoon.platoon.followers[i-1].name + "\";");
+			+ "\"" + world.platoon.followers[i-1].name + "\";");
 		i++;
 	}
 	%]
