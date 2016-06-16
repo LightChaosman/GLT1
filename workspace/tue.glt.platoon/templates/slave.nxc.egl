@@ -68,7 +68,7 @@ int reqprogress = 0;
 
 string names[];		// Names of all vehicles in the platoon
 string name;		// Name of this vehicle
-int nameIdx			// Index of this vehicle
+int nameIdx;			// Index of this vehicle
 string slaveName;	// Name of the direct follower
 
 // Bluetooth variables
@@ -83,6 +83,7 @@ inline int mod(int a, int b)
 	return a - (a / b) * b;
 }
 
+//Aquire the name of this vehicle, its position in the platoon, and set communication variable accordingly
 sub acquireNames()
 {
 	name = ""; // Fill in name of this vehicle, not required by assignment
@@ -229,11 +230,11 @@ task main() {
 	// Initialize sensor
 	SetSensorLowspeed(SENSOR_DISTANCE);	
 	do {
-		// Wait for commands from master
-		ReceiveRemoteString(BT_IN_MASTER, true, in);
+		// Recieve commands from master
+		ReceiveRemoteString(BT_IN_MASTER, true, in); //We assume this is a non-blocking operation
 		if(in != "")
 		{
-			// Append command to the queue
+			// Store command in command array
 			int idx = StrToNum(SubStr(in, 0, Pos("_", in)));
 			commands[idx] = in ;
 		}

@@ -54,7 +54,7 @@ int reqprogress = 0;
 
 string names[];		// Names of all vehicles in the platoon
 string name;		// Name of this vehicle
-int nameIdx			// Index of this vehicle
+int nameIdx;			// Index of this vehicle
 string slaveName;	// Name of the direct follower
 
 sub acquireNames()
