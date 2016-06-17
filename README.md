@@ -73,3 +73,9 @@ Terefor we used .launch files in combination with predefined models to test our 
 
 -	A vehicle will not stop to allow its follower to catch up.
 	This could be added, but it only add more NXC code, complicating the program, without using model transformations.
+
+# Deplyment
+- Platoon to NXC is in the `tue.glt.platoon` project, under templates
+- Platoon to bounding box is in the `tue.gtl.platoon2boundingbox` project, in the root
+- Bounding box to Java is in the `tue.glt.boundingbox` project, under templates
+
